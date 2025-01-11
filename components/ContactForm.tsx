@@ -26,7 +26,7 @@ const ReservationForm = () => {
       specialRequestsLabel: "Demandes Speciales",
       submitButton: "ENVOYER LA DEMANDE",
 
-      afterSentMessage: `Votre demande de réservation a bien été envoyé ! Vous allez
+      afterSentMessage: `Assurez-vous de bien avoir cliqué sur le bouton pour envoyer le mail ! Vous allez
       recevoir une confirmation d'ici peu 😋`,
     },
     en: {
@@ -43,7 +43,7 @@ const ReservationForm = () => {
       specialRequestsLabel: "Special Requests",
       submitButton: "SEND REQUEST",
 
-      afterSentMessage: `Your reservation request has been sent! You will
+      afterSentMessage: `Make sure you have clicked on the button to send the e-mail ! You will
       receive confirmation shortly 😋`,
     },
     es: {
@@ -60,8 +60,25 @@ const ReservationForm = () => {
       specialRequestsLabel: "Solicitudes Especiales",
       submitButton: "ENVIAR SOLICITUD",
 
-      afterSentMessage: `¡Su solicitud de reserva ha sido enviada! Lo harás
+      afterSentMessage: `¡Asegúrese de que ha pulsado el botón para enviar el correo electrónico! Lo harás
       recibir confirmación en breve 😋`,
+    },
+    it: {
+      title: "richiesta di prenotazione",
+      fullNameLabel: "Nome Completo",
+      emailLabel: "Email",
+      numberOfGuestsLabel: "Numero di Ospiti",
+      eventDateLabel: "Data e Ora",
+
+      reservationTypeLabel: "Tipo di Prenotazione",
+      repas: "Pasto",
+      evenement: "Evento",
+
+      specialRequestsLabel: "Richieste Speciali",
+      submitButton: "INVIA LA RICHIESTA",
+
+      afterSentMessage: `Assicuratevi di aver fatto clic sul pulsante per inviare l'e-mail! Riceverai
+      presto una conferma 😋`,
     },
   };
 
@@ -138,7 +155,7 @@ const ReservationForm = () => {
       reservationType,
     } = formData;
 
-    const mailTo = "floridablanca22@gmail.com";
+    const mailTo = "carbo11@icloud.com";
     const subject = `Table Reservation - Le ${eventDate} à ${eventTime}`;
     const body = `Full Name: ${fullName}\nEmail: ${email}\nNumber of Guests: ${numberOfGuests}\nDate and Time: ${eventDate}, ${eventTime}\nSpecial Requests: ${specialRequests}\nReservation Type: ${reservationType}`;
 
@@ -179,6 +196,7 @@ const ReservationForm = () => {
                 <option value="fr">🇫🇷</option>
                 <option value="en">🇬🇧</option>
                 <option value="es">🇪🇸</option>
+                <option value="it">🇮🇹</option>
               </select>
             </div>
             <div>
@@ -262,7 +280,7 @@ const ReservationForm = () => {
               </div>
             </div>
 
-            <div className="lg:w-1/2 w-full">
+            {/* <div className="lg:w-1/2 w-full">
               <label
                 htmlFor="reservationType"
                 className="block text-lg font-medium text-[#002E6D] font-spaceTransit text-4xl tracking-wide"
@@ -280,7 +298,7 @@ const ReservationForm = () => {
                 <option value="repas">{translation.repas}</option>
                 <option value="evenement">{translation.evenement}</option>
               </select>
-            </div>
+            </div> */}
 
             <div>
               <label

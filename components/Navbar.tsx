@@ -58,7 +58,7 @@ function Navbar() {
         className="fixed w-full h-16 backdrop-blur justify-between items-center text-white px-8 z-50 bg-[#002E6D]/80 hidden lg:flex"
       >
         <a href="/" className="h-14 w-14">
-          <img src="/logo-white.webp" alt="logo de floridablanca" />
+          <img src="" alt="logo carbo" />
         </a>
         <div>
           <li className="flex justify-center space-x-12">

@@ -69,12 +69,10 @@ function IntroRestaurant() {
           className="lg:w-1/2 w-5/6 flex flex-col space-y-8"
         >
           <h3 className="text-[#002E6D] text-5xl font-medium font-spaceTransit leading-none">
-            Restaurant de Tapas Specialites Espagnoles
+            TITRE
           </h3>
           <article className="text-[#274b7e] text-justify lg:text-left">
-            Petit restaurant espagnol au pied de la cité nous proposons une
-            carte variée de tapas et de plats avec une belle sélection de vins
-            locaux.
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique soluta eum dicta enim, nemo dolor adipisci illo vero! Voluptatum blanditiis nisi, dicta laboriosam autem ea hic vitae quas velit placeat?
           </article>
           <Link
             href="/apropos"

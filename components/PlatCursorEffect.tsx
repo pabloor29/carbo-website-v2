@@ -4,10 +4,10 @@ function PlatCursorEffect() {
   return (
     <div className="relative w-full bg-[#002E6D] flex flex-col justify-center items-center py-20">
       <h2 className="w-11/12 text-center leading-none text-7xl text-white font-spaceTransit tracking-wide">
-        reservation pour des evenements par Groupes
+        Reservations pour les groupes
       </h2>
 
-      <p className="text-lg text-center lg:text-left mt-8 w-3/5 text-[#F0F5FF]">
+      {/* <p className="text-lg text-center lg:text-left mt-8 w-3/5 text-[#F0F5FF]">
         Pour des groupes entre 15 et 25 personnes, nous vous proposons une
         formule à 30€ par personne qui comprend :
       </p>
@@ -53,7 +53,7 @@ function PlatCursorEffect() {
           alt=""
           className="absolute opacity-5 z-0 scale-150 overflow-x-hidden invert"
         />
-      </div>
+      </div> */}
     </div>
   );
 }

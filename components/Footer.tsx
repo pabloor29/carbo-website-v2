@@ -6,8 +6,7 @@ function Footer() {
     <footer className="w-full bg-[#f0f5ff] flex flex-col justify-center items-center">
       <div className="flex flex-col lg:flex-row w-5/6 lg:justify-between justify-center items-center p-4 space-y-12 lg:space-y-0">
         <div className="lg:w-1/3 w-full text-[#0A3C74] flex flex-col items-center justify-center">
-          <h4 className="font-spaceTransit text-5xl">HORAIRES</h4>
-          <h2 className="font-spaceTransit text-3xl">En vacances jusqu'au 3 mars 2025</h2>
+          <h4 className="font-spaceTransit text-5xl mb-3">HORAIRES</h4>
           <ul className="flex items-center justify-between space-x-10">
             <div className="flex flex-col items-center justify-center text-center">
               <li className="font-bold text-lg">Juillet - Août</li>
@@ -32,7 +31,7 @@ function Footer() {
             className="flex flex-col items-center justify-center text-center hover:underline"
             href="https://www.google.com/maps/place/22+Rue+Trivalle,+11000+Carcassonne/@43.2092525,2.3586791,17z/data=!3m1!4b1!4m6!3m5!1s0x12ae2c3fe47df2d1:0xecd2d651ec878ced!8m2!3d43.2092525!4d2.361254!16s%2Fg%2F11bw40xyml?entry=ttu"
           >
-            22 rue Trivalle
+            11 rue Trivalle
             <br />
             11000, Carcassonne
           </a>
@@ -43,24 +42,24 @@ function Footer() {
           <ul className="flex flex-col items-center justify-center">
             <li className="flex gap-2 mb-3 hover:underline">
               <Mail />
-              <a href="mailto:floridablanca22@gmail.com">
-                floridablanca22@gmail.com
+              <a href="mailto:carbo11@icloud.com">
+                carbo11@icloud.com
               </a>
             </li>
             <li className="flex gap-2 mb-3 hover:underline">
               <Phone />
-              <a href="tel:+33430345855">04 30 34 58 55</a>
+              <a href="tel:+33">TEL</a>
             </li>
             <li className="flex gap-2 mb-3 hover:underline">
               <Instagram />
-              <a href="https://www.instagram.com/floridablanca_bar_a_poulpe/?hl=fr">@floridablanca_bar_a_poulpe</a>
+              <a href="https://www.instagram.com/floridablanca_bar_a_poulpe/?hl=fr">@insta</a>
             </li>
             <li className="flex gap-2 mb-3 hover:underline"></li>
           </ul>
         </div>
 
         <div className="w-40 flex items-center justify-center">
-          <img src="/logo-blue.webp" alt="logo de floridablanca" />
+          <img src="" alt="logo carbo" />
         </div>
       </div>
 
@@ -68,7 +67,7 @@ function Footer() {
         href="https://www.cntl.digital/"
         className="text-[#0A3C74] hover:underline py-2 text-xs w-full bg-[#e0ebff] flex justify-center items-center"
       >
-        © This is a CNTL Digital creation - 2023
+        © Pablo ORTEGA - 2025
       </a>
     </footer>
   );

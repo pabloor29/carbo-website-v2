@@ -71,7 +71,7 @@ function SuggestionChef() {
           variants={imagesVariants}
           className="text-[#002E6D] text-7xl font-spaceTransit tracking-wide leading-none"
         >
-          Suggestions du Chef
+          Les suggestions
         </motion.h3>
 
         <motion.p
@@ -93,19 +93,19 @@ function SuggestionChef() {
           className="flex flex-col lg:flex-row justify-center items-center py-8 lg:space-x-10 space-y-20 lg:space-y-0"
         >
           <PlatSuggest
-            src="/casserole-poivron.webp"
-            alt="casserole de poivrons"
-            title="PIMIENTOS DE PADRON"
+            src=""
+            alt="plat 1"
+            title="plat 1"
           />
           <PlatSuggest
-            src="/assiette-poulpe.webp"
-            alt="assiette de poulpe"
-            title="POULPE - tentacule entier"
+            src=""
+            alt="plat 2"
+            title="plat 2"
           />
           <PlatSuggest
-            src="/casserole_3fritures.webp"
-            alt="casserole trois fritures"
-            title="croquetas del rey"
+            src=""
+            alt="plat 3"
+            title="plat 3"
           />
         </motion.div>
 
