@@ -28,8 +28,8 @@ function ContactPage() {
                 <h4 className="underline">
                   22, rue Trivalle 11000 CARCASSONNE
                 </h4>
-                <a href="">Fixe : +33 4 30 34 58 55 </a>
-                <a href="">Mobile : +33 6 34 29 48 74</a>
+                <a href="tel:+33430345855">Fixe : +33 4 30 34 58 55 </a>
+                <a href="tel:+33634294874">Mobile : +33 6 34 29 48 74</a>
               </div>
 
               <div className="text-[#002E6D] w-full flex flex-col space-y-3 items-center lg:items-start justify-center">

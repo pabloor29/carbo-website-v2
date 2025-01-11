@@ -65,7 +65,7 @@ function Navbar() {
             {links.map((link) => (
               <a
                 href={link.href}
-                className="border-b-[1px] border-transparent leading-none hover:border-b-[1px] hover:border-white font-spaceTransit text-4xl tracking-wide"
+                className="border-b-[1px] border-transparent leading-none hover:border-b-[1px] hover:border-white font-spaceTransit text-4xl tracking-wide "
               >
                 {link.label}
               </a>

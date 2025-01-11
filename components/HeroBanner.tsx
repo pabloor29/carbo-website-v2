@@ -23,7 +23,7 @@ function HeroBanner() {
     <div className="h-screen w-full flex justify-center items-center bg-gradient-to-b from-[#001F50] to-[#002E6D]">
       <div className="h-screen w-full flex justify-center items-center bg-black/60 absolute z-10"></div>
       <img
-        src="/bar-black.webp"
+        src="/background_home.webp"
         alt=""
         className="w-full h-screen object-cover absolute z-0"
       />
@@ -36,7 +36,7 @@ function HeroBanner() {
           className="text-bigSM lg:text-bigLG text-white font-spaceTransit
             tracking-wide z-30 drop-shadow-[5px_5px_0_#00A6E6]"
         >
-          FLORIDABLANCA
+          CARBO
         </motion.h1>
         <motion.h3
           initial="hidden"
@@ -45,7 +45,7 @@ function HeroBanner() {
           variants={textVariants}
           className="z-10 text-white/90 font-spaceTransit lg:text-5xl text-2xl"
         >
-          Bar a poulpe. Tapas espagnols maison avec vins regionaux.
+          Cuisine italienne.
         </motion.h3>
       </div>
     </div>
