@@ -25,7 +25,11 @@ module.exports = {
       "9xl": "8rem",
     },
     fontFamily: {
-      spaceTransit: ["SpaceTransit", "ui-serif"],
+      cormorantGaramond: ["Cormorant Garamond", "ui-serif"],
+      ttInterphasesMono: ["TT Interphases Pro Mono Trl", "ui-serif"],
+      scandiloverScript: ["Scandilover Script", "ui-serif"],
+      schoolbell: ["Schoolbell", "ui-serif"],
+      anton: ["Anton", "ui-serif"],
     },
     container: {
       center: true,

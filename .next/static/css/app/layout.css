@@ -638,59 +638,23 @@ video {
 .left-0 {
   left: 0px;
 }
-.left-1\/2 {
-  left: 50%;
-}
-.left-1\/4 {
-  left: 25%;
-}
-.left-6 {
-  left: 1.5rem;
-}
-.left-64 {
-  left: 16rem;
-}
-.left-96 {
-  left: 24rem;
+.left-1\/3 {
+  left: 33.333333%;
 }
 .right-0 {
   right: 0px;
 }
-.right-1\/2 {
-  right: 50%;
-}
 .right-1\/3 {
   right: 33.333333%;
 }
-.right-1\/4 {
-  right: 25%;
-}
-.right-2 {
-  right: 0.5rem;
-}
 .right-4 {
   right: 1rem;
-}
-.right-6 {
-  right: 1.5rem;
-}
-.right-64 {
-  right: 16rem;
-}
-.right-96 {
-  right: 24rem;
 }
 .right-\[15vw\] {
   right: 15vw;
 }
 .top-0 {
   top: 0px;
-}
-.top-2 {
-  top: 0.5rem;
-}
-.top-20 {
-  top: 5rem;
 }
 .top-4 {
   top: 1rem;
@@ -755,8 +719,11 @@ video {
 .hidden {
   display: none;
 }
-.h-1 {
-  height: 0.25rem;
+.h-1\/2 {
+  height: 50%;
+}
+.h-1\/3 {
+  height: 33.333333%;
 }
 .h-10 {
   height: 2.5rem;
@@ -767,11 +734,14 @@ video {
 .h-16 {
   height: 4rem;
 }
+.h-2\/3 {
+  height: 66.666667%;
+}
 .h-20 {
   height: 5rem;
 }
-.h-8 {
-  height: 2rem;
+.h-24 {
+  height: 6rem;
 }
 .h-96 {
   height: 24rem;
@@ -791,20 +761,17 @@ video {
 .h-screen {
   height: 100vh;
 }
-.w-1 {
-  width: 0.25rem;
-}
 .w-10 {
   width: 2.5rem;
 }
 .w-11\/12 {
   width: 91.666667%;
 }
-.w-14 {
-  width: 3.5rem;
-}
 .w-2\/3 {
   width: 66.666667%;
+}
+.w-24 {
+  width: 6rem;
 }
 .w-3\/5 {
   width: 60%;
@@ -812,11 +779,11 @@ video {
 .w-4\/5 {
   width: 80%;
 }
-.w-40 {
-  width: 10rem;
-}
 .w-5\/6 {
   width: 83.333333%;
+}
+.w-52 {
+  width: 13rem;
 }
 .w-8 {
   width: 2rem;
@@ -996,9 +963,16 @@ video {
 .border-t {
   border-top-width: 1px;
 }
+.border-t-2 {
+  border-top-width: 2px;
+}
 .border-\[\#002E6D\] {
   --tw-border-opacity: 1;
   border-color: rgb(0 46 109 / var(--tw-border-opacity));
+}
+.border-\[\#023c18\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(2 60 24 / var(--tw-border-opacity));
 }
 .border-\[\#597ba8\] {
   --tw-border-opacity: 1;
@@ -1007,23 +981,26 @@ video {
 .border-transparent {
   border-color: transparent;
 }
-.border-white\/50 {
-  border-color: rgb(255 255 255 / 0.5);
-}
 .bg-\[\#002E6D\] {
   --tw-bg-opacity: 1;
   background-color: rgb(0 46 109 / var(--tw-bg-opacity));
 }
-.bg-\[\#002E6D\]\/80 {
-  background-color: rgb(0 46 109 / 0.8);
-}
-.bg-\[\#e0ebff\] {
+.bg-\[\#023c18\] {
   --tw-bg-opacity: 1;
-  background-color: rgb(224 235 255 / var(--tw-bg-opacity));
+  background-color: rgb(2 60 24 / var(--tw-bg-opacity));
 }
-.bg-\[\#f0f5ff\] {
+.bg-\[\#f7dad9\] {
   --tw-bg-opacity: 1;
-  background-color: rgb(240 245 255 / var(--tw-bg-opacity));
+  background-color: rgb(247 218 217 / var(--tw-bg-opacity));
+}
+.bg-\[\#f7dad9\]\/80 {
+  background-color: rgb(247 218 217 / 0.8);
+}
+.bg-\[rgba\(2\2c 60\2c 24\2c 0\.5\)\] {
+  background-color: rgba(2,60,24,0.5);
+}
+.bg-\[rgba\(2\2c 60\2c 24\2c 0\.8\)\] {
+  background-color: rgba(2,60,24,0.8);
 }
 .bg-background {
   background-color: hsl(var(--background));
@@ -1053,22 +1030,11 @@ video {
 .bg-white\/5 {
   background-color: rgb(255 255 255 / 0.05);
 }
-.bg-white\/50 {
-  background-color: rgb(255 255 255 / 0.5);
-}
 .bg-\[url\(\'\/carteETE2023-1\.webp\'\)\] {
   background-image: url('/carteETE2023-1.webp');
 }
 .bg-gradient-to-b {
   background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
-}
-.bg-gradient-to-t {
-  background-image: linear-gradient(to top, var(--tw-gradient-stops));
-}
-.from-\[\#000e21\] {
-  --tw-gradient-from: #000e21 var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(0 14 33 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 .from-\[\#001F50\] {
   --tw-gradient-from: #001F50 var(--tw-gradient-from-position);
@@ -1078,14 +1044,8 @@ video {
 .to-\[\#002E6D\] {
   --tw-gradient-to: #002E6D var(--tw-gradient-to-position);
 }
-.to-\[\#295DA6\] {
-  --tw-gradient-to: #295DA6 var(--tw-gradient-to-position);
-}
-.fill-\[\#002E6D\] {
-  fill: #002E6D;
-}
-.fill-\[\#285AA2\] {
-  fill: #285AA2;
+.fill-\[\#023c18\] {
+  fill: #023c18;
 }
 .object-cover {
   -o-object-fit: cover;
@@ -1186,8 +1146,14 @@ video {
 .text-justify {
   text-align: justify;
 }
-.font-spaceTransit {
-  font-family: SpaceTransit, ui-serif;
+.font-cormorantGaramond {
+  font-family: Cormorant Garamond, ui-serif;
+}
+.font-schoolbell {
+  font-family: Schoolbell, ui-serif;
+}
+.font-ttInterphasesMono {
+  font-family: TT Interphases Pro Mono Trl, ui-serif;
 }
 .text-2xl {
   font-size: 1.563rem;
@@ -1241,17 +1207,17 @@ video {
   --tw-text-opacity: 1;
   color: rgb(0 46 109 / var(--tw-text-opacity));
 }
-.text-\[\#0A3C74\] {
+.text-\[\#023c18\] {
   --tw-text-opacity: 1;
-  color: rgb(10 60 116 / var(--tw-text-opacity));
-}
-.text-\[\#274b7e\] {
-  --tw-text-opacity: 1;
-  color: rgb(39 75 126 / var(--tw-text-opacity));
+  color: rgb(2 60 24 / var(--tw-text-opacity));
 }
 .text-\[\#F0F5FF\] {
   --tw-text-opacity: 1;
   color: rgb(240 245 255 / var(--tw-text-opacity));
+}
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 .text-foreground {
   color: hsl(var(--foreground));
@@ -1286,19 +1252,14 @@ video {
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
-.shadow-\[-15px_15px_0_0_\#002E6D\] {
-  --tw-shadow: -15px 15px 0 0 #002E6D;
+.shadow-\[-15px_15px_0_0_\#023c18\] {
+  --tw-shadow: -15px 15px 0 0 #023c18;
   --tw-shadow-colored: -15px 15px 0 0 var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 .shadow-\[-25px_25px_0_0_\#002E6D\] {
   --tw-shadow: -25px 25px 0 0 #002E6D;
   --tw-shadow-colored: -25px 25px 0 0 var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-.shadow-\[25px_15px_0_0_\#002E6D\] {
-  --tw-shadow: 25px 15px 0 0 #002E6D;
-  --tw-shadow-colored: 25px 15px 0 0 var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 .shadow-lg {
@@ -1318,8 +1279,8 @@ video {
   --tw-drop-shadow: drop-shadow(-15px 15px 3px rgba(0,0,0,0.25));
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
-.drop-shadow-\[5px_5px_0_\#00A6E6\] {
-  --tw-drop-shadow: drop-shadow(5px 5px 0 #00A6E6);
+.drop-shadow-\[4px_4px_0_\#f7dad9\] {
+  --tw-drop-shadow: drop-shadow(4px 4px 0 #f7dad9);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 .grayscale {
@@ -1409,14 +1370,69 @@ body,
   overflow-x: hidden;
 }
 
+.scroll-bars {
+  background: repeating-linear-gradient(
+    to right,
+    #32cd32,
+    #32cd32 10px,
+    #ffffff 10px,
+    #ffffff 20px
+  );
+  animation: scroll-bars 10s linear infinite;
+}
+
+@keyframes scroll-bars {
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: -200px;
+  }
+}
+
 @font-face {
-  font-family: 'SpaceTransit';
-  src: url(/_next/static/media/SpaceTransit.c6351c2e.woff2) format('woff2'),
-       url(/_next/static/media/SpaceTransit.be5c0dc9.woff) format('woff'),
-       url(/_next/static/media/SpaceTransit.bfbe1ec2.ttf) format('truetype');
-       font-weight: 100 900;
-       font-display: swap;
-       font-style: normal;
+  font-family: "TT Interphases Pro Mono Trl";
+  src: url("https://db.onlinewebfonts.com/t/2c74ce745a8860bdab8c503f3270b455.eot");
+  src: url("https://db.onlinewebfonts.com/t/2c74ce745a8860bdab8c503f3270b455.eot?#iefix")format("embedded-opentype"),
+  url("https://db.onlinewebfonts.com/t/2c74ce745a8860bdab8c503f3270b455.woff2")format("woff2"),
+  url("https://db.onlinewebfonts.com/t/2c74ce745a8860bdab8c503f3270b455.woff")format("woff"),
+  url("https://db.onlinewebfonts.com/t/2c74ce745a8860bdab8c503f3270b455.ttf")format("truetype"),
+}
+
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("https://db.onlinewebfonts.com/t/0203d5e624845aacd2d8fd722b43aff1.eot");
+  src: url("https://db.onlinewebfonts.com/t/0203d5e624845aacd2d8fd722b43aff1.eot?#iefix")format("embedded-opentype"),
+  url("https://db.onlinewebfonts.com/t/0203d5e624845aacd2d8fd722b43aff1.woff2")format("woff2"),
+  url("https://db.onlinewebfonts.com/t/0203d5e624845aacd2d8fd722b43aff1.woff")format("woff"),
+  url("https://db.onlinewebfonts.com/t/0203d5e624845aacd2d8fd722b43aff1.ttf")format("truetype"),
+}
+
+@font-face {
+  font-family: "Anton";
+  src: url("https://db.onlinewebfonts.com/t/0d4bd6300a54d19c5fc62fe7e07c48cb.eot");
+  src: url("https://db.onlinewebfonts.com/t/0d4bd6300a54d19c5fc62fe7e07c48cb.eot?#iefix")format("embedded-opentype"),
+  url("https://db.onlinewebfonts.com/t/0d4bd6300a54d19c5fc62fe7e07c48cb.woff2")format("woff2"),
+  url("https://db.onlinewebfonts.com/t/0d4bd6300a54d19c5fc62fe7e07c48cb.woff")format("woff"),
+  url("https://db.onlinewebfonts.com/t/0d4bd6300a54d19c5fc62fe7e07c48cb.ttf")format("truetype"),
+}
+
+@font-face {
+  font-family: "Schoolbell";
+  src: url("https://db.onlinewebfonts.com/t/b42e4e53dbbc46a382a8a68a702c91f9.eot");
+  src: url("https://db.onlinewebfonts.com/t/b42e4e53dbbc46a382a8a68a702c91f9.eot?#iefix")format("embedded-opentype"),
+  url("https://db.onlinewebfonts.com/t/b42e4e53dbbc46a382a8a68a702c91f9.woff2")format("woff2"),
+  url("https://db.onlinewebfonts.com/t/b42e4e53dbbc46a382a8a68a702c91f9.woff")format("woff"),
+  url("https://db.onlinewebfonts.com/t/b42e4e53dbbc46a382a8a68a702c91f9.ttf")format("truetype"),
+}
+
+@font-face {
+  font-family: "Scandilover Script";
+  src: url("https://db.onlinewebfonts.com/t/e3ff19aa48b4151e4db25834c9ee68dd.eot");
+  src: url("https://db.onlinewebfonts.com/t/e3ff19aa48b4151e4db25834c9ee68dd.eot?#iefix")format("embedded-opentype"),
+  url("https://db.onlinewebfonts.com/t/e3ff19aa48b4151e4db25834c9ee68dd.woff2")format("woff2"),
+  url("https://db.onlinewebfonts.com/t/e3ff19aa48b4151e4db25834c9ee68dd.woff")format("woff"),
+  url("https://db.onlinewebfonts.com/t/e3ff19aa48b4151e4db25834c9ee68dd.ttf")format("truetype"),
 }
 
 .placeholder\:text-muted-foreground::-moz-placeholder {
@@ -1439,13 +1455,9 @@ body,
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.hover\:border-b-\[1px\]:hover {
-  border-bottom-width: 1px;
-}
-
-.hover\:border-\[\#002E6D\]:hover {
+.hover\:border-\[\#023c18\]:hover {
   --tw-border-opacity: 1;
-  border-color: rgb(0 46 109 / var(--tw-border-opacity));
+  border-color: rgb(2 60 24 / var(--tw-border-opacity));
 }
 
 .hover\:border-white:hover {
@@ -1463,9 +1475,8 @@ body,
   background-color: rgb(39 75 126 / var(--tw-bg-opacity));
 }
 
-.hover\:bg-\[\#295DA6\]:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(41 93 166 / var(--tw-bg-opacity));
+.hover\:bg-\[rgba\(2\2c 60\2c 24\2c 0\.8\)\]:hover {
+  background-color: rgba(2,60,24,0.8);
 }
 
 .hover\:bg-transparent:hover {
@@ -1477,14 +1488,9 @@ body,
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.hover\:text-\[\#002E6D\]:hover {
+.hover\:text-\[\#023c18\]:hover {
   --tw-text-opacity: 1;
-  color: rgb(0 46 109 / var(--tw-text-opacity));
-}
-
-.hover\:text-black:hover {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
+  color: rgb(2 60 24 / var(--tw-text-opacity));
 }
 
 .hover\:text-white:hover {
@@ -1686,10 +1692,6 @@ body,
     top: 5rem;
   }
 
-  .lg\:top-44 {
-    top: 11rem;
-  }
-
   .lg\:mb-20 {
     margin-bottom: 5rem;
   }
@@ -1870,6 +1872,10 @@ body,
     font-size: 3.00rem;
   }
 
+  .lg\:text-9xl {
+    font-size: 8rem;
+  }
+
   .lg\:text-base {
     font-size: 1rem;
   }
@@ -1878,3 +1884,4 @@ body,
     font-size: 15vw;
   }
 }
+

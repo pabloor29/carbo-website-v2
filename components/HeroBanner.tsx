@@ -33,8 +33,8 @@ function HeroBanner() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={textVariants}
-          className="text-bigSM lg:text-bigLG text-white font-spaceTransit
-            tracking-wide z-30 drop-shadow-[5px_5px_0_#00A6E6]"
+          className="text-bigSM lg:text-bigLG text-white font-ttInterphasesMono
+            tracking-wide z-30 drop-shadow-[4px_4px_0_#f7dad9]"
         >
           CARBO
         </motion.h1>
@@ -43,7 +43,7 @@ function HeroBanner() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={textVariants}
-          className="z-10 text-white/90 font-spaceTransit lg:text-5xl text-2xl"
+          className="z-10 text-white/90 font-schoolbell lg:text-5xl text-2xl"
         >
           Cuisine italienne.
         </motion.h3>

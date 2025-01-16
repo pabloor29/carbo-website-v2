@@ -10,7 +10,7 @@ function AboutPage() {
       <Navbar />
       <CustomHeroBanner title="Presentation" img="/IMG_0230.webp" />
 
-      <div className="z-40 flex justify-center items-center pt-12 pb-24 lg:py-32 bg-white relative overflow-hidden">
+      <div className="z-40 flex justify-center items-center pt-12 pb-24 lg:py-32 bg-[#f7dad9] relative overflow-hidden">
         <div className="lg:w-3/5 w-5/6 flex flex-col lg:flex-row justify-center items-center lg:space-x-20 space-y-16">
           <img
             src="/worker.webp"
@@ -18,23 +18,17 @@ function AboutPage() {
             className="shadow-[-25px_25px_0_0_#002E6D] lg:w-1/2 w-5/6"
           />
           <div className="lg:w-1/2 flex flex-col lg:space-y-8">
-            <h3 className="text-[#002E6D] text-7xl font-medium font-spaceTransit">
-              le chef JEAN-LOUP
+            <h3 className="text-[#023c18] text-7xl font-medium font-schoolbell">
+              Les loulous
             </h3>
-            <article className="text-[#274b7e] text-justify lg:text-left">
-              Le Floridablanca a ouvert ses portes en 2017, rue trivalle, à
-              mi-chemin entre la Bastide et la Cité Médiévale. Jean-Loup,
-              affable, régale sa clientèle, qui mêle tout autant de touristes
-              que de "figures" carcassonnaises, de préparations culinaires
-              largement inspirées de sa culture méditerranéenne. À la carte, on retrouve plats et tapas : de
-              l'encornet et aïoli maison aux padrons en passant par une
-              pika-pika de boeuf ou quelques calçots...
+            <article className="text-[#023c18] text-justify lg:text-left">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde eius exercitationem aliquid, molestias libero, similique quia, labore tempora deleniti ex repellendus quisquam voluptatibus molestiae delectus modi neque vero! Est dicta sequi dolorum exercitationem facere, ex, mollitia earum, repellat assumenda nesciunt autem porro omnis sit nostrum quidem rerum perspiciatis voluptatem eaque.
             </article>
           </div>
         </div>
       </div>
 
-      <div className="relative bg-gradient-to-t from-[#000e21] to-[#295DA6] flex justify-center items-center py-20 text-white">
+      <div className="relative flex justify-center items-center py-20 text-black">
         <div
         className="
     absolute
@@ -60,14 +54,10 @@ function AboutPage() {
           viewBox="0 0 1200 120"
           preserveAspectRatio="none"
         >
-          <path
-            d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
-            className="fill-[#285AA2]"
-          ></path>
         </svg>
       </div>
         <Bubble />
-        <div className="lg:w-3/5 w-5/6 flex flex-col justify-center items-center space-y-20">
+        <div className="lg:w-3/5 w-5/6 flex flex-col justify-center items-center space-y-20 ">
           <h3 className="text-7xl font-spaceTransit w-full text-center">
             Trois salles, trois ambiances...
           </h3>

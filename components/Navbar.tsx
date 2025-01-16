@@ -14,19 +14,19 @@ import { Variants, motion } from "framer-motion";
 
 const links = [
   {
-    label: "accueil",
+    label: ".accueil",
     href: "/",
   },
   {
-    label: "a propos",
+    label: ".a propos",
     href: "/apropos",
   },
   {
-    label: "menu",
+    label: ".menu",
     href: "/menu",
   },
   {
-    label: "contact",
+    label: ".contact",
     href: "/contact",
   },
 ];
@@ -55,17 +55,17 @@ function Navbar() {
         whileInView="visible"
         viewport={{ once: true, margin: "30%" }}
         variants={Variants}
-        className="fixed w-full h-16 backdrop-blur justify-between items-center text-white px-8 z-50 bg-[#002E6D]/80 hidden lg:flex"
+        className="fixed w-full h-16 backdrop-blur justify-between items-center text-white px-8 z-50 bg-[#f7dad9]/80 hidden lg:flex"
       >
-        <a href="/" className="h-14 w-14">
-          <img src="" alt="logo carbo" />
+        <a href="/" className="h-24 w-24">
+          <img src="/CARBO-LOGO-1.webp" alt="logo carbo" />
         </a>
         <div>
           <li className="flex justify-center space-x-12">
             {links.map((link) => (
               <a
                 href={link.href}
-                className="border-b-[1px] border-transparent leading-none hover:border-b-[1px] hover:border-white font-spaceTransit text-4xl tracking-wide "
+                className="border-b-[1px] border-transparent leading-none hover:text-[#023c18] font-ttInterphasesMono text-2xl"
               >
                 {link.label}
               </a>
@@ -74,7 +74,7 @@ function Navbar() {
         </div>
         <Link
           href="/reservation"
-          className="px-3 py-1 bg-white/5 hover:bg-white leading-none cursor-pointer duration-200 text-white hover:text-black font-spaceTransit text-4xl tracking-wide"
+          className="px-3 py-1 bg-white/5 hover:bg-white leading-none cursor-pointer duration-200 text-white hover:text-[#023c18] font-schoolbell text-3xl tracking-wide"
         >
           RESERVATION
         </Link>

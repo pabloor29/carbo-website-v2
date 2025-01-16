@@ -18,21 +18,21 @@ function ContactPage() {
 
       <div className="w-full flex flex-col lg:flex-row justify-between lg:space-x-8 space-y-8 lg:space-y-0">
         <div className="lg:h-[750px] h-[1100px] lg:w-1/2 lg:pl-16 space-y-8 flex flex-col items-center justify-center lg:py-12">
-          <h3 className="z-10 leading-none text-[#002E6D] font-spaceTransit text-8xl tracking-wide">
-            Floridablanca
+          <h3 className="z-10 leading-none text-[#023c18] font-ttInterphasesMono text-8xl tracking-wide">
+            CARBO
           </h3>
 
           <div className="flex flex-col lg:flex-row items-center justify-between lg:space-x-16">
             <div className="flex flex-col justify-between items-center space-y-12">
-              <div className="text-[#002E6D] flex flex-col space-y-3 items-center lg:items-start justify-center">
+              <div className="text-[#023c18] flex flex-col space-y-3 items-center lg:items-start justify-center">
                 <h4 className="underline">
-                  22, rue Trivalle 11000 CARCASSONNE
+                  11, rue Trivalle 11000 CARCASSONNE
                 </h4>
-                <a href="tel:+33430345855">Fixe : +33 4 30 34 58 55 </a>
-                <a href="tel:+33634294874">Mobile : +33 6 34 29 48 74</a>
+                <a href="tel:+33430345855">Fixe : +33  </a>
+                <a href="tel:+33634294874">Mobile : +33 </a>
               </div>
 
-              <div className="text-[#002E6D] w-full flex flex-col space-y-3 items-center lg:items-start justify-center">
+              <div className="text-[#023c18] w-full flex flex-col space-y-3 items-center lg:items-start justify-center">
                 <p>Modes de paiment</p>
                 <div className="flex items-center space-x-10">
                   <TooltipProvider>
@@ -89,23 +89,24 @@ function ContactPage() {
                 </div>
               </div>
 
-              <div className="text-[#002E6D] flex w-full flex-col justify-center items-center lg:items-start space-y-3">
+              <div className="text-[#023c18] flex w-full flex-col justify-center items-center lg:items-start space-y-3">
                 <p>Animaux acceptés</p>
                 <p>Accès Internet Wifi</p>
                 <p>🇬🇧 Anglais</p>
                 <p>🇪🇸 Espagnol</p>
+                <p>🇮🇹 Italien</p>
               </div>
             </div>
 
-            <div className="text-[#002E6D] border-4 w-fit mt-12 lg:mt-0 px-8 py-4 border-[#002E6D] flex flex-col items-center justify-center space-y-6 shadow-[-15px_15px_0_0_#002E6D]">
-              <h3 className="w-full text-center z-10 text-[#002E6D] border-b-4 border-[#002E6D] font-spaceTransit text-7xl tracking-wide">
+            <div className="text-[#023c18] border-4 w-fit mt-12 lg:mt-0 px-8 py-4 border-[#023c18] flex flex-col items-center justify-center space-y-6 shadow-[-15px_15px_0_0_#023c18]">
+              <h3 className="w-full text-center z-10 text-[#023c18] border-b-4 border-[#023c18] font-schoolbell text-7xl tracking-wide">
                 horaires
               </h3>
 
               <div className="flex flex-col items-center justify-center">
                 <p>Juillet - Aout</p>
                 <p>Lundi - Samedi </p>
-                <p className="font-spaceTransit text-5xl">
+                <p className="font-cormorantGaramond text-2xl">
                   {" "}
                   12:00 - 14:00 & 18:00 - 22:00
                 </p>
@@ -114,7 +115,7 @@ function ContactPage() {
               <div className="flex flex-col items-center justify-center">
                 <p>Septembre - Juin</p>
                 <p>Mardi - Samedi </p>
-                <p className="font-spaceTransit text-5xl">
+                <p className="font-cormorantGaramond text-2xl">
                   {" "}
                   12:00 - 14:00 & 18:00 - 22:00
                 </p>
@@ -124,7 +125,7 @@ function ContactPage() {
         </div>
 
         <div className="lg:w-1/2 flex items-center justify-center lg:h-[750px] overflow-hidden">
-          <img src="/florida-map-3.png" alt="" />
+          <img src="/map-carbo.webp" alt="" />
         </div>
       </div>
 

@@ -68,15 +68,15 @@ function IntroRestaurant() {
           variants={imagesVariants}
           className="lg:w-1/2 w-5/6 flex flex-col space-y-8"
         >
-          <h3 className="text-[#002E6D] text-5xl font-medium font-spaceTransit leading-none">
+          <h3 className="text-[#023c18] text-5xl font-medium font-schoolbell leading-none">
             TITRE
           </h3>
-          <article className="text-[#274b7e] text-justify lg:text-left">
+          <article className="text-[#023c18] text-justify lg:text-left">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique soluta eum dicta enim, nemo dolor adipisci illo vero! Voluptatum blanditiis nisi, dicta laboriosam autem ea hic vitae quas velit placeat?
           </article>
           <Link
             href="/apropos"
-            className="bg-[#002E6D] hover:bg-transparent border hover:border-[#002E6D] text-white font-medium hover:text-[#002E6D] w-fit duration-200 px-4 py-3"
+            className="bg-[#023c18] hover:bg-transparent border hover:border-[#023c18] text-white font-medium hover:text-[#023c18] w-fit duration-200 px-4 py-3"
           >
             À propos du restaurant
           </Link>

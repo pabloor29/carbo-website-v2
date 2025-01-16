@@ -2,7 +2,7 @@ import React from "react";
 
 function PlatCursorEffect() {
   return (
-    <div className="relative w-full bg-[#002E6D] flex flex-col justify-center items-center py-20">
+    <div className="relative w-full bg-[#023c18] flex flex-col justify-center items-center py-20">
       <h2 className="w-11/12 text-center leading-none text-7xl text-white font-spaceTransit tracking-wide">
         Reservations pour les groupes
       </h2>

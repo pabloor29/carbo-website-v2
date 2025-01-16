@@ -19,10 +19,6 @@ const ReservationForm = () => {
       numberOfGuestsLabel: "Nombre de Convives",
       eventDateLabel: "Date et Heure",
 
-      reservationTypeLabel: "Type de Reservation",
-      repas: "Repas",
-      evenement: "Evenement",
-
       specialRequestsLabel: "Demandes Speciales",
       submitButton: "ENVOYER LA DEMANDE",
 
@@ -35,10 +31,6 @@ const ReservationForm = () => {
       emailLabel: "Email",
       numberOfGuestsLabel: "Number of Guests",
       eventDateLabel: "Date and Time",
-
-      reservationTypeLabel: "Reservation Type",
-      repas: "Meal",
-      evenement: "Event",
 
       specialRequestsLabel: "Special Requests",
       submitButton: "SEND REQUEST",
@@ -53,10 +45,6 @@ const ReservationForm = () => {
       numberOfGuestsLabel: "Numero de Invitados",
       eventDateLabel: "Fecha y Hora",
 
-      reservationTypeLabel: "Tipo de Reserva",
-      repas: "Comida",
-      evenement: "Evento",
-
       specialRequestsLabel: "Solicitudes Especiales",
       submitButton: "ENVIAR SOLICITUD",
 
@@ -69,10 +57,6 @@ const ReservationForm = () => {
       emailLabel: "Email",
       numberOfGuestsLabel: "Numero di Ospiti",
       eventDateLabel: "Data e Ora",
-
-      reservationTypeLabel: "Tipo di Prenotazione",
-      repas: "Pasto",
-      evenement: "Evento",
 
       specialRequestsLabel: "Richieste Speciali",
       submitButton: "INVIA LA RICHIESTA",
@@ -155,9 +139,9 @@ const ReservationForm = () => {
       reservationType,
     } = formData;
 
-    const mailTo = "carbo11@icloud.com";
-    const subject = `Table Reservation - Le ${eventDate} à ${eventTime}`;
-    const body = `Full Name: ${fullName}\nEmail: ${email}\nNumber of Guests: ${numberOfGuests}\nDate and Time: ${eventDate}, ${eventTime}\nSpecial Requests: ${specialRequests}\nReservation Type: ${reservationType}`;
+    const mailTo = "pab.ortg@gmail.com";
+    const subject = `Reservation - Le ${eventDate} à ${eventTime}`;
+    const body = `Nom: ${fullName}\nEmail: ${email}\nCouverts: ${numberOfGuests}\nDate: ${eventDate}\nHeure: ${eventTime}\nCommentaire: ${specialRequests}`;
 
     window.location.href = `mailto:${mailTo}?subject=${encodeURIComponent(
       subject
@@ -172,7 +156,7 @@ const ReservationForm = () => {
   return (
     <>
       {succeeded ? (
-        <div className="flex flex-col lg:flex-row w-full h-96 justify-center px-4 items-center lg:space-x-3 text-[#002E6D]">
+        <div className="flex flex-col lg:flex-row w-full h-96 justify-center px-4 items-center lg:space-x-3 text-[#023c18]">
           <BadgeCheck />
           <p className="text-xl italic text-center">
             {translation.afterSentMessage}
@@ -185,13 +169,13 @@ const ReservationForm = () => {
             className="space-y-8 lg:w-1/3 w-5/6 z-20"
           >
             <div className="flex items-center justify-between lg:flex-row flex-col-reverse">
-              <h3 className="text-[#002E6D] text-7xl font-medium font-spaceTransit leading-none">
+              <h3 className="text-[#023c18] text-7xl font-medium font-schoolbell leading-none">
                 {translation.title}
               </h3>
               <select
                 value={selectedLanguage}
                 onChange={(e) => setSelectedLanguage(e.target.value)}
-                className="rounded-md border border-[#597ba8] text-xl px-2 py-1 ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                className="rounded-md border border-[#023c18] text-xl px-2 py-1 ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 <option value="fr">🇫🇷</option>
                 <option value="en">🇬🇧</option>
@@ -202,7 +186,7 @@ const ReservationForm = () => {
             <div>
               <label
                 htmlFor="fullName"
-                className="block text-lg font-medium text-[#002E6D] font-spaceTransit text-4xl tracking-wide"
+                className="block text-xl font-medium text-[#023c18] font-ttInterphasesMono tracking-wide"
               >
                 {translation.fullNameLabel}
               </label>
@@ -212,7 +196,7 @@ const ReservationForm = () => {
                 name="fullName"
                 value={formData.fullName}
                 onChange={handleChange}
-                className="mt-1 block w-full px-4 py-2 border border-[#597ba8] rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
+                className="mt-1 block w-full px-4 py-2 border border-[#023c18] rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
                 required
               />
             </div>
@@ -220,7 +204,7 @@ const ReservationForm = () => {
             <div>
               <label
                 htmlFor="email"
-                className="block text-lg font-medium text-[#002E6D] font-spaceTransit text-4xl tracking-wide"
+                className="block font-medium text-[#023c18] font-ttInterphasesMono text-xl tracking-wide"
               >
                 Email
               </label>
@@ -230,7 +214,7 @@ const ReservationForm = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="mt-1 block w-full px-4 py-2 border border-[#597ba8] rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
+                className="mt-1 block w-full px-4 py-2 border border-[#023c18] rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
                 required
               />
             </div>
@@ -239,7 +223,7 @@ const ReservationForm = () => {
               <div className="lg:w-1/2 w-full">
                 <label
                   htmlFor="numberOfGuests"
-                  className="block text-lg font-medium text-[#002E6D] font-spaceTransit text-4xl tracking-wide"
+                  className="block font-medium text-[#023c18] font-ttInterphasesMono text-xl tracking-wide"
                 >
                   {translation.numberOfGuestsLabel}
                 </label>
@@ -250,7 +234,7 @@ const ReservationForm = () => {
                   value={formData.numberOfGuests}
                   onChange={handleChange}
                   min={1}
-                  className="mt-1 block w-full px-4 py-2 border border-[#597ba8] rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
+                  className="mt-1 block w-full px-4 py-2 border border-[#023c18] rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
                   required
                 />
               </div>
@@ -258,7 +242,7 @@ const ReservationForm = () => {
               <div className="lg:w-1/2 w-full">
                 <label
                   htmlFor="eventDate"
-                  className="w-full block text-lg font-medium text-[#002E6D] font-spaceTransit text-4xl tracking-wide"
+                  className="w-full block font-medium text-[#023c18] font-ttInterphasesMono text-xl tracking-wide"
                 >
                   {translation.eventDateLabel}
                 </label>
@@ -274,36 +258,16 @@ const ReservationForm = () => {
                   minDate={new Date()}
                   filterDate={isWeekday}
                   filterTime={isRestaurantOpen}
-                  className="mt-1 block w-full px-4 py-2 border border-[#597ba8] rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
+                  className="mt-1 block w-full px-4 py-2 border border-[#023c18] rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
                   locale="fr"
                 />
               </div>
             </div>
 
-            {/* <div className="lg:w-1/2 w-full">
-              <label
-                htmlFor="reservationType"
-                className="block text-lg font-medium text-[#002E6D] font-spaceTransit text-4xl tracking-wide"
-              >
-                {translation.reservationTypeLabel}
-              </label>
-              <select
-                id="reservationType"
-                name="reservationType"
-                value={formData.reservationType}
-                onChange={handleChange}
-                className="mt-1 block w-full px-4 py-2 border border-[#597ba8] rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
-                required
-              >
-                <option value="repas">{translation.repas}</option>
-                <option value="evenement">{translation.evenement}</option>
-              </select>
-            </div> */}
-
             <div>
               <label
                 htmlFor="specialRequests"
-                className="block text-lg font-medium text-[#002E6D] font-spaceTransit text-4xl tracking-wide"
+                className="block font-medium text-[#023c18] font-ttInterphasesMono text-xl tracking-wide"
               >
                 {translation.specialRequestsLabel}
               </label>
@@ -313,13 +277,13 @@ const ReservationForm = () => {
                 rows={4}
                 value={formData.specialRequests}
                 onChange={handleChange}
-                className="mt-1 block w-full px-4 py-2 border border-[#597ba8] rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
+                className="mt-1 block w-full px-4 py-2 border border-[#023c18] rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full bg-[#002E6D] rounded-sm py-3 text-lg font-semibold text-white hover:bg-[#295DA6] duration-300 cursor-pointer"
+              className="w-full bg-[#023c18] rounded-sm py-3 text-lg font-semibold text-white hover:bg-[rgba(2,60,24,0.8)] duration-300 cursor-pointer"
             >
               {translation.submitButton}
             </button>
@@ -327,17 +291,11 @@ const ReservationForm = () => {
 
           <div className="lg:w-1/3 w-5/6 z-30">
             <img
-              src="/IMG_0228.webp"
+              src="/CARBO-LOGO-21.webp"
               alt=""
-              className="shadow-[25px_15px_0_0_#002E6D] z-30"
+              className="bg-[rgba(2,60,24,0.8)]  z-30"
             />
           </div>
-
-          <img
-            src="/top-octopus.webp"
-            alt=""
-            className="absolute opacity-5 z-0 scale-150 top-20 lg:top-44 left-0 overflow-x-hidden"
-          />
         </div>
       )}
     </>
