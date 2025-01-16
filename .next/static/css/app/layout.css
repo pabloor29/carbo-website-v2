@@ -1030,6 +1030,12 @@ video {
 .bg-white\/5 {
   background-color: rgb(255 255 255 / 0.05);
 }
+.bg-\[\] {
+  background-color: ;
+}
+.bg-\[\#\] {
+  background-color: #;
+}
 .bg-\[url\(\'\/carteETE2023-1\.webp\'\)\] {
   background-image: url('/carteETE2023-1.webp');
 }
@@ -1235,6 +1241,10 @@ video {
 .text-white\/90 {
   color: rgb(255 255 255 / 0.9);
 }
+.text-\[\#f7dad9\] {
+  --tw-text-opacity: 1;
+  color: rgb(247 218 217 / var(--tw-text-opacity));
+}
 .underline {
   text-decoration-line: underline;
 }
@@ -1281,6 +1291,18 @@ video {
 }
 .drop-shadow-\[4px_4px_0_\#f7dad9\] {
   --tw-drop-shadow: drop-shadow(4px 4px 0 #f7dad9);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+.drop-shadow-\[5px_5px_0_\#00A6E6\] {
+  --tw-drop-shadow: drop-shadow(5px 5px 0 #00A6E6);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+.drop-shadow-\[3px_4px_0_\#f7dad9\] {
+  --tw-drop-shadow: drop-shadow(3px 4px 0 #f7dad9);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+.drop-shadow-\[3px_3px_0_\#f7dad9\] {
+  --tw-drop-shadow: drop-shadow(3px 3px 0 #f7dad9);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 .grayscale {

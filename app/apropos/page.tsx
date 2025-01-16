@@ -57,7 +57,8 @@ function AboutPage() {
         </svg>
       </div>
         <Bubble />
-        <div className="lg:w-3/5 w-5/6 flex flex-col justify-center items-center space-y-20 ">
+        <div className="h-screen"></div>
+        {/* <div className="lg:w-3/5 w-5/6 flex flex-col justify-center items-center space-y-20 ">
           <h3 className="text-7xl font-spaceTransit w-full text-center">
             Trois salles, trois ambiances...
           </h3>
@@ -134,7 +135,7 @@ function AboutPage() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <Footer />
