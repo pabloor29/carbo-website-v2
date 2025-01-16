@@ -73,7 +73,6 @@ const ReservationForm = () => {
     eventDate: new Date(),
     eventTime: "",
     specialRequests: "",
-    reservationType: "repas",
   });
 
   const [succeeded, setSucceeded] = useState(false);
@@ -136,7 +135,6 @@ const ReservationForm = () => {
       eventDate,
       eventTime,
       specialRequests,
-      reservationType,
     } = formData;
 
     const mailTo = "pab.ortg@gmail.com";
