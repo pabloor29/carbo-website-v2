@@ -14,19 +14,19 @@ import { Variants, motion } from "framer-motion";
 
 const links = [
   {
-    label: ".accueil",
+    label: "Accueil",
     href: "/",
   },
   {
-    label: ".a propos",
+    label: "A propos",
     href: "/apropos",
   },
   {
-    label: ".menu",
+    label: "Menu",
     href: "/menu",
   },
   {
-    label: ".contact",
+    label: "Contact",
     href: "/contact",
   },
 ];
@@ -76,7 +76,7 @@ function Navbar() {
           href="/reservation"
           className="px-3 py-1 bg-white/5 hover:bg-white leading-none cursor-pointer duration-200 text-white hover:text-[#023c18] font-schoolbell text-3xl tracking-wide"
         >
-          RESERVATION
+          Réservation
         </Link>
       </motion.div>
 
@@ -95,7 +95,7 @@ function Navbar() {
                     className="overflow-hidden h-20 w-4/5 flex items-center text-white hover:bg-[#274b7e] duration-300 px-5 py-3 cursor-pointer"
                   >
                     <h3 className="font-ttInterphasesMono text-3xl tracking-wide">
-                      {items.label.toUpperCase()}
+                      {items.label}
                     </h3>
                   </a>
                 ))}
@@ -104,7 +104,7 @@ function Navbar() {
                   className="overflow-hidden h-20 w-4/5 flex items-center text-white hover:bg-[#274b7e] duration-300 px-5 py-3 cursor-pointer"
                 >
                   <h3 className="font-ttInterphasesMono text-3xl tracking-wide">
-                    .RESERVATION
+                    Réservation
                   </h3>
                 </a>
               </SheetDescription>
@@ -115,7 +115,7 @@ function Navbar() {
           href="/reservation"
           className="shadow cursor-pointer overflow-hidden h-10 px-3 rounded-full bg-[rgba(2,60,24,0.5)] flex items-center justify-center"
         >
-          <h3 className="font-schoolbell text-3xl tracking-wide text-[#f7dad9]">reserver</h3>
+          <h3 className="font-schoolbell text-2xl tracking-wide text-[#f7dad9]">Réserver</h3>
         </a>
         {/* <a href="/reservation" className="shadow cursor-pointer overflow-hidden w-10 h-10 rounded-full bg-white flex items-center justify-center">
           <Utensils />

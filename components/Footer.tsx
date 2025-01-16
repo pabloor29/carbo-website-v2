@@ -6,7 +6,7 @@ function Footer() {
     <footer className="w-full bg-[#f7dad9] flex flex-col justify-center items-center">
       <div className="flex flex-col lg:flex-row w-5/6 lg:justify-between justify-center items-center p-4 space-y-12 lg:space-y-0">
         <div className="lg:w-1/3 w-full text-[#023c18] flex flex-col items-center justify-center">
-          <h4 className="font-schoolbell text-4xl mb-3">HORAIRES</h4>
+          <h4 className="font-schoolbell text-4xl mb-3">Horaires</h4>
           <ul className="flex items-center justify-between space-x-10">
             <div className="flex flex-col items-center justify-center text-center">
               <li className="font-bold text-lg">Juillet - Août</li>
@@ -26,7 +26,7 @@ function Footer() {
         </div>
 
         <div className="lg:w-1/3 w-full text-[#023c18] flex flex-col items-center justify-center">
-          <h4 className="font-schoolbell text-4xl mb-3">ADRESSE</h4>
+          <h4 className="font-schoolbell text-4xl mb-3">Adresse</h4>
           <a
             className="flex flex-col items-center justify-center text-center hover:underline"
             href="https://www.google.com/maps/place/22+Rue+Trivalle,+11000+Carcassonne/@43.2092525,2.3586791,17z/data=!3m1!4b1!4m6!3m5!1s0x12ae2c3fe47df2d1:0xecd2d651ec878ced!8m2!3d43.2092525!4d2.361254!16s%2Fg%2F11bw40xyml?entry=ttu"
@@ -38,7 +38,7 @@ function Footer() {
         </div>
 
         <div className="lg:w-1/3 w-full text-[#023c18] flex flex-col items-center justify-center">
-          <h4 className="font-schoolbell text-4xl mb-3">CONTACT</h4>
+          <h4 className="font-schoolbell text-4xl mb-3">Contact</h4>
           <ul className="flex flex-col items-center justify-center">
             <li className="flex gap-2 mb-3 hover:underline">
               <Mail />

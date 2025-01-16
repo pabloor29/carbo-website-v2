@@ -13,52 +13,52 @@ setDefaultLocale("fr");
 const ReservationForm = () => {
   const translations = {
     fr: {
-      title: "demande de reservation",
-      fullNameLabel: "Nom Complet",
+      title: "Demande de réservation",
+      fullNameLabel: "Nom complet",
       emailLabel: "Email",
-      numberOfGuestsLabel: "Nombre de Convives",
-      eventDateLabel: "Date et Heure",
+      numberOfGuestsLabel: "Nombre de convives",
+      eventDateLabel: "Date et heure",
 
-      specialRequestsLabel: "Demandes Speciales",
+      specialRequestsLabel: "Demandes spéciales",
       submitButton: "ENVOYER LA DEMANDE",
 
       afterSentMessage: `Assurez-vous de bien avoir cliqué sur le bouton pour envoyer le mail ! Vous allez
       recevoir une confirmation d'ici peu 😋`,
     },
     en: {
-      title: "reservation request",
-      fullNameLabel: "Full Name",
+      title: "Reservation request",
+      fullNameLabel: "Full name",
       emailLabel: "Email",
-      numberOfGuestsLabel: "Number of Guests",
-      eventDateLabel: "Date and Time",
+      numberOfGuestsLabel: "Number of guests",
+      eventDateLabel: "Date and time",
 
-      specialRequestsLabel: "Special Requests",
+      specialRequestsLabel: "Special requests",
       submitButton: "SEND REQUEST",
 
       afterSentMessage: `Make sure you have clicked on the button to send the e-mail ! You will
       receive confirmation shortly 😋`,
     },
     es: {
-      title: "solicitud de reserva",
-      fullNameLabel: "Nombre Completo",
-      emailLabel: "Correo Electrónico",
-      numberOfGuestsLabel: "Numero de Invitados",
-      eventDateLabel: "Fecha y Hora",
+      title: "Solicitud de reserva",
+      fullNameLabel: "Nombre completo",
+      emailLabel: "Correo electrónico",
+      numberOfGuestsLabel: "Numero de invitados",
+      eventDateLabel: "Fecha y hora",
 
-      specialRequestsLabel: "Solicitudes Especiales",
+      specialRequestsLabel: "Solicitudes especiales",
       submitButton: "ENVIAR SOLICITUD",
 
       afterSentMessage: `¡Asegúrese de que ha pulsado el botón para enviar el correo electrónico! Lo harás
       recibir confirmación en breve 😋`,
     },
     it: {
-      title: "richiesta di prenotazione",
-      fullNameLabel: "Nome Completo",
+      title: "Richiesta di prenotazione",
+      fullNameLabel: "Nome completo",
       emailLabel: "Email",
-      numberOfGuestsLabel: "Numero di Ospiti",
-      eventDateLabel: "Data e Ora",
+      numberOfGuestsLabel: "Numero di ospiti",
+      eventDateLabel: "Data e ora",
 
-      specialRequestsLabel: "Richieste Speciali",
+      specialRequestsLabel: "Richieste speciali",
       submitButton: "INVIA LA RICHIESTA",
 
       afterSentMessage: `Assicuratevi di aver fatto clic sul pulsante per inviare l'e-mail! Riceverai

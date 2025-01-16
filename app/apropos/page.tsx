@@ -8,7 +8,7 @@ function AboutPage() {
   return (
     <>
       <Navbar />
-      <CustomHeroBanner title="Presentation" img="/IMG_0230.webp" />
+      <CustomHeroBanner title="Présentation" img="/IMG_0230.webp" />
 
       <div className="z-40 flex justify-center items-center pt-12 pb-24 lg:py-32 bg-[#f7dad9] relative overflow-hidden">
         <div className="lg:w-3/5 w-5/6 flex flex-col lg:flex-row justify-center items-center lg:space-x-20 space-y-16">
