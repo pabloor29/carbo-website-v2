@@ -55,7 +55,7 @@ function Navbar() {
         whileInView="visible"
         viewport={{ once: true, margin: "30%" }}
         variants={Variants}
-        className="fixed w-full h-16 backdrop-blur justify-between items-center text-white px-8 z-50 bg-[#f7dad9]/80 hidden lg:flex"
+        className="fixed w-full h-16 backdrop-blur justify-between items-center text-white px-8 z-50 bg-[#023c18]/80 hidden lg:flex"
       >
         <a href="/" className="h-24 w-24">
           <img src="/CARBO-LOGO-1.webp" alt="logo carbo" />
@@ -65,7 +65,7 @@ function Navbar() {
             {links.map((link) => (
               <a
                 href={link.href}
-                className="border-b-[1px] border-transparent leading-none hover:text-[#023c18] font-ttInterphasesMono text-2xl"
+                className="border-b-[1px] border-transparent leading-none hover:text-[#f7dad9] hover:border-[#f7dad9] font-cormorantGaramond text-2xl"
               >
                 {link.label}
               </a>

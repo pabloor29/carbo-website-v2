@@ -33,17 +33,16 @@ function HeroBanner() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={textVariants}
-          className="text-bigSM lg:text-bigLG text-white font-ttInterphasesMono
-            tracking-wide z-30 drop-shadow-[4px_4px_0_#f7dad9]"
+          className="tracking-wide z-30 w-2/3"
         >
-          CARBO
+          <img src="/CARBO-LOGO-10.webp" alt="logo hero banner" />
         </motion.h1>
         <motion.h3
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={textVariants}
-          className="z-10 text-white/90 font-schoolbell lg:text-5xl text-2xl"
+          className="z-10 text-white/90 font-schoolbell lg:text-5xl text-2xl pt-10"
         >
           Cuisine italienne.
         </motion.h3>
