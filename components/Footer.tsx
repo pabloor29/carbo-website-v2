@@ -3,20 +3,20 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="w-full bg-[#f7dad9] flex flex-col justify-center items-center">
-      <div className="flex flex-col lg:flex-row w-5/6 lg:justify-between justify-center items-center p-4 space-y-12 lg:space-y-0">
-        <div className="lg:w-1/3 w-full text-[#023c18] flex flex-col items-center justify-center">
+    <footer className="w-full bg-[#f7dad9] flex flex-col items-center justify-center">
+      <div className="flex flex-col lg:flex-row w-5/6 lg:justify-between p-4 space-y-12 lg:space-y-0">
+        <div className="lg:w-1/3 w-full text-[#023c18] flex flex-col items-center h-full">
           <h4 className="font-schoolbell text-4xl mb-3">Horaires</h4>
-          <ul className="flex items-center justify-between space-x-10">
+          <ul className="flex items-center justify-between space-x-10 font-cormorantGaramond text-xl">
             <div className="flex flex-col items-center justify-center text-center">
-              <li className="font-bold text-lg">Juillet - Août</li>
+              <li className="underline">Juillet - Août</li>
               <p>Lundi - Samedi</p>
               <p>
                 12:00 - 14:00 <br /> 18:00 - 22:00
               </p>
             </div>
             <div className="flex flex-col items-center justify-center text-center">
-              <li className="font-bold text-lg">Septembre - Juin</li>
+              <li className="underline">Septembre - Juin</li>
               <p>Mardi - Samedi</p>
               <p>
                 12:00 - 14:00 <br /> 18:00 - 22:00
@@ -25,10 +25,10 @@ function Footer() {
           </ul>
         </div>
 
-        <div className="lg:w-1/3 w-full text-[#023c18] flex flex-col items-center justify-center">
+        <div className="lg:w-1/3 w-full text-[#023c18] flex flex-col items-center justify-center h-full">
           <h4 className="font-schoolbell text-4xl mb-3">Adresse</h4>
           <a
-            className="flex flex-col items-center justify-center text-center hover:underline"
+            className="flex flex-col items-center justify-center text-center hover:underline font-cormorantGaramond text-xl"
             href="https://www.google.com/maps/place/22+Rue+Trivalle,+11000+Carcassonne/@43.2092525,2.3586791,17z/data=!3m1!4b1!4m6!3m5!1s0x12ae2c3fe47df2d1:0xecd2d651ec878ced!8m2!3d43.2092525!4d2.361254!16s%2Fg%2F11bw40xyml?entry=ttu"
           >
             11 rue Trivalle
@@ -37,29 +37,31 @@ function Footer() {
           </a>
         </div>
 
-        <div className="lg:w-1/3 w-full text-[#023c18] flex flex-col items-center justify-center">
+        <div className="lg:w-1/3 w-full text-[#023c18] flex flex-col items-center justify-center h-full">
           <h4 className="font-schoolbell text-4xl mb-3">Contact</h4>
-          <ul className="flex flex-col items-center justify-center">
-            <li className="flex gap-2 mb-3 hover:underline">
+          <ul className="flex flex-col gap-1 items-center justify-center text-xl font-cormorantGaramond">
+            <li className="flex gap-2 hover:underline">
               <Mail />
               <a href="mailto:carbo11@icloud.com">
                 carbo11@icloud.com
               </a>
             </li>
-            <li className="flex gap-2 mb-3 hover:underline">
+            <li className="flex gap-2 hover:underline">
               <Phone />
               <a href="tel:+33">TEL</a>
             </li>
-            <li className="flex gap-2 mb-3 hover:underline">
+            <li className="flex gap-2 hover:underline">
               <Instagram />
-              <a href="https://www.instagram.com/floridablanca_bar_a_poulpe/?hl=fr">@insta</a>
+              <a href="https://www.instagram.com/carbo_restaurant/?hl=fr">@carbo_restaurant</a>
             </li>
-            <li className="flex gap-2 mb-3 hover:underline"></li>
+            <li className="flex gap-2 hover:underline"></li>
           </ul>
         </div>
 
-        <div className="w-52 flex items-center justify-center">
-          <img src="/CARBO-LOGO-4.webp" alt="logo carbo" />
+        <div className="lg:w-1/3 w-full  flex items-center justify-center">
+          <div className="w-52">
+            <img src="/CARBO-LOGO-4.webp" alt="logo carbo" />
+          </div>
         </div>
       </div>
 

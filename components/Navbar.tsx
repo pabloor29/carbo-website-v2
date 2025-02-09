@@ -55,17 +55,17 @@ function Navbar() {
         whileInView="visible"
         viewport={{ once: true, margin: "30%" }}
         variants={Variants}
-        className="fixed w-full h-16 backdrop-blur justify-between items-center text-white px-8 z-50 bg-[#023c18]/80 hidden lg:flex"
+        className="fixed w-full h-16 backdrop-blur justify-between items-center text-white px-8 z-50 hidden lg:flex"
       >
         <a href="/" className="h-24 w-24">
-          <img src="/CARBO-LOGO-1.webp" alt="logo carbo" />
+          <img src="/CARBO-LOGO-2.webp" alt="logo carbo" />
         </a>
         <div>
           <li className="flex justify-center space-x-12">
             {links.map((link) => (
               <a
                 href={link.href}
-                className="border-b-[1px] border-transparent leading-none hover:text-[#f7dad9] hover:border-[#f7dad9] font-cormorantGaramond text-2xl"
+                className="leading-none hover:text-pinkCarbo hover:border-pinkCarbo font-schoolbell text-2xl"
               >
                 {link.label}
               </a>
@@ -74,7 +74,7 @@ function Navbar() {
         </div>
         <Link
           href="/reservation"
-          className="px-3 py-1 bg-white/5 hover:bg-white leading-none cursor-pointer duration-200 text-white hover:text-[#023c18] font-schoolbell text-3xl tracking-wide"
+          className="leading-none hover:text-pinkCarbo hover:border-pinkCarbo font-schoolbell text-2xl"
         >
           Réservation
         </Link>
