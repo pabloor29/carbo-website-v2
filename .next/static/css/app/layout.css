@@ -769,6 +769,9 @@ video {
 .w-96 {
   width: 24rem;
 }
+.w-1\/2 {
+  width: 50%;
+}
 .-rotate-3 {
   --tw-rotate: -3deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -952,6 +955,10 @@ video {
   --tw-border-opacity: 1;
   border-color: rgb(89 123 168 / var(--tw-border-opacity));
 }
+.border-greenBottle {
+  --tw-border-opacity: 1;
+  border-color: rgb(25 44 29 / var(--tw-border-opacity));
+}
 .bg-\[\#002E6D\] {
   --tw-bg-opacity: 1;
   background-color: rgb(0 46 109 / var(--tw-bg-opacity));
@@ -1001,6 +1008,22 @@ video {
 .bg-blue-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(59 130 246 / var(--tw-bg-opacity));
+}
+.bg-greenBottle {
+  --tw-bg-opacity: 1;
+  background-color: rgb(25 44 29 / var(--tw-bg-opacity));
+}
+.bg-\[rgba\(25\2c 60\2c 24\2c 0\.8\)\] {
+  background-color: rgba(25,60,24,0.8);
+}
+.bg-\[rgba\(25\2c \2c 24\2c 0\.8\)\] {
+  background-color: rgba(25,,24,0.8);
+}
+.bg-\[rgba\(25\2c 44\2c 24\2c 0\.8\)\] {
+  background-color: rgba(25,44,24,0.8);
+}
+.bg-\[rgba\(25\2c 44\2c 29\2c 0\.8\)\] {
+  background-color: rgba(25,44,29,0.8);
 }
 .bg-\[url\(\'\/carteETE2023-1\.webp\'\)\] {
   background-image: url('/carteETE2023-1.webp');
@@ -1202,6 +1225,10 @@ video {
 .text-white\/90 {
   color: rgb(255 255 255 / 0.9);
 }
+.text-greenBottle {
+  --tw-text-opacity: 1;
+  color: rgb(25 44 29 / var(--tw-text-opacity));
+}
 .underline {
   text-decoration-line: underline;
 }
@@ -1239,12 +1266,26 @@ video {
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
+.shadow-\[-15px_15px_0_0_\#schoolbell\] {
+  --tw-shadow: -15px 15px 0 0 #schoolbell;
+  --tw-shadow-colored: -15px 15px 0 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.shadow-\[-15px_15px_0_0_\#192C1D\] {
+  --tw-shadow: -15px 15px 0 0 #192C1D;
+  --tw-shadow-colored: -15px 15px 0 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
 .drop-shadow-\[-15px_15px_3px_rgba\(0\2c 0\2c 0\2c 0\.25\)\] {
   --tw-drop-shadow: drop-shadow(-15px 15px 3px rgba(0,0,0,0.25));
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 .drop-shadow-\[3px_3px_0_\#023c18\] {
   --tw-drop-shadow: drop-shadow(3px 3px 0 #023c18);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+.drop-shadow-\[3px_3px_0_\#192C1D\] {
+  --tw-drop-shadow: drop-shadow(3px 3px 0 #192C1D);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 .grayscale {
@@ -1400,6 +1441,11 @@ video {
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
 }
 
+.hover\:border-greenBottle:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(25 44 29 / var(--tw-border-opacity));
+}
+
 .hover\:bg-\[\#002E6D\]:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(0 46 109 / var(--tw-bg-opacity));
@@ -1418,6 +1464,10 @@ video {
   background-color: transparent;
 }
 
+.hover\:bg-\[rgba\(25\2c 44\2c 29\2c 0\.8\)\]:hover {
+  background-color: rgba(25,44,29,0.8);
+}
+
 .hover\:text-\[\#023c18\]:hover {
   --tw-text-opacity: 1;
   color: rgb(2 60 24 / var(--tw-text-opacity));
@@ -1431,6 +1481,11 @@ video {
 .hover\:text-white:hover {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.hover\:text-greenBottle:hover {
+  --tw-text-opacity: 1;
+  color: rgb(25 44 29 / var(--tw-text-opacity));
 }
 
 .hover\:underline:hover {

@@ -33,8 +33,8 @@ function CustomHeroBanner(props: any) {
           whileInView="visible"
           viewport={{ once: true }}
           variants={textVariants}
-          className="text-5xl lg:text-9xl text-white font-ttInterphasesMono
-             z-40 drop-shadow-[3px_3px_0_#023c18]"
+          className="text-5xl lg:text-9xl text-white font-schoolbell
+             z-40 drop-shadow-[3px_3px_0_#192C1D]"
         >
           {props.title}
         </motion.h1>

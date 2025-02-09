@@ -7,18 +7,18 @@ function Footer() {
       <div className="flex flex-col lg:flex-row w-5/6 lg:justify-between p-4 space-y-12 lg:space-y-0">
         <div className="lg:w-1/3 w-full text-[#023c18] flex flex-col items-center h-full">
           <h4 className="font-schoolbell text-4xl mb-3">Horaires</h4>
-          <ul className="flex items-center justify-between space-x-10 font-cormorantGaramond text-xl">
+          <ul className="flex items-center justify-between space-x-10">
             <div className="flex flex-col items-center justify-center text-center">
-              <li className="underline">Juillet - Août</li>
+              <li className="font-bold">Juillet - Août</li>
               <p>Lundi - Samedi</p>
-              <p>
+              <p className="font-cormorantGaramond text-xl">
                 12:00 - 14:00 <br /> 18:00 - 22:00
               </p>
             </div>
             <div className="flex flex-col items-center justify-center text-center">
-              <li className="underline">Septembre - Juin</li>
+              <li className="font-bold">Septembre - Juin</li>
               <p>Mardi - Samedi</p>
-              <p>
+              <p className="font-cormorantGaramond text-xl">
                 12:00 - 14:00 <br /> 18:00 - 22:00
               </p>
             </div>
@@ -29,7 +29,7 @@ function Footer() {
           <h4 className="font-schoolbell text-4xl mb-3">Adresse</h4>
           <a
             className="flex flex-col items-center justify-center text-center hover:underline font-cormorantGaramond text-xl"
-            href="https://www.google.com/maps/place/22+Rue+Trivalle,+11000+Carcassonne/@43.2092525,2.3586791,17z/data=!3m1!4b1!4m6!3m5!1s0x12ae2c3fe47df2d1:0xecd2d651ec878ced!8m2!3d43.2092525!4d2.361254!16s%2Fg%2F11bw40xyml?entry=ttu"
+            href="https://www.google.fr/maps/place/11+Rue+Trivalle,+11000+Carcassonne/@43.2094872,2.3589394,17z/data=!3m1!4b1!4m6!3m5!1s0x12ae2c155f7dfa75:0xfab50ca890041ead!8m2!3d43.2094833!4d2.3615143!16s%2Fg%2F11c5qj1msb?entry=ttu&g_ep=EgoyMDI1MDIwNS4xIKXMDSoASAFQAw%3D%3D"
           >
             11 rue Trivalle
             <br />

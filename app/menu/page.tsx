@@ -9,7 +9,7 @@ function MenuPage() {
       <Navbar />
       <CustomHeroBanner title="Menu" img="/IMG_0236.webp" />
 
-      <div className="w-full flex justify-center items-center bg-[url('/carteETE2023-1.webp')]">
+      <div className="w-full flex justify-center items-center bg-whiteSmokedBG">
         <div className="lg:w-3/5 w-11/12 flex flex-col items-center justify-center py-20 space-y-6">
           <img
             className="w-full h-auto object-cover"

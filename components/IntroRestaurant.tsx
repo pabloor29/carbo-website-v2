@@ -68,15 +68,15 @@ function IntroRestaurant() {
           variants={imagesVariants}
           className="lg:w-1/2 w-5/6 flex flex-col space-y-8"
         >
-          <h3 className="text-[#023c18] text-5xl font-medium font-schoolbell leading-none">
+          <h3 className="text-greenBottle text-5xl font-medium font-schoolbell leading-none">
             Pâtes & tradition
           </h3>
-          <article className="text-[#023c18] text-justify lg:text-left font-cormorantGaramond text-xl">
+          <article className="text-greenBottle text-justify lg:text-left font-cormorantGaramond text-xl">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique soluta eum dicta enim, nemo dolor adipisci illo vero! Voluptatum blanditiis nisi, dicta laboriosam autem ea hic vitae quas velit placeat?
           </article>
           <Link
             href="/menu"
-            className="bg-[#023c18] hover:bg-transparent border hover:border-[#023c18] text-white font-medium hover:text-[#023c18] w-fit duration-200 px-4 py-3"
+            className="bg-greenBottle hover:bg-transparent border hover:border-greenBottle text-white font-medium hover:text-greenBottle w-fit duration-200 px-4 py-3"
           >
             Notre carte
           </Link>

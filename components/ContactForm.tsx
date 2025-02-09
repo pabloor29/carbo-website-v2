@@ -154,26 +154,26 @@ const ReservationForm = () => {
   return (
     <>
       {succeeded ? (
-        <div className="flex flex-col lg:flex-row w-full h-96 justify-center px-4 items-center lg:space-x-3 text-[#023c18]">
+        <div className="flex flex-col lg:flex-row w-full h-96 justify-center px-4 items-center lg:space-x-3 text-greenBottle bg-whiteSmokedBG">
           <BadgeCheck />
           <p className="text-xl italic text-center">
             {translation.afterSentMessage}
           </p>
         </div>
       ) : (
-        <div className="relative flex flex-col lg:flex-row justify-center items-center lg:space-x-20 space-y-8 py-16">
+        <div className="relative flex flex-col lg:flex-row justify-center items-center lg:space-x-20 space-y-8 py-16 bg-whiteSmokedBG">
           <form
             onSubmit={handleSubmit}
             className="space-y-8 lg:w-1/3 w-5/6 z-20"
           >
             <div className="flex items-center justify-between lg:flex-row flex-col-reverse">
-              <h3 className="text-[#023c18] text-7xl font-medium font-schoolbell leading-none">
+              <h3 className="text-greenBottle text-7xl font-medium font-schoolbell leading-none">
                 {translation.title}
               </h3>
               <select
                 value={selectedLanguage}
                 onChange={(e) => setSelectedLanguage(e.target.value)}
-                className="rounded-md border border-[#023c18] text-xl px-2 py-1 ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                className="rounded-md border border-greenBottle text-xl px-2 py-1 ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 <option value="fr">🇫🇷</option>
                 <option value="en">🇬🇧</option>
@@ -184,7 +184,7 @@ const ReservationForm = () => {
             <div>
               <label
                 htmlFor="fullName"
-                className="block text-xl font-medium text-[#023c18] font-ttInterphasesMono tracking-wide"
+                className="block text-xl font-medium text-greenBottle font-ttInterphasesMono tracking-wide"
               >
                 {translation.fullNameLabel}
               </label>
@@ -194,7 +194,7 @@ const ReservationForm = () => {
                 name="fullName"
                 value={formData.fullName}
                 onChange={handleChange}
-                className="mt-1 block w-full px-4 py-2 border border-[#023c18] rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
+                className="mt-1 block w-full px-4 py-2 border border-greenBottle rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
                 required
               />
             </div>
@@ -202,7 +202,7 @@ const ReservationForm = () => {
             <div>
               <label
                 htmlFor="email"
-                className="block font-medium text-[#023c18] font-ttInterphasesMono text-xl tracking-wide"
+                className="block font-medium text-greenBottle font-ttInterphasesMono text-xl tracking-wide"
               >
                 Email
               </label>
@@ -212,7 +212,7 @@ const ReservationForm = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="mt-1 block w-full px-4 py-2 border border-[#023c18] rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
+                className="mt-1 block w-full px-4 py-2 border border-greenBottle rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
                 required
               />
             </div>
@@ -221,7 +221,7 @@ const ReservationForm = () => {
               <div className="lg:w-1/2 w-full">
                 <label
                   htmlFor="numberOfGuests"
-                  className="block font-medium text-[#023c18] font-ttInterphasesMono text-xl tracking-wide"
+                  className="block font-medium text-greenBottle font-ttInterphasesMono text-xl tracking-wide"
                 >
                   {translation.numberOfGuestsLabel}
                 </label>
@@ -232,7 +232,7 @@ const ReservationForm = () => {
                   value={formData.numberOfGuests}
                   onChange={handleChange}
                   min={1}
-                  className="mt-1 block w-full px-4 py-2 border border-[#023c18] rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
+                  className="mt-1 block w-full px-4 py-2 border border-greenBottle rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
                   required
                 />
               </div>
@@ -240,7 +240,7 @@ const ReservationForm = () => {
               <div className="lg:w-1/2 w-full">
                 <label
                   htmlFor="eventDate"
-                  className="w-full block font-medium text-[#023c18] font-ttInterphasesMono text-xl tracking-wide"
+                  className="w-full block font-medium text-greenBottle font-ttInterphasesMono text-xl tracking-wide"
                 >
                   {translation.eventDateLabel}
                 </label>
@@ -256,7 +256,7 @@ const ReservationForm = () => {
                   minDate={new Date()}
                   filterDate={isWeekday}
                   filterTime={isRestaurantOpen}
-                  className="mt-1 block w-full px-4 py-2 border border-[#023c18] rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
+                  className="mt-1 block w-full px-4 py-2 border border-greenBottle rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
                   locale="fr"
                 />
               </div>
@@ -265,7 +265,7 @@ const ReservationForm = () => {
             <div>
               <label
                 htmlFor="specialRequests"
-                className="block font-medium text-[#023c18] font-ttInterphasesMono text-xl tracking-wide"
+                className="block font-medium text-greenBottle font-ttInterphasesMono text-xl tracking-wide"
               >
                 {translation.specialRequestsLabel}
               </label>
@@ -275,13 +275,13 @@ const ReservationForm = () => {
                 rows={4}
                 value={formData.specialRequests}
                 onChange={handleChange}
-                className="mt-1 block w-full px-4 py-2 border border-[#023c18] rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
+                className="mt-1 block w-full px-4 py-2 border border-greenBottle rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full bg-[#023c18] rounded-sm py-3 text-lg font-semibold text-white hover:bg-[rgba(2,60,24,0.8)] duration-300 cursor-pointer"
+              className="w-full bg-greenBottle rounded-sm py-3 text-lg font-semibold text-white hover:bg-[rgba(25,44,29,0.8)] duration-300 cursor-pointer"
             >
               {translation.submitButton}
             </button>
@@ -291,7 +291,7 @@ const ReservationForm = () => {
             <img
               src="/CARBO-LOGO-21.webp"
               alt=""
-              className="bg-[rgba(2,60,24,0.8)]  z-30"
+              className="bg-[rgba(25,44,29,0.8)]  z-30"
             />
           </div>
         </div>
