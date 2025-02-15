@@ -184,7 +184,7 @@ const ReservationForm = () => {
             <div>
               <label
                 htmlFor="fullName"
-                className="block text-xl font-medium text-greenBottle font-ttInterphasesMono tracking-wide"
+                className="block text-xl font-medium text-greenBottle font-cormorantGaramond tracking-wide"
               >
                 {translation.fullNameLabel}
               </label>
@@ -202,7 +202,7 @@ const ReservationForm = () => {
             <div>
               <label
                 htmlFor="email"
-                className="block font-medium text-greenBottle font-ttInterphasesMono text-xl tracking-wide"
+                className="block font-medium text-greenBottle font-cormorantGaramond text-xl tracking-wide"
               >
                 Email
               </label>
@@ -221,7 +221,7 @@ const ReservationForm = () => {
               <div className="lg:w-1/2 w-full">
                 <label
                   htmlFor="numberOfGuests"
-                  className="block font-medium text-greenBottle font-ttInterphasesMono text-xl tracking-wide"
+                  className="block font-medium text-greenBottle font-cormorantGaramond text-xl tracking-wide"
                 >
                   {translation.numberOfGuestsLabel}
                 </label>
@@ -240,7 +240,7 @@ const ReservationForm = () => {
               <div className="lg:w-1/2 w-full">
                 <label
                   htmlFor="eventDate"
-                  className="w-full block font-medium text-greenBottle font-ttInterphasesMono text-xl tracking-wide"
+                  className="w-full block font-medium text-greenBottle font-cormorantGaramond text-xl tracking-wide"
                 >
                   {translation.eventDateLabel}
                 </label>
@@ -265,7 +265,7 @@ const ReservationForm = () => {
             <div>
               <label
                 htmlFor="specialRequests"
-                className="block font-medium text-greenBottle font-ttInterphasesMono text-xl tracking-wide"
+                className="block font-medium text-greenBottle font-cormorantGaramond text-xl tracking-wide"
               >
                 {translation.specialRequestsLabel}
               </label>
@@ -281,7 +281,7 @@ const ReservationForm = () => {
 
             <button
               type="submit"
-              className="w-full bg-greenBottle rounded-sm py-3 text-lg font-semibold text-white hover:bg-[rgba(25,44,29,0.8)] duration-300 cursor-pointer"
+              className="bg-greenBottle hover:bg-transparent border hover:border-greenBottle text-white font-medium hover:text-greenBottle w-fit duration-200 px-4 py-3"
             >
               {translation.submitButton}
             </button>
