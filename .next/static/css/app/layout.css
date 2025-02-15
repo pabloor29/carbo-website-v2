@@ -946,6 +946,9 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(254 248 237 / var(--tw-bg-opacity));
 }
+.bg-greenBottle\/50 {
+  background-color: rgb(25 44 29 / 0.5);
+}
 .bg-gradient-to-b {
   background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
 }
@@ -1312,6 +1315,11 @@ video {
 
 .hover\:bg-transparent:hover {
   background-color: transparent;
+}
+
+.hover\:bg-greenBottle:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(25 44 29 / var(--tw-bg-opacity));
 }
 
 .hover\:text-greenBottle:hover {
