@@ -46,7 +46,7 @@ const imagesVariants: Variants = {
 function IntroRestaurant() {
   return (
     <div className="flex justify-center items-center py-24 bg-whiteSmokedBG">
-      <div className="lg:w-3/5 flex flex-col lg:flex-row justify-center items-center lg:space-x-20 space-y-10">
+      <div className="lg:w-3/5 flex flex-col lg:flex-row justify-center items-center md:space-x-20 space-y-10">
         <motion.div
           initial="hiddenRight"
           whileInView="visibleRight"
@@ -55,9 +55,9 @@ function IntroRestaurant() {
           className="lg:w-1/2 w-5/6"
         >
           <img
-            src="/octopus-drawing-blue.webp"
+            src="/plat-carbo-1.webp"
             alt=""
-            className="-scale-x-100"
+            className="shadow-2xl"
           />
         </motion.div>
 
@@ -72,7 +72,7 @@ function IntroRestaurant() {
             Pâtes & tradition
           </h3>
           <article className="text-greenBottle text-justify lg:text-left font-cormorantGaramond text-xl">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique soluta eum dicta enim, nemo dolor adipisci illo vero! Voluptatum blanditiis nisi, dicta laboriosam autem ea hic vitae quas velit placeat?
+            Chez Carbo, tout est fait pour que vous vous sentiez comme chez vous. Une cuisine généreuse, une ambiance conviviale et une équipe passionnée : bienvenue dans notre petit coin d’Italie à Carcassonne !  
           </article>
           <Link
             href="/menu"

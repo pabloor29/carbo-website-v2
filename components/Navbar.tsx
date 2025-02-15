@@ -55,9 +55,9 @@ function Navbar() {
         whileInView="visible"
         viewport={{ once: true, margin: "30%" }}
         variants={Variants}
-        className="fixed w-full h-16 backdrop-blur justify-between items-center text-white px-8 z-50 hidden lg:flex"
+        className="fixed w-full h-16 backdrop-blur justify-between items-center text-white px-8 z-50 hidden lg:flex bg-greenBottle/30"
       >
-        <a href="/" className="h-24 w-24">
+        <a href="/" className="h-16 w-16 py-2">
           <img src="/CARBO-LOGO-2.webp" alt="logo carbo" />
         </a>
         <div>
