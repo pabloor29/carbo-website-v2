@@ -1,4 +1,4 @@
-import CustomHeroBanner from "@/components/CustomHeroBanner";
+import CustomHeroBannerImage from "@/components/CustomHeroBannerImage";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import React from "react";
@@ -7,7 +7,7 @@ function MenuPage() {
   return (
     <>
       <Navbar />
-      <CustomHeroBanner title="Menu" img="/IMG_0236.webp" />
+      <CustomHeroBannerImage title="Menu" img="/IMG_0236.webp" />
 
       <div className="w-full flex justify-center items-center bg-whiteSmokedBG">
         <div className="lg:w-3/5 w-11/12 flex flex-col items-center justify-center py-20 space-y-6">

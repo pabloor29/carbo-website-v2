@@ -1,4 +1,4 @@
-import CustomHeroBanner from "@/components/CustomHeroBanner";
+import CustomHeroBannerImage from "@/components/CustomHeroBannerImage";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import {
@@ -14,7 +14,7 @@ function ContactPage() {
   return (
     <>
       <Navbar />
-      <CustomHeroBanner title="Contact" img="/IMG_0234.webp" />
+      <CustomHeroBannerImage title="Contact" img="/IMG_0234.webp" />
 
       <div className="w-full flex flex-col lg:flex-row justify-between lg:space-x-8 space-y-8 lg:space-y-0 bg-whiteSmokedBG">
         <div className="lg:h-[750px] h-[1100px] lg:w-1/2 lg:pl-16 space-y-8 flex flex-col items-center justify-center lg:py-12">

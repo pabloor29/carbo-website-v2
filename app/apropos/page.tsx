@@ -1,11 +1,10 @@
 "use client";
 
 import { Variants, motion } from "framer-motion";
-import Bubble from "@/components/Bubble";
-import CustomHeroBanner from "@/components/CustomHeroBanner";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import React from "react";
+import CustomHeroBannerImage from "@/components/CustomHeroBannerImage";
 
 const imagesVariants: Variants = {
   hiddenBottom: {
@@ -51,7 +50,7 @@ function AboutPage() {
   return (
     <>
       <Navbar />
-      <CustomHeroBanner title="Présentation" img="/IMG_0230.webp" />
+      <CustomHeroBannerImage title="Présentation" video="/IMG_0439.mp4" />
       <div className="z-40 flex flex-col justify-center items-center space-y-32 pt-12 pb-24 md:py-32 bg-whiteSmokedBG relative overflow-hidden">
         <div className="md:w-3/5 flex flex-col lg:flex-row justify-center items-center lg:space-x-20 space-y-4">
         <motion.div

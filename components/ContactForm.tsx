@@ -161,7 +161,7 @@ const ReservationForm = () => {
           </p>
         </div>
       ) : (
-        <div className="relative flex flex-col lg:flex-row justify-center items-center lg:space-x-20 space-y-8 py-16 bg-whiteSmokedBG">
+        <div className="relative flex flex-col lg:flex-row justify-center items-center lg:space-x-32 space-y-20 py-16 bg-whiteSmokedBG">
           <form
             onSubmit={handleSubmit}
             className="space-y-8 lg:w-1/3 w-5/6 z-20"
@@ -287,11 +287,11 @@ const ReservationForm = () => {
             </button>
           </form>
 
-          <div className="lg:w-1/3 w-5/6 z-30">
+          <div className="z-30">
             <img
-              src="/CARBO-LOGO-21.webp"
+              src="/CARBO-LOGO-4.webp"
               alt=""
-              className="bg-[rgba(25,44,29,0.8)]  z-30"
+              className="z-30"
             />
           </div>
         </div>

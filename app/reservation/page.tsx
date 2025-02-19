@@ -1,5 +1,5 @@
 import ContactForm from "@/components/ContactForm";
-import CustomHeroBanner from "@/components/CustomHeroBanner";
+import CustomHeroBannerImage from "@/components/CustomHeroBannerImage";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import React from "react";
@@ -8,7 +8,7 @@ function ReservationPage() {
   return (
     <>
       <Navbar />
-      <CustomHeroBanner title="Réservation" img="" />
+      <CustomHeroBannerImage title="Réservation" img="" />
       <ContactForm />
       <Footer />
     </>
