@@ -11,15 +11,20 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(home)/page.js"
     ],
-    "/apropos/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/apropos/page.js"
-    ],
     "/menu/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/menu/page.js"
+    ],
+    "/contact/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/contact/page.js"
+    ],
+    "/apropos/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/apropos/page.js"
     ]
   }
 }

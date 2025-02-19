@@ -32,7 +32,7 @@ function ContactPage() {
                   11 rue Trivalle, 11000 Carcassonne
                 </a>
                 <a href="tel:+33430345855">Fixe : +33  </a>
-                <a href="tel:+33634294874">Mobile : +33 </a>
+                <a href="tel:+33629104217">Mobile : +33 6 29 10 42 17</a>
               </div>
 
               <div className="text-greenBottle w-full flex flex-col space-y-3 items-center lg:items-start justify-center">
@@ -45,7 +45,7 @@ function ContactPage() {
                           <CreditCard />
                         </div>
                       </TooltipTrigger>
-                      <TooltipContent>
+                      <TooltipContent className="w-full bg-greenBottle rounded-xl text-white">
                         <p>Carte de crédit</p>
                       </TooltipContent>
                     </Tooltip>
@@ -58,7 +58,7 @@ function ContactPage() {
                           <Banknote />
                         </div>
                       </TooltipTrigger>
-                      <TooltipContent>
+                      <TooltipContent className="w-full bg-greenBottle rounded-xl text-white">
                         <p>Chèques bancaires et postaux</p>
                       </TooltipContent>
                     </Tooltip>
@@ -71,7 +71,7 @@ function ContactPage() {
                           <Coins />
                         </div>
                       </TooltipTrigger>
-                      <TooltipContent>
+                      <TooltipContent className="w-full bg-greenBottle rounded-xl text-white">
                         <p>Espèces</p>
                       </TooltipContent>
                     </Tooltip>
@@ -84,7 +84,7 @@ function ContactPage() {
                           <Ticket />
                         </div>
                       </TooltipTrigger>
-                      <TooltipContent>
+                      <TooltipContent className="w-full bg-greenBottle rounded-xl text-white">
                         <p>Ticket Restaurant</p>
                       </TooltipContent>
                     </Tooltip>
