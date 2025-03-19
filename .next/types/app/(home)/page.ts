@@ -1,4 +1,4 @@
-// File: /Users/pabloortega/Desktop/Restaurant Louisa/carbo-website-v2/app/(home)/page.tsx
+// File: /Users/pabloortega/Desktop/PABLO ORTEGA/Dev/carbo-website-v2/app/(home)/page.tsx
 import * as entry from '../../../../app/(home)/page.js'
 import type { ResolvingMetadata } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

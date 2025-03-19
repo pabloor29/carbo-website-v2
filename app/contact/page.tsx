@@ -127,8 +127,23 @@ function ContactPage() {
           </div>
         </div>
 
-        <div className="lg:w-1/2 flex items-center justify-center lg:h-[750px] overflow-hidden">
-          <img src="/map-carbo.webp" alt="" />
+        <div className="lg:w-1/2 flex items-center justify-center lg:h-[750px] h-[500px] overflow-hidden">
+          <iframe
+              title="Google Map"
+              width="100%"
+              height="100%"
+              style={{ 
+                border: 10,
+                padding: 40,
+                borderRadius: 50
+               }}
+              loading="lazy"
+              allowFullScreen
+              referrerPolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2908.0001026466593!2d2.3589393763361968!3d43.20948718101556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12ae2c3fe196ffff%3A0x315271cff61007ad!2s11%20Rue%20Trivalle%2C%2011000%20Carcassonne!5e0!3m2!1sfr!2sfr!4v1742408248255!5m2!1sfr!2sfr"
+              className="rounded-3xl"
+          >
+          </iframe>
         </div>
       </div>
 
