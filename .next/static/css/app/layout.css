@@ -675,20 +675,23 @@ video {
 .h-14 {
   height: 3.5rem;
 }
-.h-16 {
-  height: 4rem;
-}
 .h-2\/3 {
   height: 66.666667%;
 }
 .h-20 {
   height: 5rem;
 }
+.h-24 {
+  height: 6rem;
+}
 .h-96 {
   height: 24rem;
 }
 .h-\[1100px\] {
   height: 1100px;
+}
+.h-\[500px\] {
+  height: 500px;
 }
 .h-\[620px\] {
   height: 620px;
@@ -702,21 +705,6 @@ video {
 .h-screen {
   height: 100vh;
 }
-.h-\[\] {
-  height: ;
-}
-.h-\[400\] {
-  height: 400;
-}
-.h-\[400px\] {
-  height: 400px;
-}
-.h-\[00px\] {
-  height: 00px;
-}
-.h-\[500px\] {
-  height: 500px;
-}
 .w-1\/2 {
   width: 50%;
 }
@@ -726,11 +714,11 @@ video {
 .w-11\/12 {
   width: 91.666667%;
 }
-.w-16 {
-  width: 4rem;
-}
 .w-2\/3 {
   width: 66.666667%;
+}
+.w-24 {
+  width: 6rem;
 }
 .w-4\/5 {
   width: 80%;
@@ -798,6 +786,9 @@ video {
 .gap-4 {
   gap: 1rem;
 }
+.gap-12 {
+  gap: 3rem;
+}
 .space-x-10 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(2.5rem * var(--tw-space-x-reverse));
@@ -853,11 +844,24 @@ video {
   margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(2rem * var(--tw-space-y-reverse));
 }
+.space-y-40 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(10rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(10rem * var(--tw-space-y-reverse));
+}
+.space-x-20 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(5rem * var(--tw-space-x-reverse));
+  margin-left: calc(5rem * calc(1 - var(--tw-space-x-reverse)));
+}
 .overflow-hidden {
   overflow: hidden;
 }
 .overflow-x-hidden {
   overflow-x: hidden;
+}
+.rounded-3xl {
+  border-radius: 1.5rem;
 }
 .rounded-full {
   border-radius: 9999px;
@@ -870,9 +874,6 @@ video {
 }
 .rounded-xl {
   border-radius: 0.75rem;
-}
-.rounded-3xl {
-  border-radius: 1.5rem;
 }
 .border {
   border-width: 1px;
@@ -946,6 +947,10 @@ video {
 .bg-whiteSmokedBG {
   --tw-bg-opacity: 1;
   background-color: rgb(254 248 237 / var(--tw-bg-opacity));
+}
+.bg-red-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
 }
 .bg-gradient-to-b {
   background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
@@ -1081,6 +1086,9 @@ video {
 }
 .text-xl {
   font-size: 1.25rem;
+}
+.text-6xl {
+  font-size: 3.75rem;
 }
 .font-bold {
   font-weight: 700;
@@ -1241,7 +1249,8 @@ video {
   src: url("https://db.onlinewebfonts.com/t/2c74ce745a8860bdab8c503f3270b455.eot?#iefix")format("embedded-opentype"),
   url("https://db.onlinewebfonts.com/t/2c74ce745a8860bdab8c503f3270b455.woff2")format("woff2"),
   url("https://db.onlinewebfonts.com/t/2c74ce745a8860bdab8c503f3270b455.woff")format("woff"),
-  url("https://db.onlinewebfonts.com/t/2c74ce745a8860bdab8c503f3270b455.ttf")format("truetype"),
+  url("https://db.onlinewebfonts.com/t/2c74ce745a8860bdab8c503f3270b455.ttf")format("opentype");
+  font-display: swap;
 }
 
 @font-face {
@@ -1250,7 +1259,8 @@ video {
   src: url("https://db.onlinewebfonts.com/t/0203d5e624845aacd2d8fd722b43aff1.eot?#iefix")format("embedded-opentype"),
   url("https://db.onlinewebfonts.com/t/0203d5e624845aacd2d8fd722b43aff1.woff2")format("woff2"),
   url("https://db.onlinewebfonts.com/t/0203d5e624845aacd2d8fd722b43aff1.woff")format("woff"),
-  url("https://db.onlinewebfonts.com/t/0203d5e624845aacd2d8fd722b43aff1.ttf")format("truetype"),
+  url("https://db.onlinewebfonts.com/t/0203d5e624845aacd2d8fd722b43aff1.ttf")format("opentype");
+  font-display: swap;
 }
 
 @font-face {
@@ -1259,7 +1269,8 @@ video {
   src: url("https://db.onlinewebfonts.com/t/0d4bd6300a54d19c5fc62fe7e07c48cb.eot?#iefix")format("embedded-opentype"),
   url("https://db.onlinewebfonts.com/t/0d4bd6300a54d19c5fc62fe7e07c48cb.woff2")format("woff2"),
   url("https://db.onlinewebfonts.com/t/0d4bd6300a54d19c5fc62fe7e07c48cb.woff")format("woff"),
-  url("https://db.onlinewebfonts.com/t/0d4bd6300a54d19c5fc62fe7e07c48cb.ttf")format("truetype"),
+  url("https://db.onlinewebfonts.com/t/0d4bd6300a54d19c5fc62fe7e07c48cb.ttf")format("opentype");
+  font-display: swap;
 }
 
 @font-face {
@@ -1268,7 +1279,8 @@ video {
   src: url("https://db.onlinewebfonts.com/t/b42e4e53dbbc46a382a8a68a702c91f9.eot?#iefix")format("embedded-opentype"),
   url("https://db.onlinewebfonts.com/t/b42e4e53dbbc46a382a8a68a702c91f9.woff2")format("woff2"),
   url("https://db.onlinewebfonts.com/t/b42e4e53dbbc46a382a8a68a702c91f9.woff")format("woff"),
-  url("https://db.onlinewebfonts.com/t/b42e4e53dbbc46a382a8a68a702c91f9.ttf")format("truetype"),
+  url("https://db.onlinewebfonts.com/t/b42e4e53dbbc46a382a8a68a702c91f9.ttf")format("opentype");
+  font-display: swap;
 }
 
 @font-face {
@@ -1277,7 +1289,8 @@ video {
   src: url("https://db.onlinewebfonts.com/t/e3ff19aa48b4151e4db25834c9ee68dd.eot?#iefix")format("embedded-opentype"),
   url("https://db.onlinewebfonts.com/t/e3ff19aa48b4151e4db25834c9ee68dd.woff2")format("woff2"),
   url("https://db.onlinewebfonts.com/t/e3ff19aa48b4151e4db25834c9ee68dd.woff")format("woff"),
-  url("https://db.onlinewebfonts.com/t/e3ff19aa48b4151e4db25834c9ee68dd.ttf")format("truetype"),
+  url("https://db.onlinewebfonts.com/t/e3ff19aa48b4151e4db25834c9ee68dd.ttf")format("opentype");
+  font-display: swap;
 }
 
 .hover\:border-greenBottle:hover {
@@ -1493,8 +1506,24 @@ video {
 
 @media (min-width: 768px) {
 
+  .md\:flex {
+    display: flex;
+  }
+
   .md\:w-3\/5 {
     width: 60%;
+  }
+
+  .md\:w-2\/3 {
+    width: 66.666667%;
+  }
+
+  .md\:w-1\/2 {
+    width: 50%;
+  }
+
+  .md\:flex-row {
+    flex-direction: row;
   }
 
   .md\:space-x-20 > :not([hidden]) ~ :not([hidden]) {
@@ -1506,6 +1535,10 @@ video {
   .md\:py-32 {
     padding-top: 8rem;
     padding-bottom: 8rem;
+  }
+
+  .md\:text-4xl {
+    font-size: 2.441rem;
   }
 }
 
@@ -1636,6 +1669,18 @@ video {
 
   .lg\:text-base {
     font-size: 1rem;
+  }
+
+  .lg\:text-4xl {
+    font-size: 2.441rem;
+  }
+
+  .lg\:text-xl {
+    font-size: 1.25rem;
+  }
+
+  .lg\:text-6xl {
+    font-size: 3.75rem;
   }
 }
 

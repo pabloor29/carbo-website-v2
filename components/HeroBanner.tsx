@@ -23,7 +23,7 @@ function HeroBanner() {
     <div className="h-screen w-full flex justify-center items-center bg-gradient-to-b from-[#001F50] to-[#002E6D]">
       <div className="h-screen w-full flex justify-center items-center bg-black/60 absolute z-10"></div>
       <img
-        src="/background_home.webp"
+        src="/img/deco/background_home.webp"
         alt=""
         className="w-full h-screen object-cover absolute z-0"
       />
@@ -35,7 +35,7 @@ function HeroBanner() {
           variants={textVariants}
           className="tracking-wide z-30 w-2/3"
         >
-          <img src="/CARBO-LOGO-10.webp" alt="logo hero banner" />
+          <img src="img/logo/CARBO-LOGO-10.webp" alt="logo hero banner" />
         </motion.h1>
         <motion.h3
           initial="hidden"

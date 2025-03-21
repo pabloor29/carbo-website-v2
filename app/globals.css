@@ -8,7 +8,8 @@
   src: url("https://db.onlinewebfonts.com/t/2c74ce745a8860bdab8c503f3270b455.eot?#iefix")format("embedded-opentype"),
   url("https://db.onlinewebfonts.com/t/2c74ce745a8860bdab8c503f3270b455.woff2")format("woff2"),
   url("https://db.onlinewebfonts.com/t/2c74ce745a8860bdab8c503f3270b455.woff")format("woff"),
-  url("https://db.onlinewebfonts.com/t/2c74ce745a8860bdab8c503f3270b455.ttf")format("truetype"),
+  url("https://db.onlinewebfonts.com/t/2c74ce745a8860bdab8c503f3270b455.ttf")format("opentype");
+  font-display: swap;
 }
 
 @font-face {
@@ -17,7 +18,8 @@
   src: url("https://db.onlinewebfonts.com/t/0203d5e624845aacd2d8fd722b43aff1.eot?#iefix")format("embedded-opentype"),
   url("https://db.onlinewebfonts.com/t/0203d5e624845aacd2d8fd722b43aff1.woff2")format("woff2"),
   url("https://db.onlinewebfonts.com/t/0203d5e624845aacd2d8fd722b43aff1.woff")format("woff"),
-  url("https://db.onlinewebfonts.com/t/0203d5e624845aacd2d8fd722b43aff1.ttf")format("truetype"),
+  url("https://db.onlinewebfonts.com/t/0203d5e624845aacd2d8fd722b43aff1.ttf")format("opentype");
+  font-display: swap;
 }
 
 @font-face {
@@ -26,7 +28,8 @@
   src: url("https://db.onlinewebfonts.com/t/0d4bd6300a54d19c5fc62fe7e07c48cb.eot?#iefix")format("embedded-opentype"),
   url("https://db.onlinewebfonts.com/t/0d4bd6300a54d19c5fc62fe7e07c48cb.woff2")format("woff2"),
   url("https://db.onlinewebfonts.com/t/0d4bd6300a54d19c5fc62fe7e07c48cb.woff")format("woff"),
-  url("https://db.onlinewebfonts.com/t/0d4bd6300a54d19c5fc62fe7e07c48cb.ttf")format("truetype"),
+  url("https://db.onlinewebfonts.com/t/0d4bd6300a54d19c5fc62fe7e07c48cb.ttf")format("opentype");
+  font-display: swap;
 }
 
 @font-face {
@@ -35,7 +38,8 @@
   src: url("https://db.onlinewebfonts.com/t/b42e4e53dbbc46a382a8a68a702c91f9.eot?#iefix")format("embedded-opentype"),
   url("https://db.onlinewebfonts.com/t/b42e4e53dbbc46a382a8a68a702c91f9.woff2")format("woff2"),
   url("https://db.onlinewebfonts.com/t/b42e4e53dbbc46a382a8a68a702c91f9.woff")format("woff"),
-  url("https://db.onlinewebfonts.com/t/b42e4e53dbbc46a382a8a68a702c91f9.ttf")format("truetype"),
+  url("https://db.onlinewebfonts.com/t/b42e4e53dbbc46a382a8a68a702c91f9.ttf")format("opentype");
+  font-display: swap;
 }
 
 @font-face {
@@ -44,5 +48,6 @@
   src: url("https://db.onlinewebfonts.com/t/e3ff19aa48b4151e4db25834c9ee68dd.eot?#iefix")format("embedded-opentype"),
   url("https://db.onlinewebfonts.com/t/e3ff19aa48b4151e4db25834c9ee68dd.woff2")format("woff2"),
   url("https://db.onlinewebfonts.com/t/e3ff19aa48b4151e4db25834c9ee68dd.woff")format("woff"),
-  url("https://db.onlinewebfonts.com/t/e3ff19aa48b4151e4db25834c9ee68dd.ttf")format("truetype"),
+  url("https://db.onlinewebfonts.com/t/e3ff19aa48b4151e4db25834c9ee68dd.ttf")format("opentype");
+  font-display: swap;
 }

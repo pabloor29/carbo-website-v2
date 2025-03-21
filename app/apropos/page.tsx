@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import React from "react";
 import CustomHeroBannerImage from "@/components/CustomHeroBannerImage";
+import CustomHeroBannerVideo from "@/components/CustomHeroBannerVideo";
 
 const imagesVariants: Variants = {
   hiddenBottom: {
@@ -50,7 +51,7 @@ function AboutPage() {
   return (
     <>
       <Navbar />
-      <CustomHeroBannerImage title="Présentation" video="/IMG_0439.mp4" />
+      <CustomHeroBannerVideo title="Présentation" video="/img/deco/bg_video.mp4" />
       <div className="z-40 flex flex-col justify-center items-center space-y-32 pt-12 pb-24 md:py-32 bg-whiteSmokedBG relative overflow-hidden">
         <div className="md:w-3/5 flex flex-col lg:flex-row justify-center items-center lg:space-x-20 space-y-4">
         <motion.div
@@ -61,7 +62,7 @@ function AboutPage() {
           className="lg:w-1/2 w-5/6"
         >
           <img
-            src="/team-carbo-1.webp"
+            src="/img/person/team-carbo-1.webp"
             alt="carbo team"
             className="shadow-2xl"
           />
@@ -73,7 +74,7 @@ function AboutPage() {
           variants={imagesVariants}
           className="lg:w-1/2 w-5/6"
         >
-          <h3 className="text-greenBottle text-7xl font-medium font-schoolbell">
+          <h3 className="text-greenBottle text-6xl lg:text-5xl font-medium font-schoolbell">
             Les loulous
           </h3>
           <article className="text-greenBottle font-cormorantGaramond text-xl text-justify lg:text-left">
@@ -89,7 +90,7 @@ function AboutPage() {
           variants={imagesVariants}
           className="lg:w-1/2 w-5/6"
         >
-          <h3 className="text-greenBottle text-7xl font-medium font-schoolbell">
+          <h3 className="text-greenBottle text-6xl lg:text-5xl font-medium font-schoolbell">
             La cheffe
           </h3>
           <article className="text-greenBottle font-cormorantGaramond text-xl text-justify lg:text-left">
@@ -104,7 +105,7 @@ function AboutPage() {
           className="lg:w-1/2 w-5/6"
         >
           <img
-            src="/louisa-1.webp"
+            src="/img/person/louisa-1.webp"
             alt="Louisa"
             className="shadow-2xl"
           />
@@ -119,7 +120,7 @@ function AboutPage() {
           className="lg:w-1/2 w-5/6"
         >
           <img
-            src="/louis-1.webp"
+            src="/img/person/louis-1.webp"
             alt="Louis"
             className="shadow-2xl"
           />
@@ -131,7 +132,7 @@ function AboutPage() {
           variants={imagesVariants}
           className="lg:w-1/2 w-5/6"
         >
-          <h3 className="text-greenBottle text-7xl font-medium font-schoolbell">
+          <h3 className="text-greenBottle text-6xl lg:text-5xl font-medium font-schoolbell">
             Le barman
           </h3>
           <article className="text-greenBottle font-cormorantGaramond text-xl text-justify lg:text-left">
@@ -147,7 +148,7 @@ function AboutPage() {
           variants={imagesVariants}
           className="lg:w-1/2 w-5/6"
         >
-          <h3 className="text-greenBottle text-7xl font-medium font-schoolbell">
+          <h3 className="text-greenBottle text-6xl lg:text-5xl font-medium font-schoolbell">
             Carbo
           </h3>
           <article className="text-greenBottle font-cormorantGaramond text-xl text-justify lg:text-left">
@@ -162,7 +163,7 @@ function AboutPage() {
           className="lg:w-1/2 w-5/6"
         >
           <img
-            src="/carbo-1.webp"
+            src="/img/person/carbo-1.webp"
             alt="Carbo"
             className="shadow-2xl"
           />

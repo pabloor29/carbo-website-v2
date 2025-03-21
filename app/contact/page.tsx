@@ -1,4 +1,5 @@
 import CustomHeroBannerImage from "@/components/CustomHeroBannerImage";
+import CustomHeroBannerVideo from "@/components/CustomHeroBannerVideo";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import {
@@ -14,7 +15,7 @@ function ContactPage() {
   return (
     <>
       <Navbar />
-      <CustomHeroBannerImage title="Contact" img="/IMG_0234.webp" />
+      <CustomHeroBannerVideo title="Contact" video="/img/deco/bg_video.mp4" />
 
       <div className="w-full flex flex-col lg:flex-row justify-between lg:space-x-8 space-y-8 lg:space-y-0 bg-whiteSmokedBG">
         <div className="lg:h-[750px] h-[1100px] lg:w-1/2 lg:pl-16 space-y-8 flex flex-col items-center justify-center lg:py-12">
@@ -31,7 +32,7 @@ function ContactPage() {
                 >
                   11 rue Trivalle, 11000 Carcassonne
                 </a>
-                <a href="tel:+33430345855">Fixe : +33  </a>
+                <a href="tel:+33434422749">Fixe : +33 4 34 42 27 49</a>
                 <a href="tel:+33629104217">Mobile : +33 6 29 10 42 17</a>
               </div>
 

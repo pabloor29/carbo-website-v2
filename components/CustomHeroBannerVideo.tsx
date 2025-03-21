@@ -20,14 +20,14 @@ const textVariants: Variants = {
 function CustomHeroBannerVideo(props: any) {
   return (
     <div className="h-96 relative">
-      <div className="w-full h-full bg-black/50 z-40 absolute"></div>
+      <div className="w-full h-full z-40 absolute"></div>
       <video
         src={props.video}
         autoPlay
         loop
         muted
         playsInline
-        className="h-full w-full object-cover absolute z-30 grayscale pointer-events-none"
+        className="h-full w-full object-cover absolute z-30  pointer-events-none"
       />
 
       <div className="relative z-40 h-full flex flex-col items-center justify-center leading-none">

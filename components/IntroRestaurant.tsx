@@ -46,16 +46,16 @@ const imagesVariants: Variants = {
 function IntroRestaurant() {
   return (
     <div className="flex justify-center items-center py-24 bg-whiteSmokedBG">
-      <div className="lg:w-3/5 flex flex-col lg:flex-row justify-center items-center md:space-x-20 space-y-10">
+      <div className="lg:w-3/5 flex flex-col lg:flex-row justify-center items-center lg:space-x-20 space-y-10">
         <motion.div
           initial="hiddenRight"
           whileInView="visibleRight"
           viewport={{ once: true, margin: "-20%" }}
           variants={imagesVariants}
-          className="lg:w-1/2 w-5/6"
+          className="lg:w-1/2 md:w-1/2 w-5/6"
         >
           <img
-            src="/plat-carbo-1.webp"
+            src="/img/plats/plat-carbo-1.webp"
             alt=""
             className="shadow-2xl"
           />

@@ -289,7 +289,7 @@ const ReservationForm = () => {
 
           <div className="z-30">
             <img
-              src="/CARBO-LOGO-4.webp"
+              src="img/logo/CARBO-LOGO-4.webp"
               alt=""
               className="z-30"
             />
