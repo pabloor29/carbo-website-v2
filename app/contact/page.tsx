@@ -19,9 +19,6 @@ function ContactPage() {
 
       <div className="w-full flex flex-col lg:flex-row justify-between lg:space-x-8 space-y-8 lg:space-y-0 bg-whiteSmokedBG">
         <div className="lg:h-[750px] h-[1100px] lg:w-1/2 lg:pl-16 space-y-8 flex flex-col items-center justify-center lg:py-12">
-          <div className="w-1/2">
-            <img src="/CARBO-LOGO-9.webp" alt="" />
-          </div>
 
           <div className="flex flex-col lg:flex-row items-center justify-between lg:space-x-16 font-cormorantGaramond text-xl">
             <div className="flex flex-col justify-between items-center space-y-12">
