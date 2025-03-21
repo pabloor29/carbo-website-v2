@@ -117,11 +117,11 @@ const ReservationForm = () => {
       hour === 12 ||
       hour === 13 ||
       (hour === 14 && minute === 0) ||
-      hour === 18 ||
+      (hour === 18 && minute == 30) ||
       hour === 19 ||
       hour === 20 ||
       hour === 21 ||
-      (hour === 22 && minute === 0)
+      (hour === 21 && minute === 30)
     );
   };
 
@@ -137,7 +137,7 @@ const ReservationForm = () => {
       specialRequests,
     } = formData;
 
-    const mailTo = "pab.ortg@gmail.com";
+    const mailTo = "carbo11@icloud.com";
     const subject = `Reservation - Le ${eventDate} à ${eventTime}`;
     const body = `Nom: ${fullName}\nEmail: ${email}\nCouverts: ${numberOfGuests}\nDate: ${eventDate}\nHeure: ${eventTime}\nCommentaire: ${specialRequests}`;
 

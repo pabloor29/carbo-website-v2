@@ -12,14 +12,14 @@ function Footer() {
               <li className="font-bold">Juillet - Août</li>
               <p>Lundi - Samedi</p>
               <p className="font-cormorantGaramond text-xl">
-                12:00 - 14:00 <br /> 18:00 - 22:00
+                12:00 - 14:00 <br /> 18:30 - 21:30
               </p>
             </div>
             <div className="flex flex-col items-center justify-center text-center">
               <li className="font-bold">Septembre - Juin</li>
               <p>Mardi - Samedi</p>
               <p className="font-cormorantGaramond text-xl">
-                12:00 - 14:00 <br /> 18:00 - 22:00
+                12:00 - 14:00 <br /> 18:30 - 21:30
               </p>
             </div>
           </ul>
@@ -40,7 +40,7 @@ function Footer() {
 
           <div className="lg:w-1/3 w-full text-[#023c18] flex flex-col items-center justify-center h-full">
             <h4 className="font-schoolbell text-4xl mb-3">Contact</h4>
-            <ul className="flex flex-col gap-1 items-center justify-center text-xl font-cormorantGaramond">
+            <ul className="flex flex-col gap-3 items-center justify-center text-xl font-cormorantGaramond">
               <li className="flex gap-2 hover:underline">
                 <Mail />
                 <a href="mailto:carbo11@icloud.com">

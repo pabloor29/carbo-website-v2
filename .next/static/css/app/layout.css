@@ -780,14 +780,17 @@ video {
 .gap-1 {
   gap: 0.25rem;
 }
+.gap-12 {
+  gap: 3rem;
+}
 .gap-2 {
   gap: 0.5rem;
 }
 .gap-4 {
   gap: 1rem;
 }
-.gap-12 {
-  gap: 3rem;
+.gap-3 {
+  gap: 0.75rem;
 }
 .space-x-10 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
@@ -843,16 +846,6 @@ video {
   --tw-space-y-reverse: 0;
   margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(2rem * var(--tw-space-y-reverse));
-}
-.space-y-40 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(10rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(10rem * var(--tw-space-y-reverse));
-}
-.space-x-20 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(5rem * var(--tw-space-x-reverse));
-  margin-left: calc(5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 .overflow-hidden {
   overflow: hidden;
@@ -947,10 +940,6 @@ video {
 .bg-whiteSmokedBG {
   --tw-bg-opacity: 1;
   background-color: rgb(254 248 237 / var(--tw-bg-opacity));
-}
-.bg-red-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
 }
 .bg-gradient-to-b {
   background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
@@ -1078,6 +1067,9 @@ video {
 .text-5xl {
   font-size: 3.00rem;
 }
+.text-6xl {
+  font-size: 3.75rem;
+}
 .text-7xl {
   font-size: 4.5rem;
 }
@@ -1086,9 +1078,6 @@ video {
 }
 .text-xl {
   font-size: 1.25rem;
-}
-.text-6xl {
-  font-size: 3.75rem;
 }
 .font-bold {
   font-weight: 700;
@@ -1506,39 +1495,21 @@ video {
 
 @media (min-width: 768px) {
 
-  .md\:flex {
-    display: flex;
+  .md\:w-1\/2 {
+    width: 50%;
   }
 
   .md\:w-3\/5 {
     width: 60%;
   }
 
-  .md\:w-2\/3 {
-    width: 66.666667%;
-  }
-
-  .md\:w-1\/2 {
-    width: 50%;
-  }
-
   .md\:flex-row {
     flex-direction: row;
-  }
-
-  .md\:space-x-20 > :not([hidden]) ~ :not([hidden]) {
-    --tw-space-x-reverse: 0;
-    margin-right: calc(5rem * var(--tw-space-x-reverse));
-    margin-left: calc(5rem * calc(1 - var(--tw-space-x-reverse)));
   }
 
   .md\:py-32 {
     padding-top: 8rem;
     padding-bottom: 8rem;
-  }
-
-  .md\:text-4xl {
-    font-size: 2.441rem;
   }
 }
 
@@ -1669,18 +1640,6 @@ video {
 
   .lg\:text-base {
     font-size: 1rem;
-  }
-
-  .lg\:text-4xl {
-    font-size: 2.441rem;
-  }
-
-  .lg\:text-xl {
-    font-size: 1.25rem;
-  }
-
-  .lg\:text-6xl {
-    font-size: 3.75rem;
   }
 }
 
