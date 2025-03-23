@@ -1546,14 +1546,6 @@ video {
     width: fit-content;
   }
 
-  .lg\:w-4\/5 {
-    width: 80%;
-  }
-
-  .lg\:w-4 {
-    width: 1rem;
-  }
-
   .lg\:flex-row {
     flex-direction: row;
   }
