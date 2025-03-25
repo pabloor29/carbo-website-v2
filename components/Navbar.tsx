@@ -92,7 +92,7 @@ function Navbar() {
                   <a
                     key={items.label}
                     href={items.href}
-                    className="overflow-hidden h-20 w-4/5 flex items-center text-white hover:bg-greenBottle duration-300 px-5 py-3 cursor-pointer"
+                    className="overflow-hidden h-20 w-4/5 flex items-center text-greenBottle hover:text-white hover:bg-greenBottle duration-300 px-5 py-3 cursor-pointer"
                   >
                     <h3 className="font-schoolbell text-3xl tracking-wide">
                       {items.label}
@@ -101,9 +101,9 @@ function Navbar() {
                 ))}
                 <a
                   href="/reservation"
-                  className="overflow-hidden h-20 w-4/5 flex items-center text-white hover:bg-greenBottle duration-300 px-5 py-3 cursor-pointer"
+                  className="overflow-hidden h-20 w-4/5 flex items-center hover:bg-greenBottle duration-300 px-5 py-3 cursor-pointer"
                 >
-                  <h3 className="font-schoolbell text-3xl tracking-wide">
+                  <h3 className="font-schoolbell text-greenBottle hover:text-white text-3xl tracking-wide">
                     Réservation
                   </h3>
                 </a>
