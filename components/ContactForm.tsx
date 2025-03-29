@@ -1,11 +1,13 @@
 "use client";
 import { BadgeCheck } from "lucide-react";
-import React, { useState } from "react";
+import React, { useState , useEffect , useRef } from "react";
 import CustomTimePicker from "./CustomTimePicker";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
 import { fr } from "date-fns/locale";
+import emailjs from "@emailjs/browser";
+import "../app/globals.css";
 
 registerLocale("fr", fr);
 setDefaultLocale("fr");
@@ -16,53 +18,61 @@ const ReservationForm = () => {
       title: "Demande de réservation",
       fullNameLabel: "Nom complet",
       emailLabel: "Email",
-      numberOfGuestsLabel: "Nombre de convives",
-      eventDateLabel: "Date et heure",
+      numberOfGuestsLabel: "Invités",
+      eventDateLabel: "Date",
+      eventTimeLabel: "Heure",
 
       specialRequestsLabel: "Demandes spéciales",
       submitButton: "ENVOYER LA DEMANDE",
 
-      afterSentMessage: `Assurez-vous de bien avoir cliqué sur le bouton pour envoyer le mail ! Vous allez
-      recevoir une confirmation d'ici peu 😋`,
+      afterSentMessage: `Merci pour votre demande de réservation ! Un email de confirmation vous sera envoyé sous peu. Veuillez vérifier votre boîte mail.`,
+
+      alertRestaurantClose: "Restaurant fermé tous les lundis et dimanches.",
     },
     en: {
       title: "Reservation request",
       fullNameLabel: "Full name",
       emailLabel: "Email",
-      numberOfGuestsLabel: "Number of guests",
-      eventDateLabel: "Date and time",
+      numberOfGuestsLabel: "Guests",
+      eventDateLabel: "Date",
+      eventTimeLabel: "Time",
 
       specialRequestsLabel: "Special requests",
       submitButton: "SEND REQUEST",
 
-      afterSentMessage: `Make sure you have clicked on the button to send the e-mail ! You will
-      receive confirmation shortly 😋`,
+      afterSentMessage: `Merci pour votre demande de réservation ! Un email de confirmation vous sera envoyé sous peu. Veuillez vérifier votre boîte mail.`,
+
+      alertRestaurantClose: "Restaurant closed every Monday and Sunday.",
     },
     es: {
       title: "Solicitud de reserva",
       fullNameLabel: "Nombre completo",
       emailLabel: "Correo electrónico",
-      numberOfGuestsLabel: "Numero de invitados",
-      eventDateLabel: "Fecha y hora",
+      numberOfGuestsLabel: "Invitados",
+      eventDateLabel: "Fecha",
+      eventTimeLabel: "Hora",
 
       specialRequestsLabel: "Solicitudes especiales",
       submitButton: "ENVIAR SOLICITUD",
 
-      afterSentMessage: `¡Asegúrese de que ha pulsado el botón para enviar el correo electrónico! Lo harás
-      recibir confirmación en breve 😋`,
+      afterSentMessage: `¡Gracias por su solicitud de reserva! Un correo electrónico de confirmación le será enviado en breve. Por favor, verifique su bandeja de entrada.`,
+
+      alertRestaurantClose: "Restaurante cerrado todos los lunes y domingos.",
     },
     it: {
       title: "Richiesta di prenotazione",
       fullNameLabel: "Nome completo",
       emailLabel: "Email",
-      numberOfGuestsLabel: "Numero di ospiti",
-      eventDateLabel: "Data e ora",
+      numberOfGuestsLabel: "Ospiti",
+      eventDateLabel: "Data",
+      eventTimeLabel: "Ora",
 
       specialRequestsLabel: "Richieste speciali",
       submitButton: "INVIA LA RICHIESTA",
 
-      afterSentMessage: `Assicuratevi di aver fatto clic sul pulsante per inviare l'e-mail! Riceverai
-      presto una conferma 😋`,
+      afterSentMessage: `Grazie per la tua richiesta di prenotazione! Una email di conferma ti sarà inviata a breve. Controlla la tua casella di posta.`,
+
+      alertRestaurantClose: "Ristorante chiuso tutti i lunedì e domeniche.",
     },
   };
 
@@ -88,43 +98,6 @@ const ReservationForm = () => {
     console.log(formData.eventDate, formData.eventTime);
   };
 
-  const isWeekday = (date: any) => {
-    const day = date.getDay();
-    const month = date.getMonth();
-    const dayOfMonth = date.getDate();
-    const year = date.getFullYear();
-
-    const isAug31 = month === 7 && dayOfMonth === 31;
-    const isNov16ToDec2 =
-      year === 2024 &&
-      ((month === 10 && dayOfMonth >= 16) ||
-        month === 11 ||
-        (month === 11 && dayOfMonth <= 2));
-    const isJan1ToMar3 =
-        year === 2025 &&
-        ((month === 0 && dayOfMonth >= 1) ||
-         month === 1 ||             
-         (month === 2 && dayOfMonth <= 3));
-    const isSeptToJuneMonday = day === 1 && (month >= 8 || month <= 5);
-
-    return day !== 0 && !isAug31 && !isNov16ToDec2 && !isSeptToJuneMonday && !isJan1ToMar3;
-  };
-
-  const isRestaurantOpen = (time: any) => {
-    const hour = time.getHours();
-    const minute = time.getMinutes();
-    return (
-      hour === 12 ||
-      hour === 13 ||
-      (hour === 14 && minute === 0) ||
-      (hour === 18 && minute == 30) ||
-      hour === 19 ||
-      hour === 20 ||
-      hour === 21 ||
-      (hour === 21 && minute === 30)
-    );
-  };
-
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
@@ -148,8 +121,97 @@ const ReservationForm = () => {
     setSucceeded(true);
   };
 
-  const translation =
-    translations[selectedLanguage as keyof typeof translations];
+  useEffect(() => {
+    const dateInput = document.getElementById("datePicker");
+
+    const handleDateChange = (e: any) => {
+      const date = new Date(e.target.value);
+      const day = date.getDay();
+
+      if (day === 0 || day === 1) {
+        //alert("Restaurant fermé tous les lundis et dimanches.");
+        alert(`${translation.alertRestaurantClose}`);
+        e.target.value = "";
+      }
+    };
+
+    if (dateInput) {
+      dateInput.addEventListener("input", handleDateChange);
+    }
+
+    // Nettoyage de l'event listener
+    return () => {
+      if (dateInput) {
+        dateInput.removeEventListener("input", handleDateChange);
+      }
+    };
+  }, []);
+
+  const formRef = useRef(null);
+
+    const sendEmail = (e: any) => {
+        e.preventDefault();
+
+        if (!formRef.current) {
+            console.error("Le formulaire n'est pas disponible !");
+            return;
+        }
+
+        emailjs
+            .sendForm(
+                "service_carbo", 
+                "template_resa_001", 
+                formRef.current, 
+                "Hj5zsN3OJSMAXQ9TV"
+            )
+            .then(
+                (result) => {
+                    //alert("Demande de réservation envoyée avec succès !");
+                    formRef.current.reset();
+                    setSucceeded(true);
+                },
+                (error) => {
+                    //console.error("Erreur EmailJS :", error);
+                    //alert("Erreur lors de l'envoi !");
+                }
+            );
+
+            emailjs
+            .sendForm(
+                "service_carbo", 
+                "template_resa_002",
+                formRef.current, 
+                "Hj5zsN3OJSMAXQ9TV"
+            )
+            .then(
+                (result) => {
+                    //alert("Votre réservation est en attente de validation !");
+                    formRef.current.reset();
+                },
+                (error) => {
+                    //console.error("Erreur deuxième email :", error);
+                    //alert("Erreur lors de l'envoi !");
+                }
+            );
+    };
+
+    const [isOpen, setIsOpen] = useState(false); 
+    const [selectedValue, setSelectedValue] = useState("");
+  
+    const options = ["12:00", "12:30", "13:00", "13:30", "14:00",
+                     "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30"
+                    ];
+  
+    const handleSelect = (value: string) => {
+      setSelectedValue(value);
+      setIsOpen(false);
+    };
+  
+    const toggleDropdown = () => {
+      setIsOpen((prev) => !prev);
+    };
+
+    const translation = translations[selectedLanguage as keyof typeof translations];
 
   return (
     <>
@@ -163,9 +225,13 @@ const ReservationForm = () => {
       ) : (
         <div className="relative flex flex-col lg:flex-row justify-center items-center lg:space-x-32 space-y-20 py-16 bg-whiteSmokedBG">
           <form
-            onSubmit={handleSubmit}
+            ref={formRef}
+            onSubmit={sendEmail}
+            // onSubmit={handleSubmit}
             className="space-y-8 lg:w-1/3 w-5/6 z-20"
           >
+            <input type="hidden" name="company" value="CARBO" />
+            <input type="hidden" name="emailCompany" value="restaurant.carbo11@gmail.com" />
             <div className="flex items-center justify-between lg:flex-row flex-col-reverse">
               <h3 className="text-greenBottle text-7xl font-medium font-schoolbell leading-none">
                 {translation.title}
@@ -244,21 +310,48 @@ const ReservationForm = () => {
                 >
                   {translation.eventDateLabel}
                 </label>
-
-                <DatePicker
-                  showTimeSelect
-                  selected={formData.eventDate}
-                  onChange={(date: any) =>
-                    handleChange({
-                      target: { name: "eventDate", value: date },
-                    })
-                  }
-                  minDate={new Date()}
-                  filterDate={isWeekday}
-                  filterTime={isRestaurantOpen}
+                <input 
+                  type="date" 
+                  id="datePicker" 
+                  name="eventDate" 
+                  required
                   className="mt-1 block w-full px-4 py-2 border border-greenBottle rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
-                  locale="fr"
                 />
+              </div>
+
+              <div className="relative lg:w-1/2 w-full">
+                <label
+                  htmlFor="eventTime"
+                  className="w-full block font-medium text-greenBottle font-cormorantGaramond text-xl tracking-wide"
+                >
+                  {translation.eventTimeLabel}
+                </label>
+                <input
+                  type="text"
+                  name="eventTime"
+                  value={selectedValue}
+                  onClick={toggleDropdown}
+                  onChange={(e) => setSelectedValue(e.target.value)}
+                  className="mt-1 block w-full px-4 py-2 border border-greenBottle rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
+                  placeholder="Choisir une option"
+                />
+                
+                {isOpen && (
+                  <ul
+                    className="absolute w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg z-10"
+                    style={{ maxHeight: "200px", overflowY: "auto" }}
+                  >
+                    {options.map((option, index) => (
+                      <li
+                        key={index}
+                        className="px-4 py-2 cursor-pointer hover:bg-indigo-100"
+                        onClick={() => handleSelect(option)}
+                      >
+                        {option}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </div>
 
