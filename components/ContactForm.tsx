@@ -147,53 +147,30 @@ const ReservationForm = () => {
     };
   }, []);
 
-  const formRef = useRef(null);
+  const formRef = useRef<HTMLFormElement>(null);
 
-    const sendEmail = (e: any) => {
-        e.preventDefault();
+  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-        if (!formRef.current) {
-            console.error("Le formulaire n'est pas disponible !");
-            return;
-        }
+    if (!formRef.current) {
+        console.error("Le formulaire n'est pas disponible !");
+        return;
+    }
 
-        emailjs
-            .sendForm(
-                "service_carbo", 
-                "template_resa_001", 
-                formRef.current, 
-                "Hj5zsN3OJSMAXQ9TV"
-            )
-            .then(
-                (result) => {
-                    //alert("Demande de réservation envoyée avec succès !");
-                    formRef.current.reset();
-                    setSucceeded(true);
-                },
-                (error) => {
-                    //console.error("Erreur EmailJS :", error);
-                    //alert("Erreur lors de l'envoi !");
-                }
-            );
+    const formElement = formRef.current;
 
-            emailjs
-            .sendForm(
-                "service_carbo", 
-                "template_resa_002",
-                formRef.current, 
-                "Hj5zsN3OJSMAXQ9TV"
-            )
-            .then(
-                (result) => {
-                    //alert("Votre réservation est en attente de validation !");
-                    formRef.current.reset();
-                },
-                (error) => {
-                    //console.error("Erreur deuxième email :", error);
-                    //alert("Erreur lors de l'envoi !");
-                }
-            );
-    };
+    Promise.all([
+        emailjs.sendForm("service_carbo", "template_resa_001", formElement, "Hj5zsN3OJSMAXQ9TV"),
+        emailjs.sendForm("service_carbo", "template_resa_002", formElement, "Hj5zsN3OJSMAXQ9TV")
+    ])
+    .then(() => {
+        formRef.current?.reset();
+        setSucceeded(true);
+    })
+    .catch(error => {
+        console.error("Erreur lors de l'envoi des emails :", error);
+    });
+};
 
     const [isOpen, setIsOpen] = useState(false); 
     const [selectedValue, setSelectedValue] = useState("");
