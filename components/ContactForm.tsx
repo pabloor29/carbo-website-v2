@@ -127,33 +127,38 @@ const ReservationForm = () => {
       const date = new Date(e.target.value);
       const day = date.getDay();
 
+      // Si l'utilisateur sélectionne un lundi ou un dimanche
       if (day === 0 || day === 1) {
-        // Affiche un message mais ne ferme pas automatiquement le calendrier
         alert(`${translation.alertRestaurantClose}`);
-        e.target.value = ""; // Réinitialiser la date si elle est un lundi ou dimanche
+        e.target.value = ""; // Réinitialise la date
       }
     };
 
-    const handleInputFocus = (e: any) => {
+    const updateValidDates = () => {
       const today = new Date();
-      const nextAvailableDate = new Date(today);
-      // Avancer jusqu'au mardi (2) si aujourd'hui est dimanche (0) ou lundi (1)
+      let nextAvailableDate = new Date(today);
+
+      // Avance la date jusqu'au mardi si aujourd'hui est dimanche (0) ou lundi (1)
       while (nextAvailableDate.getDay() === 0 || nextAvailableDate.getDay() === 1) {
         nextAvailableDate.setDate(nextAvailableDate.getDate() + 1);
       }
-      // Définir la première date disponible comme étant le jour suivant
-      e.target.setAttribute('min', nextAvailableDate.toISOString().split('T')[0]);
+
+      // Met à jour la valeur de `min` pour éviter les dimanches et lundis
+      if (dateInput) {
+        dateInput.setAttribute("min", nextAvailableDate.toISOString().split("T")[0]);
+      }
     };
 
     if (dateInput) {
       dateInput.addEventListener("input", handleDateChange);
-      dateInput.addEventListener("focus", handleInputFocus);
     }
+
+    // Met à jour la date minimale pour éviter la sélection des lundis et dimanches
+    updateValidDates();
 
     return () => {
       if (dateInput) {
         dateInput.removeEventListener("input", handleDateChange);
-        dateInput.removeEventListener("focus", handleInputFocus);
       }
     };
   }, []);
