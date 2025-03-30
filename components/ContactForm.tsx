@@ -134,7 +134,7 @@ const ReservationForm = () => {
       }
     };
 
-    const updateValidDates = () => {
+    const updateMinDate = () => {
       const today = new Date();
       let nextAvailableDate = new Date(today);
 
@@ -143,9 +143,9 @@ const ReservationForm = () => {
         nextAvailableDate.setDate(nextAvailableDate.getDate() + 1);
       }
 
-      // Met à jour la valeur de `min` pour éviter les dimanches et lundis
+      const minDate = nextAvailableDate.toISOString().split("T")[0]; // Format YYYY-MM-DD
       if (dateInput) {
-        dateInput.setAttribute("min", nextAvailableDate.toISOString().split("T")[0]);
+        dateInput.setAttribute("min", minDate);
       }
     };
 
@@ -154,7 +154,7 @@ const ReservationForm = () => {
     }
 
     // Met à jour la date minimale pour éviter la sélection des lundis et dimanches
-    updateValidDates();
+    updateMinDate();
 
     return () => {
       if (dateInput) {
@@ -162,6 +162,8 @@ const ReservationForm = () => {
       }
     };
   }, []);
+
+
 
   const formRef = useRef<HTMLFormElement>(null);
 
