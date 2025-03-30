@@ -115,7 +115,7 @@ const ReservationDetails = () => {
       </div>
       <form ref={formRef}>
         <input type="hidden" name="company" value="CARBO" />
-        <input type="hidden" name="emailCompany" value="pab.ortg@gmail.com" />
+        <input type="hidden" name="emailCompany" value="restaurant.carbo11@gmail.com" />
         <input type="hidden" name="reservationType" value={reservationType} />
         <input type="hidden" name="reservationComment" value={reservationComment} />
         <input type="hidden" name="eventDate" value={reservationInfo?.date || ""} />

@@ -1,4 +1,4 @@
 {
-  "/reservation-autoreply/page": "app/reservation-autoreply/page.js",
-  "/reservation/page": "app/reservation/page.js"
+  "/reservation/page": "app/reservation/page.js",
+  "/reservation-autoreply/page": "app/reservation-autoreply/page.js"
 }
