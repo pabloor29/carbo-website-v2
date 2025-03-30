@@ -19,6 +19,7 @@ const ReservationForm = () => {
       emailLabel: "Email",
       numberOfGuestsLabel: "Invités",
       eventDateLabel: "Date",
+      infoDateLabel: "(Fermé lundi et dimanche)",
       eventTimeLabel: "Heure",
 
       specialRequestsLabel: "Demandes spéciales",
@@ -34,6 +35,7 @@ const ReservationForm = () => {
       emailLabel: "Email",
       numberOfGuestsLabel: "Guests",
       eventDateLabel: "Date",
+      infoDateLabel: "(Closed on Monday and Sunday)",
       eventTimeLabel: "Time",
 
       specialRequestsLabel: "Special requests",
@@ -49,6 +51,7 @@ const ReservationForm = () => {
       emailLabel: "Correo electrónico",
       numberOfGuestsLabel: "Invitados",
       eventDateLabel: "Fecha",
+      infoDateLabel: "(Cerrado los lunes y domingos)",
       eventTimeLabel: "Hora",
 
       specialRequestsLabel: "Solicitudes especiales",
@@ -64,6 +67,7 @@ const ReservationForm = () => {
       emailLabel: "Email",
       numberOfGuestsLabel: "Ospiti",
       eventDateLabel: "Data",
+      infoDateLabel: "(Chiuso il lunedì e la domenica)",
       eventTimeLabel: "Ora",
 
       specialRequestsLabel: "Richieste speciali",
@@ -300,6 +304,9 @@ const ReservationForm = () => {
 
                   className="mt-1 block w-full px-4 py-2 border border-greenBottle rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
                 />
+                <p className="absolute w-full text-lg pt-1 font-cormorantGaramond">
+                {translation.infoDateLabel}
+                </p>
               </div>
 
               <div className="relative lg:w-1/2 w-full">
