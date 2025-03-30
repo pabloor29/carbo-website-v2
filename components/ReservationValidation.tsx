@@ -64,7 +64,7 @@ const ReservationDetails = () => {
       reservationCommentInput.value = reservationComment;
     }
 
-    emailjs.sendForm("service_pablo_001", "template_resa_002", formElement, "Hj5zsN3OJSMAXQ9TV")
+    emailjs.sendForm("service_carbo", "template_resa_002", formElement, "Hj5zsN3OJSMAXQ9TV")
       .then(() => {
         formRef.current?.reset();
         alert(`E-mail envoyé avec succès !`);
