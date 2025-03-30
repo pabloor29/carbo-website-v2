@@ -33,20 +33,26 @@ const ReservationDetails = () => {
     });
   }, []);
 
-  const handleReservation = (type: string) => {
-    if (type === "valide") {
-      setReservationType("CONFIRMÉE");
-      setReservationComment(
-        "Merci beaucoup pour votre réservation ! Nous sommes heureux de vous informer que votre demande a été confirmée. Nous avons hâte de vous accueillir au restaurant pour passer un agréable moment ensemble. À très bientôt !"
-      );
-    } else if (type === "refuse") {
-      setReservationType("REFUSÉE");
-      setReservationComment(
-        "Nous vous remercions pour votre réservation. Malheureusement, nous ne pouvons pas l'accepter pour le moment. Nous sommes désolés pour ce contretemps et espérons avoir l'occasion de vous accueillir une prochaine fois. N'hésitez pas à reprogrammer votre réservation à une autre date. À bientôt !"
-      );
-    }
+  const handleReservationValid = () => {
+    setReservationType("CONFIRMÉE");
+    setReservationComment(
+      "Merci beaucoup pour votre réservation ! Nous sommes heureux de vous informer que votre demande a été confirmée. Nous avons hâte de vous accueillir au restaurant pour passer un agréable moment ensemble. À très bientôt !"
+    );
 
     sendEmail();
+
+    alert('Confirmation de réservation.');
+  };
+
+  const handleReservationRefuse = () => {
+    setReservationType("REFUSÉE");
+    setReservationComment(
+      "Nous vous remercions pour votre réservation. Malheureusement, nous ne pouvons pas l'accepter pour le moment. Nous sommes désolés pour ce contretemps et espérons avoir l'occasion de vous accueillir une prochaine fois. N'hésitez pas à reprogrammer votre réservation à une autre date. À bientôt !"
+    );
+
+    sendEmail();
+
+    alert('Refus de réservation.');
   };
 
   const sendEmail = () => {
@@ -101,13 +107,13 @@ const ReservationDetails = () => {
         <div className="mt-4 flex justify-center gap-4">
           <button
             className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
-            onClick={() => handleReservation("valide")}
+            onClick={handleReservationRefuse}
           >
             REFUSER
           </button>
           <button
             className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600"
-            onClick={() => handleReservation("refuse")}
+            onClick={handleReservationValid}
           >
             VALIDER
           </button>
