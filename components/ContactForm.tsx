@@ -124,44 +124,28 @@ const ReservationForm = () => {
     const dateInput = document.getElementById("datePicker");
 
     const handleDateChange = (e: any) => {
-      const date = new Date(e.target.value);
-      const day = date.getDay();
+        const date = new Date(e.target.value);
+        const day = date.getDay();
 
-      // Si l'utilisateur sélectionne un lundi ou un dimanche
-      if (day === 0 || day === 1) {
-        alert(`${translation.alertRestaurantClose}`);
-        e.target.value = ""; // Réinitialise la date
-      }
+        // Si la date sélectionnée est un lundi (1) ou un dimanche (0)
+        if (day === 0 || day === 1) {
+            alert(`${translation.alertRestaurantClose}`);
+            e.target.value = ""; // Réinitialise la date après l'alerte
+        }
     };
 
-    const updateMinDate = () => {
-      const today = new Date();
-      let nextAvailableDate = new Date(today);
-
-      // Avance la date jusqu'au mardi si aujourd'hui est dimanche (0) ou lundi (1)
-      while (nextAvailableDate.getDay() === 0 || nextAvailableDate.getDay() === 1) {
-        nextAvailableDate.setDate(nextAvailableDate.getDate() + 1);
-      }
-
-      const minDate = nextAvailableDate.toISOString().split("T")[0]; // Format YYYY-MM-DD
-      if (dateInput) {
-        dateInput.setAttribute("min", minDate);
-      }
-    };
-
+    // Ajoute l'événement "change" pour valider la sélection
     if (dateInput) {
-      dateInput.addEventListener("input", handleDateChange);
+        dateInput.addEventListener("change", handleDateChange);
     }
 
-    // Met à jour la date minimale pour éviter la sélection des lundis et dimanches
-    updateMinDate();
-
+    // Nettoyage après le démantèlement du composant
     return () => {
-      if (dateInput) {
-        dateInput.removeEventListener("input", handleDateChange);
-      }
+        if (dateInput) {
+            dateInput.removeEventListener("change", handleDateChange);
+        }
     };
-  }, []);
+}, []);
 
 
 
@@ -312,6 +296,7 @@ const ReservationForm = () => {
                   id="datePicker" 
                   name="eventDate" 
                   required
+                  defaultValue=""
                   className="mt-1 block w-full px-4 py-2 border border-greenBottle rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
                 />
               </div>
