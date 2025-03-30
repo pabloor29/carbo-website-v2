@@ -101,13 +101,13 @@ const ReservationDetails = () => {
         <div className="mt-4 flex justify-center gap-4">
           <button
             className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
-            onClick={() => handleReservation("valide")}
+            onClick={() => handleReservation("refuse")}
           >
             REFUSER
           </button>
           <button
             className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600"
-            onClick={() => handleReservation("refuse")}
+            onClick={() => handleReservation("valide")}
           >
             VALIDER
           </button>
@@ -124,6 +124,7 @@ const ReservationDetails = () => {
         <input type="hidden" name="fullName" value={reservationInfo?.nom || ""} />
         <input type="hidden" name="specialRequests" value={reservationInfo?.commentaire || ""} />
         <input type="hidden" name="email" value={reservationInfo?.email || ""} />
+        <input type="hidden" name="website" value="restaurant-carbo.fr" />
       </form>
     </div>
   );
