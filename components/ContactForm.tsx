@@ -166,8 +166,8 @@ const ReservationForm = () => {
     const formElement = formRef.current;
 
     Promise.all([
-        emailjs.sendForm("service_carbo", "template_resa_001", formElement, "Hj5zsN3OJSMAXQ9TV"),
-        emailjs.sendForm("service_carbo", "template_resa_002", formElement, "Hj5zsN3OJSMAXQ9TV")
+        emailjs.sendForm("service_carbo", "template_resa_001", formElement, "Bdh3AwRMePW399mo-"),
+        emailjs.sendForm("service_carbo", "template_resa_002", formElement, "Bdh3AwRMePW399mo-")
     ])
     .then(() => {
         formRef.current?.reset();

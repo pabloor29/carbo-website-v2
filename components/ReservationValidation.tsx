@@ -70,7 +70,7 @@ const ReservationDetails = () => {
       reservationCommentInput.value = reservationComment;
     }
 
-    emailjs.sendForm("service_carbo", "template_resa_002", formElement, "Hj5zsN3OJSMAXQ9TV")
+    emailjs.sendForm("service_carbo", "template_resa_002", formElement, "Bdh3AwRMePW399mo-")
       .then(() => {
         formRef.current?.reset();
         alert(`E-mail envoyé avec succès !`);
