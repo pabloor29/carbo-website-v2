@@ -1,26 +1,26 @@
 {
   "pages": {
+    "/(home)/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(home)/page.js"
+    ],
     "/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/(home)/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(home)/page.js"
-    ],
-    "/contact/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/contact/page.js"
-    ],
     "/reservation/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/css/app/reservation/page.css",
       "static/chunks/app/reservation/page.js"
+    ],
+    "/reservation-autoreply/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/reservation-autoreply/page.js"
     ]
   }
 }
