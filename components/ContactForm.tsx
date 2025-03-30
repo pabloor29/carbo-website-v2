@@ -129,7 +129,7 @@ const ReservationForm = () => {
 
         // Si la date sélectionnée est un lundi (1) ou un dimanche (0)
         if (day === 0 || day === 1) {
-            alert(`${translation.alertRestaurantClose}`);
+            //alert(`${translation.alertRestaurantClose}`);
             e.target.value = ""; // Réinitialise la date après l'alerte
         }
     };
@@ -297,6 +297,7 @@ const ReservationForm = () => {
                   name="eventDate" 
                   required
                   defaultValue=""
+
                   className="mt-1 block w-full px-4 py-2 border border-greenBottle rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
                 />
               </div>
