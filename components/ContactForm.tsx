@@ -128,20 +128,32 @@ const ReservationForm = () => {
       const day = date.getDay();
 
       if (day === 0 || day === 1) {
-        //alert("Restaurant fermé tous les lundis et dimanches.");
+        // Affiche un message mais ne ferme pas automatiquement le calendrier
         alert(`${translation.alertRestaurantClose}`);
-        e.target.value = "";
+        e.target.value = ""; // Réinitialiser la date si elle est un lundi ou dimanche
       }
+    };
+
+    const handleInputFocus = (e: any) => {
+      const today = new Date();
+      const nextAvailableDate = new Date(today);
+      // Avancer jusqu'au mardi (2) si aujourd'hui est dimanche (0) ou lundi (1)
+      while (nextAvailableDate.getDay() === 0 || nextAvailableDate.getDay() === 1) {
+        nextAvailableDate.setDate(nextAvailableDate.getDate() + 1);
+      }
+      // Définir la première date disponible comme étant le jour suivant
+      e.target.setAttribute('min', nextAvailableDate.toISOString().split('T')[0]);
     };
 
     if (dateInput) {
       dateInput.addEventListener("input", handleDateChange);
+      dateInput.addEventListener("focus", handleInputFocus);
     }
 
-    // Nettoyage de l'event listener
     return () => {
       if (dateInput) {
         dateInput.removeEventListener("input", handleDateChange);
+        dateInput.removeEventListener("focus", handleInputFocus);
       }
     };
   }, []);
