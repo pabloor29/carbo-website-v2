@@ -18,6 +18,9 @@ const ReservationDetails = () => {
   const [reservationComment, setReservationComment] = useState(
     "Merci beaucoup pour votre réservation ! Nous sommes heureux de vous informer que votre demande a été confirmée. Nous avons hâte de vous accueillir au restaurant pour passer un agréable moment ensemble. À très bientôt !"
   );
+  const [reservationComment2, setReservationComment2] = useState(
+    "Nous vous attendons au 11 rue Trivalle CARCASSONNE. Pour toutes demandes supplémentaires, veuillez nous contacter au +33 4 34 42 27 49 ou +33 6 29 10 42 17."
+  );
 
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -38,6 +41,9 @@ const ReservationDetails = () => {
     setReservationComment(
       "Merci beaucoup pour votre réservation ! Nous sommes heureux de vous informer que votre demande a été confirmée. Nous avons hâte de vous accueillir au restaurant pour passer un agréable moment ensemble. À très bientôt !"
     );
+    setReservationComment2(
+      "Nous vous attendons au 11 rue Trivalle CARCASSONNE. Pour toutes demandes supplémentaires, veuillez nous contacter au +33 4 34 42 27 49 ou +33 6 29 10 42 17."
+    );
 
     sendEmail();
 
@@ -48,6 +54,9 @@ const ReservationDetails = () => {
     setReservationType("REFUSÉE");
     setReservationComment(
       "Nous vous remercions pour votre réservation. Malheureusement, nous ne pouvons pas l'accepter pour le moment. Nous sommes désolés pour ce contretemps et espérons avoir l'occasion de vous accueillir une prochaine fois. N'hésitez pas à reprogrammer votre réservation à une autre date. À bientôt !"
+    );
+    setReservationComment2(
+      ""
     );
 
     sendEmail();
@@ -124,6 +133,7 @@ const ReservationDetails = () => {
         <input type="hidden" name="emailCompany" value="restaurant.carbo11@gmail.com" />
         <input type="hidden" name="reservationType" value={reservationType} />
         <input type="hidden" name="reservationComment" value={reservationComment} />
+        <input type="hidden" name="reservationComment" value={reservationComment2} />
         <input type="hidden" name="eventDate" value={reservationInfo?.date || ""} />
         <input type="hidden" name="eventTime" value={reservationInfo?.heure || ""} />
         <input type="hidden" name="numberOfGuests" value={reservationInfo?.invites || ""} />
