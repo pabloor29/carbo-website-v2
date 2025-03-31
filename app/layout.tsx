@@ -28,7 +28,7 @@ export default function RootLayout({
         <meta name="keywords" content="Italien, Restaurant italien carcassonne, Restaurant Carcassonne, Restaurant italien, pâtes fraîches" />
         <meta name="description" content="Découvrez CARBO, un restaurant italien à Carcassonne offrant des pâtes fraîches et une cuisine italienne authentique dans un cadre chaleureux. Réservez dès maintenant !" />
         <meta property="og:title" content="CARBO" />
-        <meta property="og:image" content="https://i.ibb.co/21hT8sPh/CARBO-LOGO-4.jpg" />
+        <meta property="og:image" content="/img/logo/CARBO-LOGO-4.webp" />
         <meta charSet="utf-8"></meta>
         <link rel="icon" href="/img/logo/CARBO-LOGO-1.webp"></link>
       </Head>
@@ -39,3 +39,4 @@ export default function RootLayout({
     </html>
   );
 }
+
