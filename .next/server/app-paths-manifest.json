@@ -1,3 +1,4 @@
 {
+  "/sitemap.xml/route": "app/sitemap.xml/route.js",
   "/(home)/page": "app/(home)/page.js"
 }
