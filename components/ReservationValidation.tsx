@@ -22,6 +22,8 @@ const ReservationDetails = () => {
     "Nous vous attendons au 11 rue Trivalle CARCASSONNE. Pour toutes demandes supplémentaires, veuillez nous contacter au +33 4 34 42 27 49 ou +33 6 29 10 42 17."
   );
 
+  const [shouldSendEmail, setShouldSendEmail] = useState(false);
+
   const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
@@ -36,7 +38,8 @@ const ReservationDetails = () => {
     });
   }, []);
 
-  const handleReservationValid = () => {
+  const handleReservationValid = () => 
+  {
     setReservationType("CONFIRMÉE");
     setReservationComment(
       "Merci beaucoup pour votre réservation ! Nous sommes heureux de vous informer que votre demande a été confirmée. Nous avons hâte de vous accueillir au restaurant pour passer un agréable moment ensemble. À très bientôt !"
@@ -45,12 +48,15 @@ const ReservationDetails = () => {
       "Nous vous attendons au 11 rue Trivalle CARCASSONNE. Pour toutes demandes supplémentaires, veuillez nous contacter au +33 4 34 42 27 49 ou +33 6 29 10 42 17."
     );
 
-    sendEmail();
+    setShouldSendEmail(true);
+
+    // sendEmail();
 
     alert('Confirmation de réservation.');
   };
 
-  const handleReservationRefuse = () => {
+  const handleReservationRefuse = () =>
+  {
     setReservationType("REFUSÉE");
     setReservationComment(
       "Nous vous remercions pour votre réservation. Malheureusement, nous ne pouvons pas l'accepter pour le moment. Nous sommes désolés pour ce contretemps et espérons avoir l'occasion de vous accueillir une prochaine fois. N'hésitez pas à reprogrammer votre réservation à une autre date. À bientôt !"
@@ -59,10 +65,19 @@ const ReservationDetails = () => {
       ""
     );
 
-    sendEmail();
+    setShouldSendEmail(true);
+
+    // sendEmail();
 
     alert('Refus de réservation.');
   };
+
+  useEffect(() => {
+    if (shouldSendEmail) {
+      sendEmail();
+      setShouldSendEmail(false);
+    }
+  }, [shouldSendEmail, reservationType, reservationComment, reservationComment2]);
 
   const sendEmail = () => {
     if (!formRef.current) {
@@ -90,7 +105,6 @@ const ReservationDetails = () => {
       });
   };
 
-  // Utilisation de la gestion conditionnelle ici
   if (!reservationInfo) return <p className="text-center mt-10">Chargement...</p>;
 
   return (
