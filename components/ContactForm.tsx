@@ -218,6 +218,7 @@ const ReservationForm = () => {
             <input type="hidden" name="reservationType" value="EN ATTENTE DE CONFIRMATION" />
             <input type="hidden" name="reservationComment" value="Nous avons bien pris en compte votre demande et elle sera traitée dans les plus brefs délais. Veuillez noter que votre réservation ne sera confirmée qu’une fois que vous aurez reçu un mail de confirmation de notre part. Nous vous remercions pour votre patience et sommes impatients de vous accueillir !" />
             <div className="flex items-center justify-between lg:flex-row flex-col-reverse">
+            <input type="hidden" name="reservationComment2" value=" " />
               <h3 className="text-greenBottle text-7xl font-medium font-schoolbell leading-none">
                 {translation.title}
               </h3>
