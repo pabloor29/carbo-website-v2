@@ -30,7 +30,6 @@ function ContactPage() {
                   11 rue Trivalle, 11000 Carcassonne
                 </a>
                 <a href="tel:+33434422749">Fixe : +33 4 34 42 27 49</a>
-                <a href="tel:+33629104217">Mobile : +33 6 29 10 42 17</a>
               </div>
 
               <div className="text-greenBottle w-full flex flex-col space-y-3 items-center lg:items-start justify-center">
@@ -53,19 +52,6 @@ function ContactPage() {
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <div className="scale-125">
-                          <Banknote />
-                        </div>
-                      </TooltipTrigger>
-                      <TooltipContent className="w-full bg-greenBottle rounded-xl text-white">
-                        <p>Chèques bancaires et postaux</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-
-                  <TooltipProvider>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <div className="scale-125">
                           <Coins />
                         </div>
                       </TooltipTrigger>
@@ -75,18 +61,6 @@ function ContactPage() {
                     </Tooltip>
                   </TooltipProvider>
 
-                  <TooltipProvider>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <div className="scale-125">
-                          <Ticket />
-                        </div>
-                      </TooltipTrigger>
-                      <TooltipContent className="w-full bg-greenBottle rounded-xl text-white">
-                        <p>Ticket Restaurant</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
                 </div>
               </div>
 
