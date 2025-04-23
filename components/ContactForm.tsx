@@ -17,7 +17,7 @@ const ReservationForm = () => {
       title: "Demande de réservation",
       fullNameLabel: "Nom complet",
       emailLabel: "Email",
-      numberOfGuestsLabel: "Invités",
+      numberOfGuestsLabel: "Nombre de personnes",
       eventDateLabel: "Date",
       infoDateLabel: "(Fermé lundi et dimanche)",
       eventTimeLabel: "Heure",
@@ -33,7 +33,7 @@ const ReservationForm = () => {
       title: "Reservation request",
       fullNameLabel: "Full name",
       emailLabel: "Email",
-      numberOfGuestsLabel: "Guests",
+      numberOfGuestsLabel: "Number of people",
       eventDateLabel: "Date",
       infoDateLabel: "(Closed on Monday and Sunday)",
       eventTimeLabel: "Time",
@@ -49,7 +49,7 @@ const ReservationForm = () => {
       title: "Solicitud de reserva",
       fullNameLabel: "Nombre completo",
       emailLabel: "Correo electrónico",
-      numberOfGuestsLabel: "Invitados",
+      numberOfGuestsLabel: "Número de personas",
       eventDateLabel: "Fecha",
       infoDateLabel: "(Cerrado los lunes y domingos)",
       eventTimeLabel: "Hora",
@@ -65,7 +65,7 @@ const ReservationForm = () => {
       title: "Richiesta di prenotazione",
       fullNameLabel: "Nome completo",
       emailLabel: "Email",
-      numberOfGuestsLabel: "Ospiti",
+      numberOfGuestsLabel: "Numero di persone",
       eventDateLabel: "Data",
       infoDateLabel: "(Chiuso il lunedì e la domenica)",
       eventTimeLabel: "Ora",
@@ -273,7 +273,7 @@ const ReservationForm = () => {
               />
             </div>
 
-            <div className="flex flex-col lg:flex-row justify-between items-center lg:space-x-10 space-y-8 lg:space-y-0">
+            <div className="flex flex-col lg:flex-row justify-between items-center md:items-end lg:space-x-10 space-y-8 lg:space-y-0">
               <div className="lg:w-1/2 w-full">
                 <label
                   htmlFor="numberOfGuests"
@@ -309,7 +309,7 @@ const ReservationForm = () => {
 
                   className="mt-1 block w-full px-4 py-2 border border-greenBottle rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
                 />
-                <p className="absolute w-full text-lg pt-1 font-cormorantGaramond">
+                <p className="absolute w-content text-lg pt-1 font-cormorantGaramond">
                   {translation.infoDateLabel}
                 </p>
               </div>
