@@ -14,17 +14,17 @@ function MenuPage() {
         <div className="lg:w-3/5 w-11/12 flex flex-col items-center justify-center py-20 space-y-6">
           <img
             className="w-full h-auto object-cover"
-            src="/img/menu/JUIN_2025_CARBO_CARTE_PRINCIPALE.webp"
+            src="/img/menu/JUIN_2025_V2_CARBO_CARTE_PRINCIPALE.webp"
             alt=""
           />
           <img
             className="w-full h-auto object-cover"
-            src="/img/menu/JUIN_2025_CARBO_CARTE_DES_VINS.webp"
+            src="/img/menu/JUIN_2025_V2_CARBO_CARTE_DES_VINS.webp"
             alt=""
           />
           <img
             className="w-full h-auto object-cover"
-            src="/img/menu/JUIN_2025_CARBO_CARTE_COCKTAILS.webp"
+            src="/img/menu/JUIN_2025_V2_CARBO_CARTE_COCKTAILS.webp"
             alt=""
           />
         </div>
