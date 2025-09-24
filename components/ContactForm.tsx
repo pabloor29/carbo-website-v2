@@ -105,6 +105,8 @@ const ReservationForm = () => {
     console.log(formData.eventDate, formData.eventTime);
   };
 
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
@@ -313,9 +315,16 @@ const ReservationForm = () => {
 
                   className="mt-1 block w-full px-4 py-2 border border-greenBottle rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
                 />
-                <p className="absolute w-content text-lg pt-1 font-cormorantGaramond">
-                  {translation.infoDateLabelSummer}
-                </p>
+                { selectedDate.getMonth() + 1 === 7 || selectedDate.getMonth() + 1 === 8 ? (
+                  <p className="absolute w-content text-sm pt-1">
+                    {translation.infoDateLabelSummer}
+                  </p>
+                ):(
+                  <p className="absolute w-content text-lg pt-1 font-cormorantGaramond">
+                    {translation.infoDateLabel}
+                  </p>
+                )
+                }
               </div>
 
               <div className="relative lg:w-1/2 w-full">

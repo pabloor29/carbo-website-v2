@@ -1,8 +1,8 @@
-// File: /Users/pabloortega/Desktop/PABLO_ORTEGA/Dev/carbo-website-v2/app/reservation/page.tsx
-import * as entry from '../../../../app/reservation/page.js'
+// File: /Users/pabloortega/Desktop/PABLO_ORTEGA_PRO/Dev/carbo-website-v2/app/menu/page.tsx
+import * as entry from '../../../../app/menu/page.js'
 import type { ResolvingMetadata } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
-type TEntry = typeof import('../../../../app/reservation/page.js')
+type TEntry = typeof import('../../../../app/menu/page.js')
 
 // Check that the entry is a valid entry
 checkFields<Diff<{
