@@ -3,7 +3,7 @@ import { BadgeCheck } from "lucide-react";
 import React, { useState , useEffect , useRef } from "react";
 import CustomTimePicker from "./CustomTimePicker";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+// import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
 import { fr } from "date-fns/locale";
 import emailjs from "@emailjs/browser";
@@ -29,6 +29,8 @@ const ReservationForm = () => {
       afterSentMessage: `Merci pour votre demande de réservation ! Un email de confirmation vous sera envoyé sous peu. Veuillez vérifier votre boîte mail.`,
 
       alertRestaurantClose: "Restaurant fermé tous les lundis et dimanches.",
+
+      alertMaxNbGuests: "Pour toute réservation supérieure à 10 couverts, veuilez nous contacter à cette adresse mail : ",
     },
     en: {
       title: "Reservation request",
@@ -46,6 +48,8 @@ const ReservationForm = () => {
       afterSentMessage: `Merci pour votre demande de réservation ! Un email de confirmation vous sera envoyé sous peu. Veuillez vérifier votre boîte mail.`,
 
       alertRestaurantClose: "Restaurant closed every Monday and Sunday.",
+
+      alertMaxNbGuests: "For reservations of more than 10 covers, please contact us at this email address: ",
     },
     es: {
       title: "Solicitud de reserva",
@@ -63,6 +67,8 @@ const ReservationForm = () => {
       afterSentMessage: `¡Gracias por su solicitud de reserva! Un correo electrónico de confirmación le será enviado en breve. Por favor, verifique su bandeja de entrada.`,
 
       alertRestaurantClose: "Restaurante cerrado todos los lunes y domingos.",
+
+      alertMaxNbGuests: "Para reservas de más de 10 comensales, póngase en contacto con nosotros en esta dirección de correo electrónico: ",
     },
     it: {
       title: "Richiesta di prenotazione",
@@ -80,6 +86,8 @@ const ReservationForm = () => {
       afterSentMessage: `Grazie per la tua richiesta di prenotazione! Una email di conferma ti sarà inviata a breve. Controlla la tua casella di posta.`,
 
       alertRestaurantClose: "Ristorante chiuso tutti i lunedì e domeniche.",
+
+      alertMaxNbGuests: "Per prenotazioni superiori a 10 coperti, vi preghiamo di contattarci all'indirizzo e-mail: ",
     },
   };
 
@@ -279,6 +287,16 @@ const ReservationForm = () => {
               />
             </div>
 
+            <div className=" bg-greenBottle/80 p-2 text-whiteSmokedBG">
+              {translation.alertMaxNbGuests}
+              <a 
+                href="mailto:carbo11@icloud.com"
+                className="text-blue-300"
+              > 
+                carbo11@icloud.com
+              </a>
+            </div>
+
             <div className="flex flex-col lg:flex-row justify-between items-center md:items-end lg:space-x-10 space-y-8 lg:space-y-0">
               <div className="lg:w-1/2 w-full">
                 <label
@@ -294,6 +312,7 @@ const ReservationForm = () => {
                   value={formData.numberOfGuests}
                   onChange={handleChange}
                   min={1}
+                  max={10}
                   className="mt-1 block w-full px-4 py-2 border border-greenBottle rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
                   required
                 />

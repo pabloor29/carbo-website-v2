@@ -1,4 +1,4 @@
-// File: /Users/pabloortega/Desktop/PABLO_ORTEGA_PRO/Dev/carbo-website-v2/app/layout.tsx
+// File: /Users/pabloortega/Library/Mobile Documents/com~apple~CloudDocs/PABLO_ORTEGA_PRO/Dev/carbo-website-v2/app/layout.tsx
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
