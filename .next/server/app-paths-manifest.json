@@ -1,5 +1,0 @@
-{
-  "/reservation/page": "app/reservation/page.js",
-  "/(home)/page": "app/(home)/page.js",
-  "/menu/page": "app/menu/page.js"
-}
