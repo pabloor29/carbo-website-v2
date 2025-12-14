@@ -1,9 +1,8 @@
 "use client";
 import { BadgeCheck } from "lucide-react";
 import React, { useState , useEffect , useRef } from "react";
-import CustomTimePicker from "./CustomTimePicker";
 import DatePicker from "react-datepicker";
-// import "react-datepicker/dist/react-datepicker.css";
+import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
 import { fr } from "date-fns/locale";
 import emailjs from "@emailjs/browser";
@@ -135,7 +134,8 @@ const ReservationForm = () => {
     console.log(formData.eventDate, formData.eventTime);
   };
 
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  // const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
   useEffect(() => {
     const dateInput = document.getElementById("datePicker");
@@ -229,6 +229,36 @@ const ReservationForm = () => {
 
   return (
     <>
+      <style jsx global>
+        {`
+          .date-past {
+            background-color: #f3f4f6 !important;
+            color: #9ca3af !important;
+            cursor: not-allowed !important;
+          }
+
+          .date-closed {
+            background-color: #fee2e2 !important;
+            color: #991b1b !important;
+            position: relative;
+          }
+
+          .date-closed::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 80%;
+            height: 2px;
+            background-color: #991b1b;
+            transform: translate(-50%, -50%) rotate(-45deg);
+          }
+
+          .react-datepicker__day--disabled {
+            cursor: not-allowed !important;
+          }
+        `}
+      </style>
       {succeeded ? (
         <div className="flex flex-col lg:flex-row w-full h-96 justify-center px-4 items-center lg:space-x-3 text-greenBottle bg-whiteSmokedBG">
           <BadgeCheck />
@@ -338,25 +368,36 @@ const ReservationForm = () => {
                 >
                   {translation.eventDateLabel}
                 </label>
-                <input 
-                  type="date" 
-                  id="datePicker" 
-                  name="eventDate" 
+                <DatePicker
+                  selected={selectedDate}
+                  onChange={(date) => date && setSelectedDate(date)}
+                  dayClassName={(date) => {
+                    const day = date.getDay();
+                    const month = date.getMonth();
+                    const startHolidays = new Date(2025, 11, 21);
+                    const endHolidays = new Date(2026, 1, 5);
+                    const isPast = date < new Date(new Date().setHours(0, 0, 0, 0));
+                    
+                    // Vérifier si c'est dans les vacances
+                    const isHoliday = date >= startHolidays && date <= endHolidays;
+                    
+                    // Vérifier si c'est un jour fermé (lundi/dimanche sauf été)
+                    const isClosed = 
+                      isHoliday ||
+                      ((day === 0 && month === 6) || (day === 0 && month === 7)) ||
+                      ((day === 0 || day === 1) && month !== 6 && month !== 7);
+                    
+                    if (isPast) return "date-past";
+                    if (isClosed) return "date-closed";
+                    return "";
+                  }}
+                  dateFormat="dd/MM/yyyy"
+                  locale="fr"
+                  minDate={new Date()}
+                  placeholderText="Sélectionner une date"
+                  className="w-full px-4 py-2 border border-greenBottle rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
                   required
-                  defaultValue=""
-
-                  className="mt-1 block w-full px-4 py-2 border border-greenBottle rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
                 />
-                { selectedDate.getMonth() + 1 === 7 || selectedDate.getMonth() + 1 === 8 ? (
-                  <p className="absolute w-content text-sm pt-1">
-                    {translation.infoDateLabelSummer}
-                  </p>
-                ):(
-                  <p className="absolute w-content text-lg pt-1 font-cormorantGaramond">
-                    {translation.infoDateLabel}
-                  </p>
-                )
-                }
               </div>
 
               <div className="relative lg:w-1/2 w-full">
