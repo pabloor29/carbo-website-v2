@@ -371,6 +371,23 @@ const ReservationForm = () => {
                 <DatePicker
                   selected={selectedDate}
                   onChange={(date) => date && setSelectedDate(date)}
+                  filterDate={(date) => {
+                    const day = date.getDay();
+                    const month = date.getMonth();
+                    const startHolidays = new Date(2025, 11, 21);
+                    const endHolidays = new Date(2026, 1, 5);
+                    
+                    // Vérifier si c'est dans les vacances
+                    const isHoliday = date >= startHolidays && date <= endHolidays;
+                    
+                    // Vérifier si c'est un jour fermé
+                    const isSummerSunday = (day === 0 && month === 6) || (day === 0 && month === 7);
+                    const isRegularClosed = (day === 0 || day === 1) && month !== 6 && month !== 7;
+                    const isClosed = isHoliday || isSummerSunday || isRegularClosed;
+                    
+                    // Retourner true si le jour est sélectionnable (pas fermé)
+                    return !isClosed;
+                  }}
                   dayClassName={(date) => {
                     const day = date.getDay();
                     const month = date.getMonth();
@@ -381,11 +398,10 @@ const ReservationForm = () => {
                     // Vérifier si c'est dans les vacances
                     const isHoliday = date >= startHolidays && date <= endHolidays;
                     
-                    // Vérifier si c'est un jour fermé (lundi/dimanche sauf été)
-                    const isClosed = 
-                      isHoliday ||
-                      ((day === 0 && month === 6) || (day === 0 && month === 7)) ||
-                      ((day === 0 || day === 1) && month !== 6 && month !== 7);
+                    // Vérifier si c'est un jour fermé
+                    const isSummerSunday = (day === 0 && month === 6) || (day === 0 && month === 7);
+                    const isRegularClosed = (day === 0 || day === 1) && month !== 6 && month !== 7;
+                    const isClosed = isHoliday || isSummerSunday || isRegularClosed;
                     
                     if (isPast) return "date-past";
                     if (isClosed) return "date-closed";
