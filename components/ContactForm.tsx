@@ -31,6 +31,11 @@ const ReservationForm = () => {
       alertRestaurantClose: "Restaurant fermé tous les lundis et dimanches.",
 
       alertMaxNbGuests: "Pour toute réservation supérieure à 10 couverts, veuilez nous contacter à cette adresse mail : ",
+
+      alertHolidaysSelected: "Restaurant fermé du 21 décembre 2025 au 5 février 2026.",
+      alertBasicClosedDays: "Restaurant fermé le lundi et le dimanche.",
+      alertSummerClosedDays: "Restaurant fermé le lundi.",
+      alertPastSelectedDate: "La date sélectionnée est passée.",
     },
     en: {
       title: "Reservation request",
@@ -50,6 +55,11 @@ const ReservationForm = () => {
       alertRestaurantClose: "Restaurant closed every Monday and Sunday.",
 
       alertMaxNbGuests: "For reservations of more than 10 covers, please contact us at this email address: ",
+
+      alertHolidaysSelected: "Restaurant closed from December 21, 2025 to February 5, 2026.",
+      alertBasicClosedDays: "Restaurant closed on Monday and Sunday.",
+      alertSummerClosedDays: "Restaurant closed on Monday.",
+      alertPastSelectedDate: "The selected date is in the past.",
     },
     es: {
       title: "Solicitud de reserva",
@@ -69,6 +79,11 @@ const ReservationForm = () => {
       alertRestaurantClose: "Restaurante cerrado todos los lunes y domingos.",
 
       alertMaxNbGuests: "Para reservas de más de 10 comensales, póngase en contacto con nosotros en esta dirección de correo electrónico: ",
+
+      alertHolidaysSelected: "Restaurante cerrado del 21 de diciembre de 2025 al 5 de febrero de 2026.",
+      alertBasicClosedDays: "Restaurante cerrado los lunes y domingos.",
+      alertSummerClosedDays: "Restaurante cerrado los lunes.",
+      alertPastSelectedDate: "La fecha seleccionada ya ha pasado.",
     },
     it: {
       title: "Richiesta di prenotazione",
@@ -88,8 +103,16 @@ const ReservationForm = () => {
       alertRestaurantClose: "Ristorante chiuso tutti i lunedì e domeniche.",
 
       alertMaxNbGuests: "Per prenotazioni superiori a 10 coperti, vi preghiamo di contattarci all'indirizzo e-mail: ",
+
+      alertHolidaysSelected: "Ristorante chiuso dal 21 dicembre 2025 al 5 febbraio 2026.",
+      alertBasicClosedDays: "Ristorante chiuso il lunedì e la domenica.",
+      alertSummerClosedDays: "Ristorante chiuso il lunedì.",
+      alertPastSelectedDate: "La data selezionata è passata.",
     },
   };
+
+  const [selectedLanguage, setSelectedLanguage] = useState("fr");
+  const translation = translations[selectedLanguage as keyof typeof translations];
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -101,7 +124,6 @@ const ReservationForm = () => {
   });
 
   const [succeeded, setSucceeded] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState("fr");
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -115,29 +137,6 @@ const ReservationForm = () => {
 
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-
-    const {
-      fullName,
-      email,
-      numberOfGuests,
-      eventDate,
-      eventTime,
-      specialRequests,
-    } = formData;
-
-    const mailTo = "carbo11@icloud.com";
-    const subject = `Reservation - Le ${eventDate} à ${eventTime}`;
-    const body = `Nom: ${fullName}\nEmail: ${email}\nCouverts: ${numberOfGuests}\nDate: ${eventDate}\nHeure: ${eventTime}\nCommentaire: ${specialRequests}`;
-
-    window.location.href = `mailto:${mailTo}?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`;
-
-    setSucceeded(true);
-  };
-
   useEffect(() => {
     const dateInput = document.getElementById("datePicker");
 
@@ -146,13 +145,29 @@ const ReservationForm = () => {
       const day = date.getDay();
       const month = date.getMonth();
 
-      if ((day == 0 && month == 6) || (day == 0 && month == 7))
+      const startHolidays = new Date(2025, 11, 21);   // 21 décembre 2025 (mois 11)
+      const endHolidays = new Date(2026, 1, 5);       // 5 février 2026 (mois 1)
+      const today = new Date();
+
+      if (date >= startHolidays && date <= endHolidays)
       {
         e.target.value = "";
+        alert(translation.alertHolidaysSelected);
+      }
+      else if ((day == 0 && month == 6) || (day == 0 && month == 7))
+      {
+        e.target.value = "";
+        alert(translation.alertSummerClosedDays);
       }
       else if ((day === 0 || day === 1) && (month != 6) && (month != 7))
       {
         e.target.value = "";
+        alert(translation.alertBasicClosedDays);
+      }
+      else if (date < today)
+      {
+        e.target.value = "";
+        alert(translation.alertPastSelectedDate);
       }
     };
 
@@ -211,8 +226,6 @@ const ReservationForm = () => {
     const toggleDropdown = () => {
       setIsOpen((prev) => !prev);
     };
-
-    const translation = translations[selectedLanguage as keyof typeof translations];
 
   return (
     <>
