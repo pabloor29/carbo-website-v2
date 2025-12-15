@@ -414,6 +414,15 @@ const ReservationForm = () => {
                   className="w-full px-4 py-2 border border-greenBottle rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
                   required
                 />
+                <input 
+                  type="hidden" 
+                  name="eventDate" 
+                  value={selectedDate ? selectedDate.toLocaleDateString('fr-FR', {
+                    day: '2-digit',
+                    month: '2-digit', 
+                    year: 'numeric'
+                  }) : ''} 
+                />
               </div>
 
               <div className="relative lg:w-1/2 w-full">
