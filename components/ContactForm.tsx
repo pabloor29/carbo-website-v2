@@ -392,7 +392,7 @@ const ReservationForm = () => {
                     const day = date.getDay();
                     const month = date.getMonth();
                     const startHolidays = new Date(2025, 11, 21);
-                    const endHolidays = new Date(2026, 1, 5);
+                    const endHolidays = new Date(2026, 1, 7);
                     const isPast = date < new Date(new Date().setHours(0, 0, 0, 0));
                     
                     // Vérifier si c'est dans les vacances
