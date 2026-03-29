@@ -56,7 +56,7 @@ function IntroRestaurant() {
         >
           <img
             src="/img/plats/plat-carbo-1.webp"
-            alt=""
+            alt="Pâtes fraîches maison du restaurant CARBO, cuisine italienne à Carcassonne"
             className="shadow-2xl"
           />
         </motion.div>
@@ -68,11 +68,11 @@ function IntroRestaurant() {
           variants={imagesVariants}
           className="lg:w-1/2 w-5/6 flex flex-col space-y-8"
         >
-          <h3 className="text-greenBottle text-5xl font-medium font-schoolbell leading-none">
+          <h2 className="text-greenBottle text-5xl font-medium font-schoolbell leading-none">
             Pâtes & tradition
-          </h3>
+          </h2>
           <article className="text-greenBottle text-justify lg:text-left font-cormorantGaramond text-xl">
-            Chez Carbo, tout est fait pour que vous vous sentiez comme chez vous. Une cuisine généreuse, une ambiance conviviale et une équipe passionnée : bienvenue dans notre petit coin d’Italie à Carcassonne !  
+            Chez CARBO, découvrez une cuisine italienne authentique au cœur de Carcassonne. Pâtes fraîches faites maison, recettes traditionnelles et produits de saison — une expérience généreuse et conviviale dans notre restaurant italien au 11 rue Trivalle.
           </article>
           <Link
             href="/menu"
