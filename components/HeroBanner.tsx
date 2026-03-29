@@ -24,7 +24,7 @@ function HeroBanner() {
       <div className="h-screen w-full flex justify-center items-center bg-black/60 absolute z-10"></div>
       <img
         src="/img/deco/background_home.webp"
-        alt=""
+        alt="Ambiance du restaurant CARBO, cuisine italienne à Carcassonne"
         className="w-full h-screen object-cover absolute z-0"
       />
       <div className="relative z-20 flex flex-col items-center justify-center leading-none">
@@ -35,7 +35,7 @@ function HeroBanner() {
           variants={textVariants}
           className="tracking-wide z-30 w-2/3"
         >
-          <img src="img/logo/CARBO-LOGO-10.webp" alt="logo hero banner" />
+          <img src="img/logo/CARBO-LOGO-10.webp" alt="CARBO - Restaurant italien à Carcassonne" />
         </motion.h1>
         <motion.h3
           initial="hidden"
@@ -44,7 +44,7 @@ function HeroBanner() {
           variants={textVariants}
           className="z-10 text-white/90 font-schoolbell lg:text-5xl text-2xl pt-10"
         >
-          Cuisine italienne.
+          Restaurant italien · Carcassonne
         </motion.h3>
       </div>
     </div>
