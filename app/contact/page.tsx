@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import CustomHeroBannerImage from "@/components/CustomHeroBannerImage";
 import CustomHeroBannerVideo from "@/components/CustomHeroBannerVideo";
 import Footer from "@/components/Footer";
@@ -10,6 +11,14 @@ import {
 } from "@/components/ui/tooltip";
 import { Banknote, CreditCard, Coins, Ticket } from "lucide-react";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "Contact & Horaires",
+  description: "Contactez le restaurant CARBO à Carcassonne. 11 rue Trivalle, 11000 Carcassonne. Tél : +33 4 34 42 27 49. Ouvert mardi au samedi 12h-14h et 18h-22h.",
+  alternates: {
+    canonical: "https://www.restaurant-carbo.fr/contact",
+  },
+};
 
 function ContactPage() {
   return (

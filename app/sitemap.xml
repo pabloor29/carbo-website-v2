@@ -3,39 +3,36 @@
   <!-- Page d'accueil -->
   <url>
     <loc>https://www.restaurant-carbo.fr/</loc>
-    <lastmod>2025-03-31</lastmod>
+    <lastmod>2026-03-29</lastmod>
     <priority>1.00</priority>
   </url>
 
-  <!-- Page à propos -->
+  <!-- Page menu -->
   <url>
-    <loc>https://www.restaurant-carbo.fr/apropos</loc>
-    <lastmod>2025-03-31</lastmod>
-    <priority>0.80</priority>
+    <loc>https://www.restaurant-carbo.fr/menu</loc>
+    <lastmod>2026-03-29</lastmod>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- Page réservation -->
+  <url>
+    <loc>https://www.restaurant-carbo.fr/reservation</loc>
+    <lastmod>2026-03-29</lastmod>
+    <priority>0.90</priority>
   </url>
 
   <!-- Page contact -->
   <url>
     <loc>https://www.restaurant-carbo.fr/contact</loc>
-    <lastmod>2025-03-31</lastmod>
+    <lastmod>2026-03-29</lastmod>
     <priority>0.80</priority>
   </url>
 
-  <!-- Page de menu (si c'est un site de restaurant) -->
+  <!-- Page à propos -->
   <url>
-    <loc>https://www.restaurant-carbo.fr/menu</loc>
-    <lastmod>2025-03-31</lastmod>
-    <priority>0.80</priority>
+    <loc>https://www.restaurant-carbo.fr/apropos</loc>
+    <lastmod>2026-03-29</lastmod>
+    <priority>0.70</priority>
   </url>
-
-  <!-- Page de réservation (si applicable) -->
-  <url>
-    <loc>https://www.restaurant-carbo.fr/reservation</loc>
-    <lastmod>2025-03-31</lastmod>
-    <priority>0.80</priority>
-  </url>
-
-  <!-- Autres pages importantes -->
-  <!-- Ajoute ici d'autres pages spécifiques de ton site -->
 
 </urlset>
