@@ -23,17 +23,17 @@ function MenuPage() {
         <div className="lg:w-3/5 w-11/12 flex flex-col items-center justify-center py-20 space-y-6">
           <img
             className="w-full h-auto object-cover"
-            src="/img/menu/20260211_CARBO_CARTE_PRINCIPALE.webp"
+            src="/img/menu/20260409_CARBO_CARTE_PRINCIPALE.webp"
             alt="Carte principale CARBO - plats italiens et pâtes fraîches"
           />
           <img
             className="w-full h-auto object-cover"
-            src="/img/menu/20260211_CARBO_CARTE_VINS.webp"
+            src="/img/menu/20260409_CARBO_CARTE_VINS.webp"
             alt="Carte des vins CARBO - sélection de vins italiens et français"
           />
           <img
             className="w-full h-auto object-cover"
-            src="/img/menu/20260211_CARBO_CARTE_COCKTAILS.webp"
+            src="/img/menu/20260409_CARBO_CARTE_COCKTAILS.webp"
             alt="Carte des cocktails CARBO - cocktails maison et boissons"
           />
         </div>
