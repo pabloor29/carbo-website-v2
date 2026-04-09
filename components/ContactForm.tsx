@@ -383,7 +383,14 @@ const ReservationForm = () => {
                     // Vérifier si c'est un jour fermé
                     const isSummerSunday = (day === 0 && month === 6) || (day === 0 && month === 7);
                     const isRegularClosed = (day === 0 || day === 1) && month !== 6 && month !== 7;
-                    const isClosed = isHoliday || isSummerSunday || isRegularClosed;
+
+                    // Vérifier si c'est un jour spécialement fermé
+                    const isExceptionallyClosed = (date.getDate() === 12 && date.getMonth() === 4) || (date.getDate() === 13 && date.getMonth() === 4) || (date.getDate() === 14 && date.getMonth() === 4) || (date.getDate() === 15 && date.getMonth() === 4) || (date.getDate() === 16 && date.getMonth() === 4);
+
+                    // Vérifier si c'est un jour spécialement ouvert
+                    const isExceptionallyOpen = (date.getDate() === 10 && date.getMonth() === 4) || (date.getDate() === 11 && date.getMonth() === 4);
+
+                    const isClosed = (isHoliday || isSummerSunday || isRegularClosed) && !isExceptionallyOpen || isExceptionallyClosed;
                     
                     // Retourner true si le jour est sélectionnable (pas fermé)
                     return !isClosed;
@@ -401,7 +408,14 @@ const ReservationForm = () => {
                     // Vérifier si c'est un jour fermé
                     const isSummerSunday = (day === 0 && month === 6) || (day === 0 && month === 7);
                     const isRegularClosed = (day === 0 || day === 1) && month !== 6 && month !== 7;
-                    const isClosed = isHoliday || isSummerSunday || isRegularClosed;
+                    
+                    // Vérifier si c'est un jour spécialement fermé
+                    const isExceptionallyClosed = (date.getDate() === 12 && date.getMonth() === 4) || (date.getDate() === 13 && date.getMonth() === 4) || (date.getDate() === 14 && date.getMonth() === 4) || (date.getDate() === 15 && date.getMonth() === 4) || (date.getDate() === 16 && date.getMonth() === 4);
+
+                    // Vérifier si c'est un jour spécialement ouvert
+                    const isExceptionallyOpen = (date.getDate() === 10 && date.getMonth() === 4) || (date.getDate() === 11 && date.getMonth() === 4);
+
+                    const isClosed = (isHoliday || isSummerSunday || isRegularClosed) && !isExceptionallyOpen || isExceptionallyClosed;
                     
                     if (isPast) return "date-past";
                     if (isClosed) return "date-closed";
