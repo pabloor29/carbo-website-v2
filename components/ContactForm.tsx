@@ -413,7 +413,7 @@ const ReservationForm = () => {
                     const isExceptionallyClosed = (date.getDate() === 12 && date.getMonth() === 4) || (date.getDate() === 13 && date.getMonth() === 4) || (date.getDate() === 14 && date.getMonth() === 4) || (date.getDate() === 15 && date.getMonth() === 4) || (date.getDate() === 16 && date.getMonth() === 4);
 
                     // Vérifier si c'est un jour spécialement ouvert
-                    const isExceptionallyOpen = (date.getDate() === 10 && date.getMonth() === 4) || (date.getDate() === 11 && date.getMonth() === 4);
+                    const isExceptionallyOpen = (date.getDate() === 10 && date.getMonth() === 4);
 
                     const isClosed = (isHoliday || isSummerSunday || isRegularClosed) && !isExceptionallyOpen || isExceptionallyClosed;
                     
