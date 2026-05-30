@@ -5,6 +5,8 @@ import Footer from "../../components/Footer";
 import HeroBanner from "../../components/HeroBanner";
 import MainPage from "../../components/MainPage";
 import Navbar from "../../components/Navbar";
+import FormulaPopup from "@/components/FormulaPopup";
+import { getMenuData, getMenuFileUrl } from "@/lib/menu";
 import { Analytics } from "@vercel/analytics/react";
 
 export const metadata: Metadata = {
@@ -15,7 +17,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Home() {
+export default async function Home() {
+  const categories = await getMenuData();
+  const formuleCategory = categories.find((c) => c.name === "Formule du midi");
+  const formuleImages = formuleCategory?.files.map((f) => getMenuFileUrl(f.file_path)) ?? [];
+
   return (
     <main className="flex flex-col items-center">
       <Navbar />
@@ -23,6 +29,7 @@ export default function Home() {
       <MainPage />
       <Footer />
       <Analytics />
+      <FormulaPopup images={formuleImages} autoOpen={true} />
     </main>
   );
 }
