@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import type { Metadata } from "next";
 import CustomHeroBannerImage from "@/components/CustomHeroBannerImage";
 import CustomHeroBannerVideo from "@/components/CustomHeroBannerVideo";
@@ -11,6 +13,7 @@ import {
 } from "@/components/ui/tooltip";
 import { Banknote, CreditCard, Coins, Ticket } from "lucide-react";
 import React from "react";
+import { getOpeningHours, DAYS_FR } from "@/lib/opening-hours";
 
 export const metadata: Metadata = {
   title: "Contact & Horaires",
@@ -20,7 +23,9 @@ export const metadata: Metadata = {
   },
 };
 
-function ContactPage() {
+async function ContactPage() {
+  const hours = await getOpeningHours();
+
   return (
     <>
       <Navbar />
@@ -82,28 +87,37 @@ function ContactPage() {
               </div>
             </div>
 
-            <div className="text-greenBottle border-4 w-fit mt-12 lg:mt-0 px-8 py-4 border-greenBottle flex flex-col items-center justify-center space-y-6 shadow-[-15px_15px_0_0_#192C1D]">
-              <h3 className="w-full text-center z-10 text-greenBottle border-b-4 border-greenBottle font-schoolbell text-7xl tracking-wide">
+            <div className="text-greenBottle border-4 md:w-fit mt-12 lg:mt-0 px-8 py-4 border-greenBottle flex flex-col items-center justify-center space-y-6 shadow-[-15px_15px_0_0_#192C1D]">
+              <h3 className="w-full text-center z-10 text-greenBottle border-b-4 border-greenBottle font-schoolbell md:text-7xl text-5xl tracking-wide">
                 Horaires
               </h3>
 
-              <div className="flex flex-col items-center justify-center">
-                <p>Juillet - Aout</p>
-                <p>Lundi - Samedi </p>
-                <p className="font-cormorantGaramond text-2xl">
-                  {" "}
-                  12:00 - 14:00 & 18:00 - 22:00
-                </p>
-              </div>
-
-              <div className="flex flex-col items-center justify-center">
-                <p>Septembre - Juin</p>
-                <p>Mardi - Samedi </p>
-                <p className="font-cormorantGaramond text-2xl">
-                  {" "}
-                  12:00 - 14:00 & 18:00 - 22:00
-                </p>
-              </div>
+              {hours ? (
+                <ul className="flex flex-col gap-2 w-full font-cormorantGaramond text-xl">
+                  {DAYS_FR.map((day, i) => {
+                    const d = hours[i];
+                    return (
+                      <li key={day} className="flex justify-between gap-8 text-base">
+                        <span className="font-bold">{day}</span>
+                        {d.closedDay ? (
+                          <span className="italic md:text-base text-sm">Fermé</span>
+                        ) : (
+                          <div className="flex flex-col items-end">
+                            {!d.closedLunch && d.midi.debut && (
+                              <span className="md:text-base text-sm">{d.midi.debut} - {d.midi.fin}</span>
+                            )}
+                            {!d.closedDiner && d.soir.debut && (
+                              <span className="md:text-base text-sm">{d.soir.debut} - {d.soir.fin}</span>
+                            )}
+                          </div>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ul>
+              ) : (
+                <p className="font-cormorantGaramond text-xl">Horaires non disponibles</p>
+              )}
             </div>
           </div>
         </div>

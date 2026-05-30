@@ -1,6 +1,6 @@
 "use client";
 import { BadgeCheck } from "lucide-react";
-import React, { useState , useEffect , useRef } from "react";
+import React, { useState, useRef } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
@@ -10,7 +10,21 @@ import emailjs from "@emailjs/browser";
 registerLocale("fr", fr);
 setDefaultLocale("fr");
 
-const ReservationForm = () => {
+type Props = {
+  closedWeekdays: number[];
+  closedDates: string[];
+  holidayPeriods: { debut: string; fin: string }[];
+  timeSlots: string[];
+};
+
+function toLocalDateStr(date: Date): string {
+  const y = date.getFullYear();
+  const m = (date.getMonth() + 1).toString().padStart(2, "0");
+  const d = date.getDate().toString().padStart(2, "0");
+  return `${y}-${m}-${d}`;
+}
+
+const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlots }: Props) => {
   const translations = {
     fr: {
       title: "Demande de réservation",
@@ -18,23 +32,11 @@ const ReservationForm = () => {
       emailLabel: "Email",
       numberOfGuestsLabel: "Nombre de personnes",
       eventDateLabel: "Date",
-      infoDateLabel: "(Fermé lundi et dimanche)",
-      infoDateLabelSummer: "(Fermé le dimanche)",
       eventTimeLabel: "Heure",
-
       specialRequestsLabel: "Demandes spéciales",
       submitButton: "ENVOYER LA DEMANDE",
-
       afterSentMessage: `Merci pour votre demande de réservation ! Un email de confirmation vous sera envoyé sous peu. Veuillez vérifier votre boîte mail.`,
-
-      alertRestaurantClose: "Restaurant fermé tous les lundis et dimanches.",
-
-      alertMaxNbGuests: "Pour toute réservation supérieure à 10 couverts, veuilez nous contacter à cette adresse mail : ",
-
-      alertHolidaysSelected: "Restaurant fermé du 21 décembre 2025 au 5 février 2026.",
-      alertBasicClosedDays: "Restaurant fermé le lundi et le dimanche.",
-      alertSummerClosedDays: "Restaurant fermé le lundi.",
-      alertPastSelectedDate: "La date sélectionnée est passée.",
+      alertMaxNbGuests: "Pour toute réservation supérieure à 10 couverts, veuillez nous contacter à cette adresse mail : ",
     },
     en: {
       title: "Reservation request",
@@ -42,23 +44,11 @@ const ReservationForm = () => {
       emailLabel: "Email",
       numberOfGuestsLabel: "Number of people",
       eventDateLabel: "Date",
-      infoDateLabel: "(Closed on Monday and Sunday)",
-      infoDateLabelSummer: "(Closed on Sunday)",
       eventTimeLabel: "Time",
-
       specialRequestsLabel: "Special requests",
       submitButton: "SEND REQUEST",
-
-      afterSentMessage: `Merci pour votre demande de réservation ! Un email de confirmation vous sera envoyé sous peu. Veuillez vérifier votre boîte mail.`,
-
-      alertRestaurantClose: "Restaurant closed every Monday and Sunday.",
-
+      afterSentMessage: `Thank you for your reservation request! A confirmation email will be sent to you shortly. Please check your inbox.`,
       alertMaxNbGuests: "For reservations of more than 10 covers, please contact us at this email address: ",
-
-      alertHolidaysSelected: "Restaurant closed from December 21, 2025 to February 5, 2026.",
-      alertBasicClosedDays: "Restaurant closed on Monday and Sunday.",
-      alertSummerClosedDays: "Restaurant closed on Monday.",
-      alertPastSelectedDate: "The selected date is in the past.",
     },
     es: {
       title: "Solicitud de reserva",
@@ -66,23 +56,11 @@ const ReservationForm = () => {
       emailLabel: "Correo electrónico",
       numberOfGuestsLabel: "Número de personas",
       eventDateLabel: "Fecha",
-      infoDateLabel: "(Cerrado los lunes y domingos)",
-      infoDateLabelSummer: "(Cerrado los domingos)",
       eventTimeLabel: "Hora",
-
       specialRequestsLabel: "Solicitudes especiales",
       submitButton: "ENVIAR SOLICITUD",
-
       afterSentMessage: `¡Gracias por su solicitud de reserva! Un correo electrónico de confirmación le será enviado en breve. Por favor, verifique su bandeja de entrada.`,
-
-      alertRestaurantClose: "Restaurante cerrado todos los lunes y domingos.",
-
       alertMaxNbGuests: "Para reservas de más de 10 comensales, póngase en contacto con nosotros en esta dirección de correo electrónico: ",
-
-      alertHolidaysSelected: "Restaurante cerrado del 21 de diciembre de 2025 al 5 de febrero de 2026.",
-      alertBasicClosedDays: "Restaurante cerrado los lunes y domingos.",
-      alertSummerClosedDays: "Restaurante cerrado los lunes.",
-      alertPastSelectedDate: "La fecha seleccionada ya ha pasado.",
     },
     it: {
       title: "Richiesta di prenotazione",
@@ -90,23 +68,11 @@ const ReservationForm = () => {
       emailLabel: "Email",
       numberOfGuestsLabel: "Numero di persone",
       eventDateLabel: "Data",
-      infoDateLabel: "(Chiuso il lunedì e la domenica)",
-      infoDateLabelSummer: "(Chiuso la domenica)",
       eventTimeLabel: "Ora",
-
       specialRequestsLabel: "Richieste speciali",
       submitButton: "INVIA LA RICHIESTA",
-
       afterSentMessage: `Grazie per la tua richiesta di prenotazione! Una email di conferma ti sarà inviata a breve. Controlla la tua casella di posta.`,
-
-      alertRestaurantClose: "Ristorante chiuso tutti i lunedì e domeniche.",
-
       alertMaxNbGuests: "Per prenotazioni superiori a 10 coperti, vi preghiamo di contattarci all'indirizzo e-mail: ",
-
-      alertHolidaysSelected: "Ristorante chiuso dal 21 dicembre 2025 al 5 febbraio 2026.",
-      alertBasicClosedDays: "Ristorante chiuso il lunedì e la domenica.",
-      alertSummerClosedDays: "Ristorante chiuso il lunedì.",
-      alertPastSelectedDate: "La data selezionata è passata.",
     },
   };
 
@@ -123,68 +89,25 @@ const ReservationForm = () => {
   });
 
   const [succeeded, setSucceeded] = useState(false);
-
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-
-    console.log(formData.eventDate, formData.eventTime);
-  };
-
-  // const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
-  useEffect(() => {
-    const dateInput = document.getElementById("datePicker");
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
-    const handleDateChange = (e: any) => {
-      const date = new Date(e.target.value);
-      const day = date.getDay();
-      const month = date.getMonth();
+  const isDateClosed = (date: Date): boolean => {
+    if (closedWeekdays.includes(date.getDay())) return true;
 
-      const startHolidays = new Date(2025, 11, 21);   // 21 décembre 2025 (mois 11)
-      const endHolidays = new Date(2026, 1, 5);       // 5 février 2026 (mois 1)
-      const today = new Date();
+    const dateStr = toLocalDateStr(date);
+    if (closedDates.includes(dateStr)) return true;
 
-      if (date >= startHolidays && date <= endHolidays)
-      {
-        e.target.value = "";
-        alert(translation.alertHolidaysSelected);
-      }
-      else if ((day == 0 && month == 6) || (day == 0 && month == 7))
-      {
-        e.target.value = "";
-        alert(translation.alertSummerClosedDays);
-      }
-      else if ((day === 0 || day === 1) && (month != 6) && (month != 7))
-      {
-        e.target.value = "";
-        alert(translation.alertBasicClosedDays);
-      }
-      else if (date < today)
-      {
-        e.target.value = "";
-        alert(translation.alertPastSelectedDate);
-      }
-    };
-
-    if (dateInput)
-    {
-      dateInput.addEventListener("change", handleDateChange);
+    for (const period of holidayPeriods) {
+      if (dateStr >= period.debut && dateStr <= period.fin) return true;
     }
 
-    return () => {
-      if (dateInput)
-      {
-        dateInput.removeEventListener("change", handleDateChange);
-      }
-    };
-  }, []);
-
-
+    return false;
+  };
 
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -192,40 +115,36 @@ const ReservationForm = () => {
     e.preventDefault();
 
     if (!formRef.current) {
-        console.error("Le formulaire n'est pas disponible !");
-        return;
+      console.error("Le formulaire n'est pas disponible !");
+      return;
     }
 
     const formElement = formRef.current;
 
     Promise.all([
-        emailjs.sendForm("service_carbo", "template_resa_001", formElement, "Bdh3AwRMePW399mo-"),
-        emailjs.sendForm("service_carbo", "template_resa_002", formElement, "Bdh3AwRMePW399mo-")
+      emailjs.sendForm("service_carbo", "template_resa_001", formElement, "Bdh3AwRMePW399mo-"),
+      emailjs.sendForm("service_carbo", "template_resa_002", formElement, "Bdh3AwRMePW399mo-"),
     ])
-    .then(() => {
+      .then(() => {
         formRef.current?.reset();
         setSucceeded(true);
-    })
-    .catch(error => {
+      })
+      .catch((error) => {
         console.error("Erreur lors de l'envoi des emails :", error);
-    });
-};
+      });
+  };
 
-    const [isOpen, setIsOpen] = useState(false); 
-    const [selectedValue, setSelectedValue] = useState("");
-  
-    const options = ["12:00", "12:30", "13:00", "13:30", "14:00",
-                     "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30"
-                    ];
-  
-    const handleSelect = (value: string) => {
-      setSelectedValue(value);
-      setIsOpen(false);
-    };
-  
-    const toggleDropdown = () => {
-      setIsOpen((prev) => !prev);
-    };
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedValue, setSelectedValue] = useState("");
+
+  const handleSelect = (value: string) => {
+    setSelectedValue(value);
+    setIsOpen(false);
+  };
+
+  const toggleDropdown = () => {
+    setIsOpen((prev) => !prev);
+  };
 
   return (
     <>
@@ -271,15 +190,15 @@ const ReservationForm = () => {
           <form
             ref={formRef}
             onSubmit={sendEmail}
-            // onSubmit={handleSubmit}
             className="space-y-8 lg:w-1/3 w-5/6 z-20"
           >
             <input type="hidden" name="company" value="CARBO" />
             <input type="hidden" name="emailCompany" value="restaurant.carbo11@gmail.com" />
             <input type="hidden" name="reservationType" value="EN ATTENTE DE CONFIRMATION" />
-            <input type="hidden" name="reservationComment" value="Nous avons bien pris en compte votre demande et elle sera traitée dans les plus brefs délais. Veuillez noter que votre réservation ne sera confirmée qu’une fois que vous aurez reçu un mail de confirmation de notre part. Nous vous remercions pour votre patience et sommes impatients de vous accueillir !" />
-            <div className="flex items-center justify-between lg:flex-row flex-col-reverse">
+            <input type="hidden" name="reservationComment" value="Nous avons bien pris en compte votre demande et elle sera traitée dans les plus brefs délais. Veuillez noter que votre réservation ne sera confirmée qu'une fois que vous aurez reçu un mail de confirmation de notre part. Nous vous remercions pour votre patience et sommes impatients de vous accueillir !" />
             <input type="hidden" name="reservationComment2" value=" " />
+
+            <div className="flex items-center justify-between lg:flex-row flex-col-reverse">
               <h3 className="text-greenBottle text-7xl font-medium font-schoolbell leading-none">
                 {translation.title}
               </h3>
@@ -294,6 +213,7 @@ const ReservationForm = () => {
                 <option value="it">🇮🇹</option>
               </select>
             </div>
+
             <div>
               <label
                 htmlFor="fullName"
@@ -330,12 +250,12 @@ const ReservationForm = () => {
               />
             </div>
 
-            <div className=" bg-greenBottle/80 p-2 text-whiteSmokedBG">
+            <div className="bg-greenBottle/80 p-2 text-whiteSmokedBG">
               {translation.alertMaxNbGuests}
-              <a 
+              <a
                 href="mailto:carbo11@icloud.com"
                 className="text-blue-300"
-              > 
+              >
                 carbo11@icloud.com
               </a>
             </div>
@@ -371,54 +291,11 @@ const ReservationForm = () => {
                 <DatePicker
                   selected={selectedDate}
                   onChange={(date) => date && setSelectedDate(date)}
-                  filterDate={(date) => {
-                    const day = date.getDay();
-                    const month = date.getMonth();
-                    const startHolidays = new Date(2025, 11, 21);
-                    const endHolidays = new Date(2026, 1, 5);
-                    
-                    // Vérifier si c'est dans les vacances
-                    const isHoliday = date >= startHolidays && date <= endHolidays;
-                    
-                    // Vérifier si c'est un jour fermé
-                    const isSummerSunday = (day === 0 && month === 6) || (day === 0 && month === 7);
-                    const isRegularClosed = (day === 0 || day === 1) && month !== 6 && month !== 7;
-
-                    // Vérifier si c'est un jour spécialement fermé
-                    const isExceptionallyClosed = (date.getDate() === 12 && date.getMonth() === 4) || (date.getDate() === 13 && date.getMonth() === 4) || (date.getDate() === 14 && date.getMonth() === 4) || (date.getDate() === 15 && date.getMonth() === 4) || (date.getDate() === 16 && date.getMonth() === 4);
-
-                    // Vérifier si c'est un jour spécialement ouvert
-                    const isExceptionallyOpen = (date.getDate() === 10 && date.getMonth() === 4) || (date.getDate() === 11 && date.getMonth() === 4);
-
-                    const isClosed = (isHoliday || isSummerSunday || isRegularClosed) && !isExceptionallyOpen || isExceptionallyClosed;
-                    
-                    // Retourner true si le jour est sélectionnable (pas fermé)
-                    return !isClosed;
-                  }}
+                  filterDate={(date) => !isDateClosed(date)}
                   dayClassName={(date) => {
-                    const day = date.getDay();
-                    const month = date.getMonth();
-                    const startHolidays = new Date(2025, 11, 21);
-                    const endHolidays = new Date(2026, 1, 9);
                     const isPast = date < new Date(new Date().setHours(0, 0, 0, 0));
-                    
-                    // Vérifier si c'est dans les vacances
-                    const isHoliday = date >= startHolidays && date <= endHolidays;
-                    
-                    // Vérifier si c'est un jour fermé
-                    const isSummerSunday = (day === 0 && month === 6) || (day === 0 && month === 7);
-                    const isRegularClosed = (day === 0 || day === 1) && month !== 6 && month !== 7;
-                    
-                    // Vérifier si c'est un jour spécialement fermé
-                    const isExceptionallyClosed = (date.getDate() === 12 && date.getMonth() === 4) || (date.getDate() === 13 && date.getMonth() === 4) || (date.getDate() === 14 && date.getMonth() === 4) || (date.getDate() === 15 && date.getMonth() === 4) || (date.getDate() === 16 && date.getMonth() === 4);
-
-                    // Vérifier si c'est un jour spécialement ouvert
-                    const isExceptionallyOpen = (date.getDate() === 10 && date.getMonth() === 4);
-
-                    const isClosed = (isHoliday || isSummerSunday || isRegularClosed) && !isExceptionallyOpen || isExceptionallyClosed;
-                    
                     if (isPast) return "date-past";
-                    if (isClosed) return "date-closed";
+                    if (isDateClosed(date)) return "date-closed";
                     return "";
                   }}
                   dateFormat="dd/MM/yyyy"
@@ -428,14 +305,14 @@ const ReservationForm = () => {
                   className="w-full px-4 py-2 border border-greenBottle rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
                   required
                 />
-                <input 
-                  type="hidden" 
-                  name="eventDate" 
-                  value={selectedDate ? selectedDate.toLocaleDateString('fr-FR', {
-                    day: '2-digit',
-                    month: '2-digit', 
-                    year: 'numeric'
-                  }) : ''} 
+                <input
+                  type="hidden"
+                  name="eventDate"
+                  value={selectedDate ? selectedDate.toLocaleDateString("fr-FR", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                  }) : ""}
                 />
               </div>
 
@@ -454,14 +331,15 @@ const ReservationForm = () => {
                   onChange={(e) => setSelectedValue(e.target.value)}
                   className="mt-1 block w-full px-4 py-2 border border-greenBottle rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
                   placeholder="Choisir une option"
+                  readOnly
                 />
-                
+
                 {isOpen && (
                   <ul
                     className="absolute w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg z-10"
                     style={{ maxHeight: "200px", overflowY: "auto" }}
                   >
-                    {options.map((option, index) => (
+                    {timeSlots.map((option, index) => (
                       <li
                         key={index}
                         className="px-4 py-2 cursor-pointer hover:bg-indigo-100"
@@ -487,7 +365,7 @@ const ReservationForm = () => {
                 name="specialRequests"
                 rows={4}
                 value={formData.specialRequests}
-                onChange={handleChange}
+                onChange={handleChange as React.ChangeEventHandler<HTMLTextAreaElement>}
                 className="mt-1 block w-full px-4 py-2 border border-greenBottle rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
               />
             </div>

@@ -1,9 +1,11 @@
+export const dynamic = 'force-dynamic';
+
 import type { Metadata } from "next";
 import ContactForm from "@/components/ContactForm";
-import CustomHeroBannerImage from "@/components/CustomHeroBannerImage";
 import CustomHeroBannerVideo from "@/components/CustomHeroBannerVideo";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import { getReservationConfig } from "@/lib/reservation";
 import React from "react";
 
 export const metadata: Metadata = {
@@ -14,12 +16,19 @@ export const metadata: Metadata = {
   },
 };
 
-function ReservationPage() {
+async function ReservationPage() {
+  const config = await getReservationConfig();
+
   return (
     <>
       <Navbar />
       <CustomHeroBannerVideo title="Réservation" video="/img/deco/bg_video.mp4" />
-      <ContactForm />
+      <ContactForm
+        closedWeekdays={config.closedWeekdays}
+        closedDates={config.closedDates}
+        holidayPeriods={config.holidayPeriods}
+        timeSlots={config.timeSlots}
+      />
       <Footer />
     </>
   );
