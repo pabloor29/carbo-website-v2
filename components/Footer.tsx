@@ -1,28 +1,41 @@
 import { Instagram, Mail, Phone } from "lucide-react";
 import React from "react";
+import { getOpeningHours, DAYS_FR } from "@/lib/opening-hours";
 
-function Footer() {
+async function Footer() {
+  const hours = await getOpeningHours();
+
   return (
     <footer className="w-full bg-[#f7dad9] flex flex-col items-center justify-center">
       <div className="flex flex-col w-5/6 items-center lg:justify-between p-4 gap-12 lg:space-y-0">
         <div className="lg:w-1/3 w-full text-[#023c18] flex flex-col items-center h-full">
           <h4 className="font-schoolbell text-4xl mb-3">Horaires</h4>
-          <ul className="flex items-center justify-between space-x-10">
-            <div className="flex flex-col items-center justify-center text-center">
-              <li className="font-bold">Juillet - Août</li>
-              <p>Lundi - Samedi</p>
-              <p className="font-cormorantGaramond text-xl">
-                12:00 - 14:00 <br /> 18:30 - 21:30
-              </p>
-            </div>
-            <div className="flex flex-col items-center justify-center text-center">
-              <li className="font-bold">Septembre - Juin</li>
-              <p>Mardi - Samedi</p>
-              <p className="font-cormorantGaramond text-xl">
-                12:00 - 14:00 <br /> 18:30 - 21:30
-              </p>
-            </div>
-          </ul>
+          {hours ? (
+            <ul className="flex flex-col gap-1 font-cormorantGaramond text-xl">
+              {DAYS_FR.map((day, i) => {
+                const d = hours[i];
+                return (
+                  <li key={day} className="flex justify-between gap-6 lg:text-xl">
+                    <span className="font-bold w-24">{day}</span>
+                    {d.closedDay ? (
+                      <span className="italic lg:text-xl md:text-base text-sm">Fermé</span>
+                    ) : (
+                      <div className="flex flex-col items-end">
+                        {!d.closedLunch && d.midi.debut && (
+                          <span className="lg:text-xl md:text-base text-sm">{d.midi.debut} - {d.midi.fin}</span>
+                        )}
+                        {!d.closedDiner && d.soir.debut && (
+                          <span className="lg:text-xl md:text-base text-sm">{d.soir.debut} - {d.soir.fin}</span>
+                        )}
+                      </div>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          ) : (
+            <p className="font-cormorantGaramond text-xl text-center">Horaires non disponibles</p>
+          )}
         </div>
 
         <div className="w-full flex flex-col md:flex-row gap-12 items-center justify-center">
