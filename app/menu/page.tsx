@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import type { Metadata } from "next";
 import CustomHeroBannerImage from "@/components/CustomHeroBannerImage";
 import CustomHeroBannerVideo from "@/components/CustomHeroBannerVideo";
