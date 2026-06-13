@@ -5,7 +5,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
 import { fr } from "date-fns/locale";
-import emailjs from "@emailjs/browser";
 
 registerLocale("fr", fr);
 setDefaultLocale("fr");
@@ -89,6 +88,7 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
   });
 
   const [succeeded, setSucceeded] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -111,27 +111,35 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
 
   const formRef = useRef<HTMLFormElement>(null);
 
-  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+  const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsSubmitting(true);
 
-    if (!formRef.current) {
-      console.error("Le formulaire n'est pas disponible !");
-      return;
-    }
+    const eventDateFormatted = selectedDate
+      ? selectedDate.toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit", year: "numeric" })
+      : "";
 
-    const formElement = formRef.current;
-
-    Promise.all([
-      emailjs.sendForm("service_carbo", "template_resa_001", formElement, "Bdh3AwRMePW399mo-"),
-      emailjs.sendForm("service_carbo", "template_resa_002", formElement, "Bdh3AwRMePW399mo-"),
-    ])
-      .then(() => {
-        formRef.current?.reset();
-        setSucceeded(true);
-      })
-      .catch((error) => {
-        console.error("Erreur lors de l'envoi des emails :", error);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          email: formData.email,
+          numberOfGuests: formData.numberOfGuests,
+          eventDate: eventDateFormatted,
+          eventTime: selectedValue,
+          specialRequests: formData.specialRequests,
+        }),
       });
+
+      if (!res.ok) throw new Error("Erreur serveur");
+      setSucceeded(true);
+    } catch (error) {
+      console.error("Erreur lors de l'envoi des emails :", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const [isOpen, setIsOpen] = useState(false);
@@ -192,11 +200,7 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
             onSubmit={sendEmail}
             className="space-y-8 lg:w-1/3 w-5/6 z-20"
           >
-            <input type="hidden" name="company" value="CARBO" />
-            <input type="hidden" name="emailCompany" value="restaurant.carbo11@gmail.com" />
-            <input type="hidden" name="reservationType" value="EN ATTENTE DE CONFIRMATION" />
-            <input type="hidden" name="reservationComment" value="Nous avons bien pris en compte votre demande et elle sera traitée dans les plus brefs délais. Veuillez noter que votre réservation ne sera confirmée qu'une fois que vous aurez reçu un mail de confirmation de notre part. Nous vous remercions pour votre patience et sommes impatients de vous accueillir !" />
-            <input type="hidden" name="reservationComment2" value=" " />
+
 
             <div className="flex items-center justify-between lg:flex-row flex-col-reverse">
               <h3 className="text-greenBottle text-7xl font-medium font-schoolbell leading-none">
@@ -305,15 +309,6 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
                   className="w-full px-4 py-2 border border-greenBottle rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
                   required
                 />
-                <input
-                  type="hidden"
-                  name="eventDate"
-                  value={selectedDate ? selectedDate.toLocaleDateString("fr-FR", {
-                    day: "2-digit",
-                    month: "2-digit",
-                    year: "numeric",
-                  }) : ""}
-                />
               </div>
 
               <div className="relative lg:w-1/2 w-full">
@@ -372,9 +367,10 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
 
             <button
               type="submit"
-              className="bg-greenBottle hover:bg-transparent border hover:border-greenBottle text-white font-medium hover:text-greenBottle w-fit duration-200 px-4 py-3"
+              disabled={isSubmitting}
+              className="bg-greenBottle hover:bg-transparent border hover:border-greenBottle text-white font-medium hover:text-greenBottle w-fit duration-200 px-4 py-3 disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              {translation.submitButton}
+              {isSubmitting ? "Envoi en cours..." : translation.submitButton}
             </button>
           </form>
 

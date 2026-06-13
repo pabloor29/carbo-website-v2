@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import CustomHeroBannerVideo from "@/components/CustomHeroBannerVideo";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import ReservationMaintenance from "@/components/ReservationMaintenance";
 import React from "react";
+import ContactForm from "@/components/ContactForm";
+import { getReservationConfig } from "@/lib/reservation";
 
 export const metadata: Metadata = {
   title: "Réservation",
@@ -14,11 +15,18 @@ export const metadata: Metadata = {
 };
 
 async function ReservationPage() {
+  const config = await getReservationConfig();
+
   return (
     <>
       <Navbar />
       <CustomHeroBannerVideo title="Réservation" video="/img/deco/bg_video.mp4" />
-      <ReservationMaintenance />
+      <ContactForm
+        closedWeekdays={config.closedWeekdays}
+        closedDates={config.closedDates}
+        holidayPeriods={config.holidayPeriods}
+        timeSlots={config.timeSlots}
+      />
       <Footer />
     </>
   );
