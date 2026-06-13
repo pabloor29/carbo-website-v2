@@ -1,7 +1,6 @@
 "use client";
 
 import { Variants, motion } from "framer-motion";
-import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import React from "react";
 import CustomHeroBannerImage from "@/components/CustomHeroBannerImage";
@@ -171,7 +170,6 @@ function AboutPage() {
         </div>
 
       </div>
-      <Footer />
     </>
   );
 }
