@@ -9,6 +9,7 @@ interface ReservationInfo {
   nom?: string;
   commentaire?: string;
   email?: string;
+  phone?: string;
 }
 
 const CONFIRM_COMMENT = "Merci beaucoup pour votre réservation ! Nous sommes heureux de vous informer que votre demande a été confirmée. Nous avons hâte de vous accueillir au restaurant pour passer un agréable moment ensemble. À très bientôt !";
@@ -29,6 +30,7 @@ const ReservationDetails = () => {
       nom: params.get("nom") || "",
       commentaire: params.get("commentaire") || "",
       email: params.get("email") || "",
+      phone: params.get("phone") || "",
     });
   }, []);
 
@@ -98,6 +100,11 @@ const ReservationDetails = () => {
         <p className="text-gray-600 mt-1">
           <strong>✉️ Email :</strong> {reservationInfo.email || "Non précisé"}
         </p>
+        {reservationInfo.phone && (
+          <p className="text-gray-600 mt-1">
+            <strong>📞 Téléphone :</strong> {reservationInfo.phone}
+          </p>
+        )}
 
         <div className="mt-4 flex justify-center gap-4">
           <button

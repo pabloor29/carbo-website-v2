@@ -29,6 +29,7 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
       title: "Demande de réservation",
       fullNameLabel: "Nom complet",
       emailLabel: "Email",
+      phoneLabel: "Téléphone",
       numberOfGuestsLabel: "Nombre de personnes",
       eventDateLabel: "Date",
       eventTimeLabel: "Heure",
@@ -41,6 +42,7 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
       title: "Reservation request",
       fullNameLabel: "Full name",
       emailLabel: "Email",
+      phoneLabel: "Phone",
       numberOfGuestsLabel: "Number of people",
       eventDateLabel: "Date",
       eventTimeLabel: "Time",
@@ -53,6 +55,7 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
       title: "Solicitud de reserva",
       fullNameLabel: "Nombre completo",
       emailLabel: "Correo electrónico",
+      phoneLabel: "Teléfono",
       numberOfGuestsLabel: "Número de personas",
       eventDateLabel: "Fecha",
       eventTimeLabel: "Hora",
@@ -65,6 +68,7 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
       title: "Richiesta di prenotazione",
       fullNameLabel: "Nome completo",
       emailLabel: "Email",
+      phoneLabel: "Telefono",
       numberOfGuestsLabel: "Numero di persone",
       eventDateLabel: "Data",
       eventTimeLabel: "Ora",
@@ -81,6 +85,7 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
+    phone: "",
     numberOfGuests: "",
     eventDate: new Date(),
     eventTime: "",
@@ -96,7 +101,12 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
     setFormData({ ...formData, [name]: value });
   };
 
+  const isTodayBlocked = (): boolean => new Date().getHours() >= 19;
+
   const isDateClosed = (date: Date): boolean => {
+    const isToday = toLocalDateStr(date) === toLocalDateStr(new Date());
+    if (isToday && isTodayBlocked()) return true;
+
     if (closedWeekdays.includes(date.getDay())) return true;
 
     const dateStr = toLocalDateStr(date);
@@ -119,6 +129,8 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
       ? selectedDate.toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit", year: "numeric" })
       : "";
 
+    const eventDateISO = selectedDate ? toLocalDateStr(selectedDate) : "";
+
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
@@ -126,8 +138,10 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
         body: JSON.stringify({
           fullName: formData.fullName,
           email: formData.email,
+          phone: formData.phone,
           numberOfGuests: formData.numberOfGuests,
           eventDate: eventDateFormatted,
+          eventDateISO,
           eventTime: selectedValue,
           specialRequests: formData.specialRequests,
         }),
@@ -254,6 +268,24 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
               />
             </div>
 
+            <div>
+              <label
+                htmlFor="phone"
+                className="block font-medium text-greenBottle font-cormorantGaramond text-xl tracking-wide"
+              >
+                {translation.phoneLabel}
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                className="mt-1 block w-full px-4 py-2 border border-greenBottle rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
+                required
+              />
+            </div>
+
             <div className="bg-greenBottle/80 p-2 text-whiteSmokedBG">
               {translation.alertMaxNbGuests}
               <a
@@ -304,11 +336,24 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
                   }}
                   dateFormat="dd/MM/yyyy"
                   locale="fr"
-                  minDate={new Date()}
+                  minDate={isTodayBlocked() ? (() => { const d = new Date(); d.setDate(d.getDate() + 1); return d; })() : new Date()}
                   placeholderText="Sélectionner une date"
                   className="w-full px-4 py-2 border border-greenBottle rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
                   required
                 />
+                {isTodayBlocked() && (
+                  <div className="mt-3 p-3 bg-amber-50 border border-amber-200 rounded-md text-sm text-amber-800">
+                    <p className="font-medium mb-2">
+                      Pour toute réservation le jour même, merci d&apos;appeler le restaurant directement.
+                    </p>
+                    <a
+                      href="tel:+33434422749"
+                      className="inline-flex items-center gap-2 bg-greenBottle text-white px-4 py-2 rounded-md hover:bg-greenBottle/80 transition-colors duration-200 font-medium"
+                    >
+                      📞 Appeler le restaurant
+                    </a>
+                  </div>
+                )}
               </div>
 
               <div className="relative lg:w-1/2 w-full">
