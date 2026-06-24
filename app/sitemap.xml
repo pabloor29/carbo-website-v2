@@ -35,4 +35,25 @@
     <priority>0.70</priority>
   </url>
 
+  <!-- Mentions légales -->
+  <url>
+    <loc>https://www.restaurant-carbo.fr/mentions-legales</loc>
+    <lastmod>2026-06-24</lastmod>
+    <priority>0.30</priority>
+  </url>
+
+  <!-- Politique de confidentialité -->
+  <url>
+    <loc>https://www.restaurant-carbo.fr/politique-confidentialite</loc>
+    <lastmod>2026-06-24</lastmod>
+    <priority>0.30</priority>
+  </url>
+
+  <!-- CGU -->
+  <url>
+    <loc>https://www.restaurant-carbo.fr/cgu</loc>
+    <lastmod>2026-06-24</lastmod>
+    <priority>0.30</priority>
+  </url>
+
 </urlset>

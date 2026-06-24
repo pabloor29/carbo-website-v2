@@ -1,6 +1,8 @@
 import { Instagram, Mail, Phone } from "lucide-react";
 import React from "react";
+import Link from "next/link";
 import { getOpeningHours, DAYS_FR } from "@/lib/opening-hours";
+import CookieBanner from "./CookieBanner";
 
 async function Footer() {
   const hours = await getOpeningHours();
@@ -80,12 +82,27 @@ async function Footer() {
         </div>
       </div>
 
-      <a
-        href=""
-        className="text-[#023c18] hover:underline py-2 text-xs w-full bg-[#f7dad9] border-t-2 flex justify-center items-center"
+      <nav
+        aria-label="Liens légaux"
+        className="w-full bg-[#f7dad9] border-t-2 text-[#023c18] text-xs flex flex-wrap justify-center items-center gap-x-4 gap-y-2 py-3 px-4"
       >
-        © Pablo ORTEGA - 2025
-      </a>
+        <Link href="/mentions-legales" className="hover:underline">
+          Mentions légales
+        </Link>
+        <span aria-hidden="true">·</span>
+        <Link href="/politique-confidentialite" className="hover:underline">
+          Politique de confidentialité
+        </Link>
+        <span aria-hidden="true">·</span>
+        <Link href="/cgu" className="hover:underline">
+          CGU
+        </Link>
+        <span aria-hidden="true">·</span>
+        <span>
+          © <a href="https://resa-service.com" target="_blank" rel="noopener noreferrer" className="hover:underline">resa-service.com</a> - 2025
+        </span>
+      </nav>
+      <CookieBanner />
     </footer>
   );
 }
