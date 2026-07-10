@@ -37,7 +37,7 @@ function HeroBanner() {
         >
           <img src="img/logo/CARBO-LOGO-10.webp" alt="CARBO - Restaurant italien à Carcassonne" />
         </motion.h1>
-        <motion.h3
+        <motion.h2
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -45,7 +45,7 @@ function HeroBanner() {
           className="z-10 text-white/90 font-schoolbell lg:text-5xl text-2xl pt-10"
         >
           Restaurant italien · Carcassonne
-        </motion.h3>
+        </motion.h2>
       </div>
     </div>
   );

@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react"
+import { getOpeningHours, toSchemaOpeningHours } from "@/lib/opening-hours";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,11 +15,15 @@ export const metadata: Metadata = {
   keywords: [
     "restaurant Carcassonne",
     "restaurant italien Carcassonne",
+    "restaurant Carcassonne italien",
     "resto italien Carcassonne",
+    "italian restaurant Carcassonne",
     "cuisine italienne Carcassonne",
     "pâtes fraîches Carcassonne",
+    "carbonara Carcassonne",
     "nouveau restaurant italien Carcassonne",
     "restaurant 11000",
+    "restaurant italien Aude",
     "CARBO restaurant",
     "restaurant rue Trivalle Carcassonne",
     "meilleur restaurant Carcassonne",
@@ -34,6 +39,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "fr_FR",
+    alternateLocale: ["en_GB"],
     url: "https://www.restaurant-carbo.fr",
     siteName: "CARBO - Restaurant Italien Carcassonne",
     title: "CARBO - Restaurant Italien à Carcassonne",
@@ -88,11 +94,13 @@ const jsonLd = {
   },
   "servesCuisine": ["Italian", "Cuisine italienne"],
   "priceRange": "€€",
-  "openingHours": [
-    "Tu-Sa 12:00-14:00",
-    "Tu-Sa 18:00-22:00",
-  ],
+  "acceptsReservations": "https://www.restaurant-carbo.fr/reservation",
+  "hasMenu": "https://www.restaurant-carbo.fr/menu",
   "hasMap": "https://www.google.fr/maps/place/11+Rue+Trivalle,+11000+Carcassonne",
+  "areaServed": {
+    "@type": "City",
+    "name": "Carcassonne",
+  },
   "currenciesAccepted": "EUR",
   "paymentAccepted": "Cash, Credit Card",
   "amenityFeature": [
@@ -111,17 +119,27 @@ const jsonLd = {
   ],
 };
 
-export default function RootLayout({
+// Static fallback used only if the DB is unreachable at build/request time.
+const FALLBACK_OPENING_HOURS = ["Tu-Sa 12:00-14:00", "Tu-Sa 18:00-22:00"];
+
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const hours = await getOpeningHours();
+  const schemaHours = hours ? toSchemaOpeningHours(hours) : [];
+  const restaurantJsonLd = {
+    ...jsonLd,
+    openingHours: schemaHours.length > 0 ? schemaHours : FALLBACK_OPENING_HOURS,
+  };
+
   return (
     <html lang="fr">
       <body className={inter.className}>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(restaurantJsonLd) }}
         />
         {children}
         <Analytics />
