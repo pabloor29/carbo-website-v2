@@ -37,6 +37,7 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
       submitButton: "ENVOYER LA DEMANDE",
       afterSentMessage: `Merci pour votre demande de réservation ! Un email de confirmation vous sera envoyé sous peu. Veuillez vérifier votre boîte mail.`,
       alertMaxNbGuests: "Pour toute réservation supérieure à 10 couverts, veuillez nous contacter à cette adresse mail : ",
+      fillRequiredFields: "Veuillez remplir les champs obligatoires : nom, email, nombre de personnes, date et heure.",
     },
     en: {
       title: "Reservation request",
@@ -50,6 +51,7 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
       submitButton: "SEND REQUEST",
       afterSentMessage: `Thank you for your reservation request! A confirmation email will be sent to you shortly. Please check your inbox.`,
       alertMaxNbGuests: "For reservations of more than 10 covers, please contact us at this email address: ",
+      fillRequiredFields: "Please fill in the required fields: name, email, number of people, date and time.",
     },
     es: {
       title: "Solicitud de reserva",
@@ -63,6 +65,7 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
       submitButton: "ENVIAR SOLICITUD",
       afterSentMessage: `¡Gracias por su solicitud de reserva! Un correo electrónico de confirmación le será enviado en breve. Por favor, verifique su bandeja de entrada.`,
       alertMaxNbGuests: "Para reservas de más de 10 comensales, póngase en contacto con nosotros en esta dirección de correo electrónico: ",
+      fillRequiredFields: "Por favor complete los campos obligatorios: nombre, correo electrónico, número de personas, fecha y hora.",
     },
     it: {
       title: "Richiesta di prenotazione",
@@ -76,6 +79,7 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
       submitButton: "INVIA LA RICHIESTA",
       afterSentMessage: `Grazie per la tua richiesta di prenotazione! Una email di conferma ti sarà inviata a breve. Controlla la tua casella di posta.`,
       alertMaxNbGuests: "Per prenotazioni superiori a 10 coperti, vi preghiamo di contattarci all'indirizzo e-mail: ",
+      fillRequiredFields: "Compila i campi obbligatori: nome, email, numero di persone, data e ora.",
     },
   };
 
@@ -95,6 +99,7 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
   const [succeeded, setSucceeded] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -123,6 +128,19 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
 
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    setErrorMessage("");
+    if (
+      !formData.fullName.trim() ||
+      !formData.email.trim() ||
+      !formData.numberOfGuests.trim() ||
+      !selectedDate ||
+      !selectedValue.trim()
+    ) {
+      setErrorMessage(translation.fillRequiredFields);
+      return;
+    }
+
     setIsSubmitting(true);
 
     const eventDateFormatted = selectedDate
@@ -372,6 +390,7 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
                   className="mt-1 block w-full px-4 py-2 border border-greenBottle rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
                   placeholder="Choisir une option"
                   readOnly
+                  required
                 />
 
                 {isOpen && (
@@ -409,6 +428,12 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
                 className="mt-1 block w-full px-4 py-2 border border-greenBottle rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
               />
             </div>
+
+            {errorMessage && (
+              <p className="text-red-600 font-medium" role="alert">
+                {errorMessage}
+              </p>
+            )}
 
             <button
               type="submit"
