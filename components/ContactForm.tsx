@@ -1,6 +1,6 @@
 "use client";
 import { BadgeCheck } from "lucide-react";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
@@ -9,11 +9,16 @@ import { fr } from "date-fns/locale";
 registerLocale("fr", fr);
 setDefaultLocale("fr");
 
+type DayServices = { lunchOpen: boolean; dinnerOpen: boolean };
+
 type Props = {
   closedWeekdays: number[];
   closedDates: string[];
   holidayPeriods: { debut: string; fin: string }[];
   timeSlots: string[];
+  lunchSlots: string[];
+  dinnerSlots: string[];
+  dayServices: DayServices[];
 };
 
 function toLocalDateStr(date: Date): string {
@@ -23,7 +28,7 @@ function toLocalDateStr(date: Date): string {
   return `${y}-${m}-${d}`;
 }
 
-const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlots }: Props) => {
+const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlots, dinnerSlots, dayServices }: Props) => {
   const translations = {
     fr: {
       title: "Demande de réservation",
@@ -38,6 +43,21 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
       afterSentMessage: `Merci pour votre demande de réservation ! Un email de confirmation vous sera envoyé sous peu. Veuillez vérifier votre boîte mail.`,
       alertMaxNbGuests: "Pour toute réservation supérieure à 10 couverts, veuillez nous contacter à cette adresse mail : ",
       fillRequiredFields: "Veuillez remplir les champs obligatoires : nom, email, nombre de personnes, date et heure.",
+      serviceLabel: "Service",
+      serviceMidi: "midi",
+      serviceSoir: "soir",
+      callButton: "Appeler le restaurant",
+      todaySameDayMessage: "Pour toute réservation le jour même, merci d'appeler le restaurant directement.",
+      pickDateFirst: "Sélectionnez d'abord une date pour voir les créneaux disponibles.",
+      noSlots: "Aucun créneau disponible",
+      selectedLabel: "Sélectionné",
+      closedLabel: "Fermé",
+      duplicateTitle: "Réservation déjà existante",
+      duplicateIntro: "Une demande de réservation existe déjà pour cette adresse email le même jour, pour le service du {service}.",
+      duplicateCheckMail: "Merci de bien vérifier votre boîte mail ainsi que vos courriers indésirables (spams).",
+      duplicateNoMail: "Si vous n'avez reçu aucun email, veuillez appeler directement le restaurant :",
+      duplicateCall: "Appeler le restaurant",
+      duplicateClose: "Fermer",
     },
     en: {
       title: "Reservation request",
@@ -52,6 +72,21 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
       afterSentMessage: `Thank you for your reservation request! A confirmation email will be sent to you shortly. Please check your inbox.`,
       alertMaxNbGuests: "For reservations of more than 10 covers, please contact us at this email address: ",
       fillRequiredFields: "Please fill in the required fields: name, email, number of people, date and time.",
+      serviceLabel: "Service",
+      serviceMidi: "lunch",
+      serviceSoir: "dinner",
+      callButton: "Call the restaurant",
+      todaySameDayMessage: "For same-day reservations, please call the restaurant directly.",
+      pickDateFirst: "Select a date first to see available time slots.",
+      noSlots: "No slots available",
+      selectedLabel: "Selected",
+      closedLabel: "Closed",
+      duplicateTitle: "Reservation already exists",
+      duplicateIntro: "A reservation request already exists for this email on the same day, for the {service} service.",
+      duplicateCheckMail: "Please check your inbox as well as your spam folder.",
+      duplicateNoMail: "If you have not received any email, please call the restaurant directly:",
+      duplicateCall: "Call the restaurant",
+      duplicateClose: "Close",
     },
     es: {
       title: "Solicitud de reserva",
@@ -66,6 +101,21 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
       afterSentMessage: `¡Gracias por su solicitud de reserva! Un correo electrónico de confirmación le será enviado en breve. Por favor, verifique su bandeja de entrada.`,
       alertMaxNbGuests: "Para reservas de más de 10 comensales, póngase en contacto con nosotros en esta dirección de correo electrónico: ",
       fillRequiredFields: "Por favor complete los campos obligatorios: nombre, correo electrónico, número de personas, fecha y hora.",
+      serviceLabel: "Servicio",
+      serviceMidi: "mediodía",
+      serviceSoir: "noche",
+      callButton: "Llamar al restaurante",
+      todaySameDayMessage: "Para reservas en el mismo día, llame directamente al restaurante.",
+      pickDateFirst: "Seleccione primero una fecha para ver los horarios disponibles.",
+      noSlots: "No hay horarios disponibles",
+      selectedLabel: "Seleccionado",
+      closedLabel: "Cerrado",
+      duplicateTitle: "Ya existe una reserva",
+      duplicateIntro: "Ya existe una solicitud de reserva para este correo electrónico el mismo día, para el servicio de {service}.",
+      duplicateCheckMail: "Por favor, compruebe su bandeja de entrada y también su carpeta de spam.",
+      duplicateNoMail: "Si no ha recibido ningún correo, llame directamente al restaurante:",
+      duplicateCall: "Llamar al restaurante",
+      duplicateClose: "Cerrar",
     },
     it: {
       title: "Richiesta di prenotazione",
@@ -80,11 +130,28 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
       afterSentMessage: `Grazie per la tua richiesta di prenotazione! Una email di conferma ti sarà inviata a breve. Controlla la tua casella di posta.`,
       alertMaxNbGuests: "Per prenotazioni superiori a 10 coperti, vi preghiamo di contattarci all'indirizzo e-mail: ",
       fillRequiredFields: "Compila i campi obbligatori: nome, email, numero di persone, data e ora.",
+      serviceLabel: "Servizio",
+      serviceMidi: "pranzo",
+      serviceSoir: "cena",
+      callButton: "Chiama il ristorante",
+      todaySameDayMessage: "Per prenotazioni in giornata, chiama direttamente il ristorante.",
+      pickDateFirst: "Seleziona prima una data per vedere gli orari disponibili.",
+      noSlots: "Nessun orario disponibile",
+      selectedLabel: "Selezionato",
+      closedLabel: "Chiuso",
+      duplicateTitle: "Prenotazione già esistente",
+      duplicateIntro: "Esiste già una richiesta di prenotazione per questa email lo stesso giorno, per il servizio di {service}.",
+      duplicateCheckMail: "Si prega di controllare la casella di posta e anche la cartella spam.",
+      duplicateNoMail: "Se non hai ricevuto alcuna email, chiama direttamente il ristorante:",
+      duplicateCall: "Chiama il ristorante",
+      duplicateClose: "Chiudi",
     },
   };
 
   const [selectedLanguage, setSelectedLanguage] = useState("fr");
   const translation = translations[selectedLanguage as keyof typeof translations];
+
+  const localeMap: Record<string, string> = { fr: "fr-FR", en: "en-GB", es: "es-ES", it: "it-IT" };
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -99,7 +166,16 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
   const [succeeded, setSucceeded] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedValue, setSelectedValue] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [duplicateInfo, setDuplicateInfo] = useState<{
+    name: string;
+    email: string;
+    date: string;
+    time_slot: string;
+    covers: number;
+    service: "midi" | "soir";
+  } | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -125,6 +201,28 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
   };
 
   const formRef = useRef<HTMLFormElement>(null);
+
+  const handleSelect = (value: string) => {
+    setSelectedValue(value);
+    setErrorMessage("");
+  };
+
+  const currentServices: DayServices = selectedDate
+    ? dayServices[selectedDate.getDay()] ?? { lunchOpen: true, dinnerOpen: true }
+    : { lunchOpen: true, dinnerOpen: true };
+
+  const lunchEnabled = !!selectedDate && currentServices.lunchOpen;
+  const dinnerEnabled = !!selectedDate && currentServices.dinnerOpen;
+
+  // Clear a chosen slot if it belongs to a service that is closed on the new date.
+  useEffect(() => {
+    if (!selectedValue) return;
+    const inLunch = lunchSlots.includes(selectedValue);
+    const inDinner = dinnerSlots.includes(selectedValue);
+    if ((inLunch && !lunchEnabled) || (inDinner && !dinnerEnabled)) {
+      setSelectedValue("");
+    }
+  }, [selectedDate, lunchEnabled, dinnerEnabled, selectedValue, lunchSlots, dinnerSlots]);
 
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -165,6 +263,14 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
         }),
       });
 
+      if (res.status === 409) {
+        const data = await res.json();
+        if (data?.existing) {
+          setDuplicateInfo(data.existing);
+          return;
+        }
+      }
+
       if (!res.ok) throw new Error("Erreur serveur");
       setSucceeded(true);
     } catch (error) {
@@ -174,16 +280,54 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
     }
   };
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState("");
-
-  const handleSelect = (value: string) => {
-    setSelectedValue(value);
-    setIsOpen(false);
-  };
-
-  const toggleDropdown = () => {
-    setIsOpen((prev) => !prev);
+  const renderSlotGroup = (
+    slots: string[],
+    enabled: boolean,
+    open: boolean,
+    icon: string,
+    label: string,
+    keyPrefix: string
+  ) => {
+    if (slots.length === 0) return null;
+    return (
+      <div className={enabled ? "" : "opacity-50"}>
+        <div className="flex items-center justify-between gap-2 mb-2 pb-1 border-b border-greenBottle/20">
+          <div className="flex items-center gap-2">
+            <span aria-hidden>{icon}</span>
+            <p className="text-xs font-bold uppercase tracking-wider text-greenBottle">{label}</p>
+          </div>
+          {selectedDate && !open && (
+            <span className="text-[10px] uppercase tracking-wider text-red-600 font-semibold">
+              {translation.closedLabel}
+            </span>
+          )}
+        </div>
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 gap-2">
+          {slots.map((option) => {
+            const disabled = !enabled;
+            const isSelected = selectedValue === option;
+            return (
+              <button
+                type="button"
+                key={`${keyPrefix}-${option}`}
+                onClick={() => !disabled && handleSelect(option)}
+                disabled={disabled}
+                aria-disabled={disabled}
+                className={`px-2 py-1.5 rounded-md border text-sm transition ${
+                  isSelected
+                    ? "bg-greenBottle text-white border-greenBottle"
+                    : disabled
+                    ? "bg-gray-100 text-gray-400 border-gray-200 line-through cursor-not-allowed"
+                    : "bg-white text-greenBottle border-greenBottle hover:bg-greenBottle/10"
+                }`}
+              >
+                {option}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -232,8 +376,6 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
             onSubmit={sendEmail}
             className="space-y-8 lg:w-1/3 w-5/6 z-20"
           >
-
-
             <div className="flex items-center justify-between lg:flex-row flex-col-reverse">
               <h3 className="text-greenBottle text-7xl font-medium font-schoolbell leading-none">
                 {translation.title}
@@ -300,7 +442,6 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
                 value={formData.phone}
                 onChange={handleChange}
                 className="mt-1 block w-full px-4 py-2 border border-greenBottle rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
-                required
               />
             </div>
 
@@ -314,7 +455,7 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
               </a>
             </div>
 
-            <div className="flex flex-col lg:flex-row justify-between items-center md:items-end lg:space-x-10 space-y-8 lg:space-y-0">
+            <div className="flex flex-col lg:flex-row justify-between items-start lg:space-x-10 space-y-8 lg:space-y-0">
               <div className="lg:w-1/2 w-full">
                 <label
                   htmlFor="numberOfGuests"
@@ -359,55 +500,53 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
                   className="w-full px-4 py-2 border border-greenBottle rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
                   required
                 />
-                {isTodayBlocked() && (
-                  <div className="mt-3 p-3 bg-amber-50 border border-amber-200 rounded-md text-sm text-amber-800">
-                    <p className="font-medium mb-2">
-                      Pour toute réservation le jour même, merci d&apos;appeler le restaurant directement.
-                    </p>
-                    <a
-                      href="tel:+33434422749"
-                      className="inline-flex items-center gap-2 bg-greenBottle text-white px-4 py-2 rounded-md hover:bg-greenBottle/80 transition-colors duration-200 font-medium"
-                    >
-                      📞 Appeler le restaurant
-                    </a>
-                  </div>
-                )}
               </div>
+            </div>
 
-              <div className="relative lg:w-1/2 w-full">
+            {isTodayBlocked() && (
+              <div className="bg-amber-50 border border-amber-200 rounded-md px-4 py-3 flex flex-col gap-3">
+                <p className="text-sm text-amber-800 font-medium">
+                  {translation.todaySameDayMessage}
+                </p>
+                <a
+                  href="tel:+33434422749"
+                  className="inline-flex items-center justify-center gap-2 bg-greenBottle text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-greenBottle/80 transition-colors duration-200 self-start"
+                >
+                  📞 {translation.callButton}
+                </a>
+              </div>
+            )}
+
+            <div className="w-full">
+              <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 mb-3">
                 <label
                   htmlFor="eventTime"
-                  className="w-full block font-medium text-greenBottle font-cormorantGaramond text-xl tracking-wide"
+                  className="block font-medium text-greenBottle font-cormorantGaramond text-xl tracking-wide"
                 >
                   {translation.eventTimeLabel}
                 </label>
-                <input
-                  type="text"
-                  name="eventTime"
-                  value={selectedValue}
-                  onClick={toggleDropdown}
-                  onChange={(e) => setSelectedValue(e.target.value)}
-                  className="mt-1 block w-full px-4 py-2 border border-greenBottle rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
-                  placeholder="Choisir une option"
-                  readOnly
-                  required
-                />
+                {selectedValue && (
+                  <span className="inline-flex items-center gap-2 self-start sm:self-auto bg-greenBottle text-white text-sm font-medium px-3 py-1 rounded-full">
+                    {translation.selectedLabel} : {selectedValue}
+                  </span>
+                )}
+              </div>
 
-                {isOpen && (
-                  <ul
-                    className="absolute w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg z-10"
-                    style={{ maxHeight: "200px", overflowY: "auto" }}
-                  >
-                    {timeSlots.map((option, index) => (
-                      <li
-                        key={index}
-                        className="px-4 py-2 cursor-pointer hover:bg-indigo-100"
-                        onClick={() => handleSelect(option)}
-                      >
-                        {option}
-                      </li>
-                    ))}
-                  </ul>
+              <div className="border border-greenBottle rounded-md p-3 sm:p-4 bg-white">
+                {!selectedDate && (
+                  <p className="text-sm italic text-greenBottle/70 text-center pb-3 mb-3 border-b border-greenBottle/10">
+                    {translation.pickDateFirst}
+                  </p>
+                )}
+                {lunchSlots.length === 0 && dinnerSlots.length === 0 ? (
+                  <p className="text-sm italic text-greenBottle/70 text-center py-4">
+                    {translation.noSlots}
+                  </p>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                    {renderSlotGroup(lunchSlots, lunchEnabled, currentServices.lunchOpen, "🌞", translation.serviceMidi, "lunch")}
+                    {renderSlotGroup(dinnerSlots, dinnerEnabled, currentServices.dinnerOpen, "🌙", translation.serviceSoir, "dinner")}
+                  </div>
                 )}
               </div>
             </div>
@@ -450,6 +589,69 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
               alt=""
               className="z-30"
             />
+          </div>
+        </div>
+      )}
+
+      {duplicateInfo && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4"
+          role="dialog"
+          aria-modal="true"
+          onClick={() => setDuplicateInfo(null)}
+        >
+          <div
+            className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3 className="text-2xl font-semibold text-greenBottle">
+              {translation.duplicateTitle}
+            </h3>
+
+            <p className="mt-3 text-gray-700">
+              {translation.duplicateIntro.replace(
+                "{service}",
+                duplicateInfo.service === "midi" ? translation.serviceMidi : translation.serviceSoir
+              )}
+            </p>
+
+            <div className="mt-4 rounded-lg border border-greenBottle/30 bg-whiteSmokedBG p-4 text-sm text-gray-700 space-y-1">
+              <p><strong>{translation.fullNameLabel} :</strong> {duplicateInfo.name}</p>
+              <p><strong>{translation.emailLabel} :</strong> {duplicateInfo.email}</p>
+              <p>
+                <strong>{translation.eventDateLabel} :</strong>{" "}
+                {new Date(duplicateInfo.date + "T00:00:00").toLocaleDateString(
+                  localeMap[selectedLanguage] ?? "fr-FR",
+                  { weekday: "long", day: "numeric", month: "long", year: "numeric" }
+                )}{" "}
+                · {duplicateInfo.time_slot}
+              </p>
+              <p>
+                <strong>{translation.serviceLabel} :</strong>{" "}
+                {duplicateInfo.service === "midi" ? translation.serviceMidi : translation.serviceSoir}
+              </p>
+              <p><strong>{translation.numberOfGuestsLabel} :</strong> {duplicateInfo.covers}</p>
+            </div>
+
+            <p className="mt-4 text-gray-700">{translation.duplicateCheckMail}</p>
+            <p className="mt-3 text-gray-700">{translation.duplicateNoMail}</p>
+
+            <a
+              href="tel:+33434422749"
+              className="mt-3 inline-flex items-center gap-2 rounded-md bg-greenBottle px-4 py-2 font-medium text-white transition-colors duration-200 hover:bg-greenBottle/80"
+            >
+              📞 {translation.duplicateCall} — +33 4 34 42 27 49
+            </a>
+
+            <div className="mt-5 flex justify-end">
+              <button
+                type="button"
+                onClick={() => setDuplicateInfo(null)}
+                className="border border-greenBottle px-4 py-2 font-medium text-greenBottle duration-200 hover:bg-greenBottle hover:text-white"
+              >
+                {translation.duplicateClose}
+              </button>
+            </div>
           </div>
         </div>
       )}

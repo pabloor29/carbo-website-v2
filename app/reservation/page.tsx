@@ -26,6 +26,9 @@ async function ReservationPage() {
         closedDates={config.closedDates}
         holidayPeriods={config.holidayPeriods}
         timeSlots={config.timeSlots}
+        lunchSlots={config.lunchSlots}
+        dinnerSlots={config.dinnerSlots}
+        dayServices={config.dayServices}
       />
       <Footer />
     </>

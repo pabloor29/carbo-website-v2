@@ -1,6 +1,7 @@
 import { Resend } from "resend";
 import { createClient } from "@supabase/supabase-js";
 import { NextRequest, NextResponse } from "next/server";
+import { waitUntil } from "@vercel/functions";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -38,6 +39,53 @@ export async function POST(req: NextRequest) {
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!
   );
+
+  // Service split: time_slot before 17:00 => lunch ("midi"), otherwise dinner ("soir").
+  const SERVICE_CUTOFF_MIN = 17 * 60;
+  const serviceFromTime = (t: string): "midi" | "soir" => {
+    const [h, m] = (t ?? "").split(":").map(Number);
+    return h * 60 + (m || 0) < SERVICE_CUTOFF_MIN ? "midi" : "soir";
+  };
+
+  // Block duplicate: same email + same day + same service (midi/soir).
+  // Service filter pushed to the DB: time_slot is zero-padded "HH:MM", so a
+  // lexicographic compare against "17:00" == chronological. Fetches at most the
+  // one matching row (limit 1) instead of scanning + filtering in JS.
+  const incomingService = serviceFromTime(eventTime);
+  let dupQuery = supabase
+    .from("reservations")
+    .select("name, email, date, time_slot, covers")
+    .eq("restaurant_id", process.env.RESTAURANT_ID!)
+    .eq("date", eventDateISO)
+    .ilike("email", email)
+    .not("status", "in", "(refused,cancelled)")
+    .limit(1);
+  dupQuery =
+    incomingService === "midi"
+      ? dupQuery.lt("time_slot", "17:00")
+      : dupQuery.gte("time_slot", "17:00");
+
+  const { data: match, error: dupError } = await dupQuery.maybeSingle();
+
+  if (dupError) {
+    console.error("Supabase duplicate check error:", JSON.stringify(dupError));
+    // Non-blocking: fall through to normal insert if the check itself fails.
+  } else if (match) {
+    return NextResponse.json(
+      {
+        duplicate: true,
+        existing: {
+          name: match.name,
+          email: match.email,
+          date: match.date,
+          time_slot: match.time_slot,
+          covers: match.covers,
+          service: incomingService,
+        },
+      },
+      { status: 409 }
+    );
+  }
 
   const { error: dbError } = await supabase.from("reservations").insert({
     restaurant_id: process.env.RESTAURANT_ID!,
@@ -136,29 +184,30 @@ export async function POST(req: NextRequest) {
     </body></html>
   `;
 
-  const [restaurantResult, clientResult] = await Promise.all([
-    resend.emails.send({
-      from: FROM_EMAIL,
-      to: RESTAURANT_EMAIL,
-      subject: `Nouvelle réservation — ${fullName} — ${eventDate} à ${eventTime}`,
-      html: restaurantHtml,
-    }),
-    resend.emails.send({
-      from: FROM_EMAIL,
-      to: email,
-      subject: "Confirmation de votre demande de réservation — CARBO",
-      html: clientHtml,
-    }),
-  ]);
-
-  if (restaurantResult.error) {
-    console.error("Resend error (restaurant):", JSON.stringify(restaurantResult.error));
-    return NextResponse.json({ error: restaurantResult.error }, { status: 500 });
-  }
-  if (clientResult.error) {
-    console.error("Resend error (client):", JSON.stringify(clientResult.error));
-    return NextResponse.json({ error: clientResult.error }, { status: 500 });
-  }
+  // Emails sent in the background (waitUntil): the reservation is already saved,
+  // so we respond immediately instead of blocking the client on two Resend
+  // round trips. The function stays alive until these settle.
+  waitUntil(
+    Promise.all([
+      resend.emails.send({
+        from: FROM_EMAIL,
+        to: RESTAURANT_EMAIL,
+        subject: `Nouvelle réservation — ${fullName} — ${eventDate} à ${eventTime}`,
+        html: restaurantHtml,
+      }),
+      resend.emails.send({
+        from: FROM_EMAIL,
+        to: email,
+        subject: "Confirmation de votre demande de réservation — CARBO",
+        html: clientHtml,
+      }),
+    ])
+      .then(([restaurantResult, clientResult]) => {
+        if (restaurantResult.error) console.error("Resend error (restaurant):", JSON.stringify(restaurantResult.error));
+        if (clientResult.error) console.error("Resend error (client):", JSON.stringify(clientResult.error));
+      })
+      .catch((err) => console.error("Resend send failed:", err))
+  );
 
   return NextResponse.json({ success: true });
 }

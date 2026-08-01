@@ -2,11 +2,17 @@ import "server-only";
 import { createClient } from "@supabase/supabase-js";
 import { DayHours } from "./opening-hours";
 
+export type DayServices = { lunchOpen: boolean; dinnerOpen: boolean };
+
 export type ReservationConfig = {
   closedWeekdays: number[];
   closedDates: string[];
   holidayPeriods: { debut: string; fin: string }[];
   timeSlots: string[];
+  lunchSlots: string[];
+  dinnerSlots: string[];
+  // Indexed by JS Date.getDay() (0=Sun…6=Sat).
+  dayServices: DayServices[];
 };
 
 // DAYS_FR index (0=Lundi…6=Dimanche) → JS Date.getDay() (0=Sun, 1=Mon…6=Sat)
@@ -61,24 +67,33 @@ export async function getReservationConfig(): Promise<ReservationConfig> {
   const holidayPeriods: { debut: string; fin: string }[] = holidaysResult.data?.periods ?? [];
 
   const closedWeekdays: number[] = [];
-  const slotSet = new Set<string>();
+  const lunchSet = new Set<string>();
+  const dinnerSet = new Set<string>();
+  // Indexed by JS getDay(); default open, overwritten per configured day below.
+  const dayServices: DayServices[] = Array.from({ length: 7 }, () => ({
+    lunchOpen: true,
+    dinnerOpen: true,
+  }));
 
   if (hours) {
     hours.forEach((day, index) => {
+      const jsDay = DAYS_FR_TO_JS[index];
       if (day.closedDay) {
-        closedWeekdays.push(DAYS_FR_TO_JS[index]);
+        closedWeekdays.push(jsDay);
+        dayServices[jsDay] = { lunchOpen: false, dinnerOpen: false };
       } else {
-        if (!day.closedLunch && day.midi?.debut && day.midi?.fin) {
-          generateSlots(day.midi.debut, day.midi.fin).forEach((s) => slotSet.add(s));
-        }
-        if (!day.closedDiner && day.soir?.debut && day.soir?.fin) {
-          generateSlots(day.soir.debut, day.soir.fin).forEach((s) => slotSet.add(s));
-        }
+        const lunchOpen = !day.closedLunch && !!day.midi?.debut && !!day.midi?.fin;
+        const dinnerOpen = !day.closedDiner && !!day.soir?.debut && !!day.soir?.fin;
+        dayServices[jsDay] = { lunchOpen, dinnerOpen };
+        if (lunchOpen) generateSlots(day.midi.debut, day.midi.fin).forEach((s) => lunchSet.add(s));
+        if (dinnerOpen) generateSlots(day.soir.debut, day.soir.fin).forEach((s) => dinnerSet.add(s));
       }
     });
   }
 
-  const timeSlots = Array.from(slotSet).sort();
+  const lunchSlots = Array.from(lunchSet).sort();
+  const dinnerSlots = Array.from(dinnerSet).sort();
+  const timeSlots = Array.from(new Set([...lunchSlots, ...dinnerSlots])).sort();
 
-  return { closedWeekdays, closedDates, holidayPeriods, timeSlots };
+  return { closedWeekdays, closedDates, holidayPeriods, timeSlots, lunchSlots, dinnerSlots, dayServices };
 }
