@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const FROM_EMAIL = process.env.RESEND_FROM_EMAIL ?? "onboarding@resend.dev";
+const REPLY_TO_EMAIL = process.env.REPLY_TO_EMAIL ?? "restaurant.carbo11@gmail.com";
 
 const FONTS = `<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@700;800&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">`;
 const MONOGRAM = `<div style="display:inline-block;width:34px;height:34px;border-radius:10px;background:#13503B;text-align:center;line-height:34px;vertical-align:middle;"><span style="color:#F5F1E9;font-family:'Schibsted Grotesk',Arial,sans-serif;font-weight:800;font-size:17px;letter-spacing:-0.03em;">R</span></div>`;
@@ -74,11 +75,34 @@ export async function POST(req: NextRequest) {
     </body></html>
   `;
 
+  // Plain-text alternative (multipart): improves deliverability, HTML-only mail
+  // is penalised by spam filters. Content mirrors the HTML, layout untouched.
+  const text = [
+    badgeLabel,
+    badgeSub,
+    "",
+    "Réservation concernée",
+    `Client : ${fullName}`,
+    `Date : ${eventDate} à ${eventTime}`,
+    `Couverts : ${numberOfGuests} personne${parseInt(numberOfGuests, 10) > 1 ? "s" : ""}`,
+    "",
+    reservationComment,
+    ...(reservationComment2 ? ["", reservationComment2] : []),
+    "",
+    "Restaurant CARBO",
+    "11 rue Trivalle, Carcassonne",
+    "+33 4 34 42 27 49 · +33 6 29 10 42 17",
+    "",
+    "Propulsé par RESA · resa-service.com",
+  ].join("\n");
+
   const { error } = await resend.emails.send({
     from: FROM_EMAIL,
     to: email,
+    replyTo: REPLY_TO_EMAIL,
     subject: `Votre réservation chez CARBO est ${reservationType}`,
     html,
+    text,
   });
 
   if (error) {

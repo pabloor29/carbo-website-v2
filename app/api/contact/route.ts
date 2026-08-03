@@ -7,6 +7,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 const FROM_EMAIL = process.env.RESEND_FROM_EMAIL ?? "onboarding@resend.dev";
 const RESTAURANT_EMAIL = process.env.RESTAURANT_CONTACT_EMAIL ?? "restaurant.carbo11@gmail.com";
+const REPLY_TO_EMAIL = process.env.REPLY_TO_EMAIL ?? "restaurant.carbo11@gmail.com";
 
 function fmtDate(iso: string): string {
   const d = new Date(iso + "T00:00:00");
@@ -184,6 +185,46 @@ export async function POST(req: NextRequest) {
     </body></html>
   `;
 
+  const guestsLabel = `${numberOfGuests} personne${parseInt(numberOfGuests, 10) > 1 ? "s" : ""}`;
+
+  // Plain-text alternatives (multipart): improves deliverability, HTML-only mail
+  // is penalised by spam filters. Content mirrors the HTML, layout untouched.
+  const restaurantText = [
+    "Nouvelle demande de réservation — en attente de validation",
+    "",
+    `Nom : ${fullName}`,
+    `Email : ${email}`,
+    `Téléphone : ${phone ?? "—"}`,
+    `Date : ${dateLabel}`,
+    `Heure : ${eventTime}`,
+    `Couverts : ${guestsLabel}`,
+    ...(specialRequests ? [`Notes : ${specialRequests}`] : []),
+    "",
+    `Gérer la réservation : ${manageUrl}`,
+    "",
+    "Propulsé par RESA · resa-service.com",
+  ].join("\n");
+
+  const clientText = [
+    "Demande reçue · En attente de confirmation",
+    "Votre réservation sera confirmée dès que le restaurant l'aura validée.",
+    "",
+    "Récapitulatif",
+    `Nom : ${fullName}`,
+    `Email : ${email}`,
+    `Téléphone : ${phone ?? "—"}`,
+    `Date : ${dateLabel}`,
+    `Heure : ${eventTime}`,
+    `Couverts : ${guestsLabel}`,
+    ...(specialRequests ? [`Notes : ${specialRequests}`] : []),
+    "",
+    "Restaurant CARBO",
+    "11 rue Trivalle, Carcassonne",
+    "+33 4 34 42 27 49",
+    "",
+    "Propulsé par RESA · resa-service.com",
+  ].join("\n");
+
   // Emails sent in the background (waitUntil): the reservation is already saved,
   // so we respond immediately instead of blocking the client on two Resend
   // round trips. The function stays alive until these settle.
@@ -192,14 +233,18 @@ export async function POST(req: NextRequest) {
       resend.emails.send({
         from: FROM_EMAIL,
         to: RESTAURANT_EMAIL,
+        replyTo: email,
         subject: `Nouvelle réservation — ${fullName} — ${eventDate} à ${eventTime}`,
         html: restaurantHtml,
+        text: restaurantText,
       }),
       resend.emails.send({
         from: FROM_EMAIL,
         to: email,
+        replyTo: REPLY_TO_EMAIL,
         subject: "Confirmation de votre demande de réservation — CARBO",
         html: clientHtml,
+        text: clientText,
       }),
     ])
       .then(([restaurantResult, clientResult]) => {
