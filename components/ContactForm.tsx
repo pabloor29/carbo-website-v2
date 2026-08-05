@@ -200,6 +200,15 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlo
     return false;
   };
 
+  // On the current day, a slot whose start time already passed can't be booked.
+  const isPastSlot = (slot: string): boolean => {
+    if (!selectedDate) return false;
+    if (toLocalDateStr(selectedDate) !== toLocalDateStr(new Date())) return false;
+    const [h, m] = slot.split(":").map(Number);
+    const now = new Date();
+    return h * 60 + (m || 0) <= now.getHours() * 60 + now.getMinutes();
+  };
+
   const formRef = useRef<HTMLFormElement>(null);
 
   const handleSelect = (value: string) => {
@@ -214,12 +223,13 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlo
   const lunchEnabled = !!selectedDate && currentServices.lunchOpen;
   const dinnerEnabled = !!selectedDate && currentServices.dinnerOpen;
 
-  // Clear a chosen slot if it belongs to a service that is closed on the new date.
+  // Clear a chosen slot if it belongs to a service that is closed on the new date,
+  // or if it has already passed on the current day.
   useEffect(() => {
     if (!selectedValue) return;
     const inLunch = lunchSlots.includes(selectedValue);
     const inDinner = dinnerSlots.includes(selectedValue);
-    if ((inLunch && !lunchEnabled) || (inDinner && !dinnerEnabled)) {
+    if ((inLunch && !lunchEnabled) || (inDinner && !dinnerEnabled) || isPastSlot(selectedValue)) {
       setSelectedValue("");
     }
   }, [selectedDate, lunchEnabled, dinnerEnabled, selectedValue, lunchSlots, dinnerSlots]);
@@ -304,7 +314,7 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlo
         </div>
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 gap-2">
           {slots.map((option) => {
-            const disabled = !enabled;
+            const disabled = !enabled || isPastSlot(option);
             const isSelected = selectedValue === option;
             return (
               <button
