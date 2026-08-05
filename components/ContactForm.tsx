@@ -182,7 +182,7 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlo
     setFormData({ ...formData, [name]: value });
   };
 
-  const isTodayBlocked = (): boolean => new Date().getHours() >= 19;
+  const isTodayBlocked = (): boolean => new Date().getHours() >= 20;
 
   const isDateClosed = (date: Date): boolean => {
     const isToday = toLocalDateStr(date) === toLocalDateStr(new Date());
