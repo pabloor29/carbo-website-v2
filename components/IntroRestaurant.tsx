@@ -1,7 +1,8 @@
 "use client";
 
 import { Variants, motion } from "framer-motion";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 import React from "react";
 
 const imagesVariants: Variants = {
@@ -44,6 +45,7 @@ const imagesVariants: Variants = {
 };
 
 function IntroRestaurant() {
+  const t = useTranslations("intro");
   return (
     <div className="flex justify-center items-center py-24 bg-whiteSmokedBG">
       <div className="lg:w-3/5 flex flex-col lg:flex-row justify-center items-center lg:space-x-20 space-y-10">
@@ -69,16 +71,16 @@ function IntroRestaurant() {
           className="lg:w-1/2 w-5/6 flex flex-col space-y-8"
         >
           <h2 className="text-greenBottle text-5xl font-medium font-schoolbell leading-none">
-            Pâtes & tradition
+            {t("title")}
           </h2>
           <article className="text-greenBottle text-justify lg:text-left font-cormorantGaramond text-xl">
-            Chez CARBO, découvrez une cuisine italienne authentique au cœur de Carcassonne. Pâtes fraîches faites maison, recettes traditionnelles et produits de saison — une expérience généreuse et conviviale dans notre restaurant italien au 11 rue Trivalle.
+            {t("body")}
           </article>
           <Link
             href="/menu"
             className="bg-greenBottle hover:bg-transparent border hover:border-greenBottle text-white font-medium hover:text-greenBottle w-fit duration-200 px-4 py-3"
           >
-            Notre carte
+            {t("cta")}
           </Link>
         </motion.div>
       </div>

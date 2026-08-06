@@ -7,17 +7,26 @@ import Navbar from "@/components/Navbar";
 import FormulaPopup from "@/components/FormulaPopup";
 import { getMenuData, getMenuFileUrl } from "@/lib/menu";
 import React from "react";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { alternatesFor } from "@/lib/i18n-meta";
 
-export const metadata: Metadata = {
-  title: "Menu & Carte",
-  description: "Découvrez la carte de CARBO : pâtes fraîches maison, plats italiens authentiques, carte des vins et cocktails. Restaurant italien à Carcassonne, 11 rue Trivalle.",
-  alternates: {
-    canonical: "https://www.restaurant-carbo.fr/menu",
-  },
-};
+export async function generateMetadata({
+  params: { locale },
+}: {
+  params: { locale: string };
+}): Promise<Metadata> {
+  const t = await getTranslations({ locale, namespace: "meta" });
+  return {
+    title: t("menuTitle"),
+    description: t("menuDescription"),
+    alternates: alternatesFor(locale, "/menu"),
+  };
+}
 
-async function MenuPage() {
+async function MenuPage({ params: { locale } }: { params: { locale: string } }) {
+  setRequestLocale(locale);
   const categories = await getMenuData();
+  const heroTitle = (await getTranslations("hero"))("menu");
 
   const menusCategory = categories.find((c) => c.name === "Menus");
   const formuleCategory = categories.find((c) => c.name === "Formule du midi");
@@ -28,7 +37,7 @@ async function MenuPage() {
   return (
     <>
       <Navbar />
-      <CustomHeroBannerVideo title="Menu" video="/img/deco/bg_video.mp4" />
+      <CustomHeroBannerVideo title={heroTitle} video="/img/deco/bg_video.mp4" />
 
       <div className="w-full flex justify-center items-center bg-whiteSmokedBG">
         <div className="lg:w-3/5 w-11/12 flex flex-col items-center justify-center py-20 space-y-6">

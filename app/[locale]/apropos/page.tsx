@@ -3,7 +3,7 @@
 import { Variants, motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import React from "react";
-import CustomHeroBannerImage from "@/components/CustomHeroBannerImage";
+import { useTranslations } from "next-intl";
 import CustomHeroBannerVideo from "@/components/CustomHeroBannerVideo";
 
 const imagesVariants: Variants = {
@@ -47,10 +47,12 @@ const imagesVariants: Variants = {
 
 
 function AboutPage() {
+  const t = useTranslations("about");
+  const th = useTranslations("hero");
   return (
     <>
       <Navbar />
-      <CustomHeroBannerVideo title="Présentation" video="/img/deco/bg_video.mp4" />
+      <CustomHeroBannerVideo title={th("about")} video="/img/deco/bg_video.mp4" />
       <div className="z-40 flex flex-col justify-center items-center space-y-32 pt-12 pb-24 md:py-32 bg-whiteSmokedBG relative overflow-hidden">
         <div className="md:w-3/5 flex flex-col lg:flex-row justify-center items-center lg:space-x-20 space-y-4">
         <motion.div
@@ -74,10 +76,10 @@ function AboutPage() {
           className="lg:w-1/2 w-5/6"
         >
           <h3 className="text-greenBottle text-6xl lg:text-5xl font-medium font-schoolbell">
-            Les loulous
+            {t("loulousTitle")}
           </h3>
           <article className="text-greenBottle font-cormorantGaramond text-xl text-justify lg:text-left">
-            Nous, c’est Louis et Louisa, un jeune couple passionné de gastronomie et d’hospitalité. Notre aventure commence avec une idée simple : créer un lieu chaleureux où l’on partage des plats italiens authentiques, des cocktails raffinés et surtout, des moments conviviaux.  
+            {t("loulousBody")}
           </article>
         </motion.div>
         </div>
@@ -90,10 +92,10 @@ function AboutPage() {
           className="lg:w-1/2 w-5/6"
         >
           <h3 className="text-greenBottle text-6xl lg:text-5xl font-medium font-schoolbell">
-            La cheffe
+            {t("chefTitle")}
           </h3>
           <article className="text-greenBottle font-cormorantGaramond text-xl text-justify lg:text-left">
-            Derrière les fourneaux, Louisa, amoureuse de la cuisine italienne, prépare des plats faits maison inspirés des recettes traditionnelles et des produits de saison. 
+            {t("chefBody")}
           </article>
         </motion.div>
         <motion.div
@@ -132,10 +134,10 @@ function AboutPage() {
           className="lg:w-1/2 w-5/6"
         >
           <h3 className="text-greenBottle text-6xl lg:text-5xl font-medium font-schoolbell">
-            Le barman
+            {t("barmanTitle")}
           </h3>
           <article className="text-greenBottle font-cormorantGaramond text-xl text-justify lg:text-left">
-            En salle, Louis vous accueille avec le sourire, vous conseille sur les vins et élabore des cocktails soigneusement pensés pour accompagner vos repas. 
+            {t("barmanBody")}
           </article>
         </motion.div>
         </div>
@@ -148,10 +150,10 @@ function AboutPage() {
           className="lg:w-1/2 w-5/6"
         >
           <h3 className="text-greenBottle text-6xl lg:text-5xl font-medium font-schoolbell">
-            Carbo
+            {t("carboTitle")}
           </h3>
           <article className="text-greenBottle font-cormorantGaramond text-xl text-justify lg:text-left">
-            Et bien sûr, il y a Carbo, notre petite teckel et mascotte du restaurant, qui nous accompagne dans cette belle aventure.  
+            {t("carboBody")}
           </article>
         </motion.div>
         <motion.div

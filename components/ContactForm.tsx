@@ -4,9 +4,13 @@ import React, { useState, useRef, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
-import { fr } from "date-fns/locale";
+import { fr, enGB, es, it } from "date-fns/locale";
+import { useLocale } from "next-intl";
 
 registerLocale("fr", fr);
+registerLocale("en", enGB);
+registerLocale("es", es);
+registerLocale("it", it);
 setDefaultLocale("fr");
 
 type DayServices = { lunchOpen: boolean; dinnerOpen: boolean };
@@ -157,8 +161,10 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlo
     },
   };
 
-  const [selectedLanguage, setSelectedLanguage] = useState("fr");
-  const translation = translations[selectedLanguage as keyof typeof translations];
+  // Locale comes from the single site-wide language selector (navbar).
+  const rawLocale = useLocale();
+  const selectedLanguage = (["fr", "en", "es", "it"].includes(rawLocale) ? rawLocale : "fr") as keyof typeof translations;
+  const translation = translations[selectedLanguage];
 
   const localeMap: Record<string, string> = { fr: "fr-FR", en: "en-GB", es: "es-ES", it: "it-IT" };
 
@@ -275,7 +281,7 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlo
     setIsSubmitting(true);
 
     const eventDateFormatted = selectedDate
-      ? selectedDate.toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit", year: "numeric" })
+      ? selectedDate.toLocaleDateString(localeMap[selectedLanguage] ?? "fr-FR", { day: "2-digit", month: "2-digit", year: "numeric" })
       : "";
 
     const eventDateISO = selectedDate ? toLocalDateStr(selectedDate) : "";
@@ -293,6 +299,7 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlo
           eventDateISO,
           eventTime: selectedValue,
           specialRequests: formData.specialRequests,
+          locale: selectedLanguage,
         }),
       });
 
@@ -432,16 +439,6 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlo
               <h3 className="text-greenBottle text-7xl font-medium font-schoolbell leading-none">
                 {translation.title}
               </h3>
-              <select
-                value={selectedLanguage}
-                onChange={(e) => setSelectedLanguage(e.target.value)}
-                className="rounded-md border border-greenBottle text-xl px-2 py-1 ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-              >
-                <option value="fr">🇫🇷</option>
-                <option value="en">🇬🇧</option>
-                <option value="es">🇪🇸</option>
-                <option value="it">🇮🇹</option>
-              </select>
             </div>
 
             <div>
@@ -546,7 +543,7 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlo
                     return "";
                   }}
                   dateFormat="dd/MM/yyyy"
-                  locale="fr"
+                  locale={selectedLanguage}
                   minDate={isTodayBlocked() ? (() => { const d = new Date(); d.setDate(d.getDate() + 1); return d; })() : new Date()}
                   placeholderText="Sélectionner une date"
                   className="w-full px-4 py-2 border border-greenBottle rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"

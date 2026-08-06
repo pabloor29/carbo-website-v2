@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { X, UtensilsCrossed } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 type Props = {
   images: string[];
@@ -10,6 +11,7 @@ type Props = {
 };
 
 export default function FormulaPopup({ images, autoOpen = false, showFloatingButton = false }: Props) {
+  const t = useTranslations("formula");
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -27,10 +29,10 @@ export default function FormulaPopup({ images, autoOpen = false, showFloatingBut
         <button
           onClick={() => setOpen(true)}
           className="fixed bottom-8 right-8 z-40 flex items-center gap-2 bg-greenBottle text-white px-5 py-3 shadow-lg font-cormorantGaramond text-lg hover:bg-opacity-90 transition-all"
-          aria-label="Voir la formule du midi"
+          aria-label={t("button")}
         >
           <UtensilsCrossed size={20} />
-          Formule du midi
+          {t("button")}
         </button>
       )}
 
@@ -46,7 +48,7 @@ export default function FormulaPopup({ images, autoOpen = false, showFloatingBut
           >
             <div className="w-full flex items-center justify-between border-b-2 border-greenBottle pb-3 mb-2">
               <h2 className="font-schoolbell text-greenBottle text-3xl tracking-wide">
-                Formule du midi
+                {t("title")}
               </h2>
               <button
                 onClick={() => setOpen(false)}

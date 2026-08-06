@@ -5,22 +5,31 @@ import Navbar from "@/components/Navbar";
 import React from "react";
 import ContactForm from "@/components/ContactForm";
 import { getReservationConfig } from "@/lib/reservation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { alternatesFor } from "@/lib/i18n-meta";
 
-export const metadata: Metadata = {
-  title: "Réservation",
-  description: "Réservez votre table au restaurant CARBO à Carcassonne. Réservation en ligne rapide et simple. Restaurant italien, 11 rue Trivalle, Carcassonne.",
-  alternates: {
-    canonical: "https://www.restaurant-carbo.fr/reservation",
-  },
-};
+export async function generateMetadata({
+  params: { locale },
+}: {
+  params: { locale: string };
+}): Promise<Metadata> {
+  const t = await getTranslations({ locale, namespace: "meta" });
+  return {
+    title: t("reservationTitle"),
+    description: t("reservationDescription"),
+    alternates: alternatesFor(locale, "/reservation"),
+  };
+}
 
-async function ReservationPage() {
+async function ReservationPage({ params: { locale } }: { params: { locale: string } }) {
+  setRequestLocale(locale);
   const config = await getReservationConfig();
+  const heroTitle = (await getTranslations("hero"))("reservation");
 
   return (
     <>
       <Navbar />
-      <CustomHeroBannerVideo title="Réservation" video="/img/deco/bg_video.mp4" />
+      <CustomHeroBannerVideo title={heroTitle} video="/img/deco/bg_video.mp4" />
       <ContactForm
         closedWeekdays={config.closedWeekdays}
         closedDates={config.closedDates}

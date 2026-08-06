@@ -20,6 +20,46 @@ const MONOGRAM = `<div style="display:inline-block;width:34px;height:34px;border
 
 const WORDMARK = `<span style="font-family:'Schibsted Grotesk',Arial,sans-serif;font-weight:800;font-size:18px;letter-spacing:-0.03em;color:#16201B;vertical-align:middle;margin-left:9px;">RESA<span style="color:#C77E3A;">.</span></span>`;
 
+// Client confirmation email strings, per guest language.
+const EMAIL_T = {
+  fr: {
+    dateLocale: "fr-FR",
+    subject: "Confirmation de votre demande de réservation — CARBO",
+    heading: "Demande reçue · En attente de confirmation",
+    sub: "Votre réservation sera confirmée dès que le restaurant l'aura validée.",
+    recap: "Récapitulatif",
+    name: "Nom", email: "Email", phone: "Téléphone", date: "Date", time: "Heure", covers: "Couverts", notes: "Notes",
+    peopleSingular: "personne", peoplePlural: "personnes",
+  },
+  en: {
+    dateLocale: "en-GB",
+    subject: "Confirmation of your reservation request — CARBO",
+    heading: "Request received · Awaiting confirmation",
+    sub: "Your reservation will be confirmed as soon as the restaurant has validated it.",
+    recap: "Summary",
+    name: "Name", email: "Email", phone: "Phone", date: "Date", time: "Time", covers: "Guests", notes: "Notes",
+    peopleSingular: "person", peoplePlural: "people",
+  },
+  es: {
+    dateLocale: "es-ES",
+    subject: "Confirmación de su solicitud de reserva — CARBO",
+    heading: "Solicitud recibida · Pendiente de confirmación",
+    sub: "Su reserva se confirmará en cuanto el restaurante la haya validado.",
+    recap: "Resumen",
+    name: "Nombre", email: "Correo", phone: "Teléfono", date: "Fecha", time: "Hora", covers: "Comensales", notes: "Notas",
+    peopleSingular: "persona", peoplePlural: "personas",
+  },
+  it: {
+    dateLocale: "it-IT",
+    subject: "Conferma della tua richiesta di prenotazione — CARBO",
+    heading: "Richiesta ricevuta · In attesa di conferma",
+    sub: "La tua prenotazione sarà confermata non appena il ristorante l'avrà convalidata.",
+    recap: "Riepilogo",
+    name: "Nome", email: "Email", phone: "Telefono", date: "Data", time: "Ora", covers: "Coperti", notes: "Note",
+    peopleSingular: "persona", peoplePlural: "persone",
+  },
+} as const;
+
 function detailsTable(rows: [string, string][]): string {
   const last = rows.length - 1;
   return `
@@ -33,8 +73,12 @@ function detailsTable(rows: [string, string][]): string {
 }
 
 export async function POST(req: NextRequest) {
-  const { fullName, email, phone, numberOfGuests, eventDate, eventDateISO, eventTime, specialRequests } =
+  const { fullName, email, phone, numberOfGuests, eventDate, eventDateISO, eventTime, specialRequests, locale } =
     await req.json();
+
+  // Client language (from the site-wide selector). Persisted on the reservation
+  // so RESA can later answer confirm/refuse in the guest's language.
+  const lang: "fr" | "en" | "es" | "it" = ["fr", "en", "es", "it"].includes(locale) ? locale : "fr";
 
   const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -114,6 +158,7 @@ export async function POST(req: NextRequest) {
     phone: phone ?? "",
     notes: specialRequests ?? "",
     status: "pending",
+    locale: lang,
   });
 
   if (dbError) {
@@ -123,6 +168,7 @@ export async function POST(req: NextRequest) {
 
   const dateLabel = eventDateISO ? fmtDate(eventDateISO) : eventDate;
 
+  // Restaurant-facing email stays in French.
   const detailRows: [string, string][] = [
     ["Nom", fullName],
     ["Email", email],
@@ -131,6 +177,28 @@ export async function POST(req: NextRequest) {
     ["Heure", eventTime],
     ["Couverts", `${numberOfGuests} personne${parseInt(numberOfGuests, 10) > 1 ? "s" : ""}`],
     ...(specialRequests ? [["Notes", specialRequests] as [string, string]] : []),
+  ];
+
+  // Client-facing email is translated into the guest's language.
+  const clientDateLabel =
+    eventDateISO
+      ? new Date(eventDateISO + "T00:00:00").toLocaleDateString(EMAIL_T[lang].dateLocale, {
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        })
+      : eventDate;
+  const et = EMAIL_T[lang];
+  const guestsCount = parseInt(numberOfGuests, 10);
+  const clientRows: [string, string][] = [
+    [et.name, fullName],
+    [et.email, email],
+    [et.phone, phone ?? "—"],
+    [et.date, clientDateLabel],
+    [et.time, eventTime],
+    [et.covers, `${numberOfGuests} ${guestsCount > 1 ? et.peoplePlural : et.peopleSingular}`],
+    ...(specialRequests ? [[et.notes, specialRequests] as [string, string]] : []),
   ];
 
   const restaurantId = process.env.RESTAURANT_ID!;
@@ -179,13 +247,13 @@ export async function POST(req: NextRequest) {
         </div>
 
         <div style="background:#F6EBD6;border:1px solid rgba(185,125,43,0.25);border-radius:12px;padding:20px 24px;text-align:center;margin-bottom:24px;">
-          <p style="margin:0 0 4px;font-size:15px;font-weight:700;color:#B97D2B;">Demande reçue · En attente de confirmation</p>
-          <p style="margin:0;font-size:13px;color:#5E665E;">Votre réservation sera confirmée dès que le restaurant l'aura validée.</p>
+          <p style="margin:0 0 4px;font-size:15px;font-weight:700;color:#B97D2B;">${et.heading}</p>
+          <p style="margin:0;font-size:13px;color:#5E665E;">${et.sub}</p>
         </div>
 
         <div style="background:#FFFFFF;border:1px solid #E5DED0;border-radius:12px;padding:24px;margin-bottom:24px;">
-          <p style="margin:0 0 14px;font-size:11px;font-weight:600;letter-spacing:0.1em;color:#9A9587;text-transform:uppercase;">Récapitulatif</p>
-          ${detailsTable(detailRows)}
+          <p style="margin:0 0 14px;font-size:11px;font-weight:600;letter-spacing:0.1em;color:#9A9587;text-transform:uppercase;">${et.recap}</p>
+          ${detailsTable(clientRows)}
         </div>
 
         <div style="background:#FFFFFF;border:1px solid #E5DED0;border-radius:12px;padding:20px 24px;margin-bottom:24px;">
@@ -221,18 +289,19 @@ export async function POST(req: NextRequest) {
     "Propulsé par RESA · resa-service.com",
   ].join("\n");
 
+  const clientGuestsLabel = `${numberOfGuests} ${guestsCount > 1 ? et.peoplePlural : et.peopleSingular}`;
   const clientText = [
-    "Demande reçue · En attente de confirmation",
-    "Votre réservation sera confirmée dès que le restaurant l'aura validée.",
+    et.heading,
+    et.sub,
     "",
-    "Récapitulatif",
-    `Nom : ${fullName}`,
-    `Email : ${email}`,
-    `Téléphone : ${phone ?? "—"}`,
-    `Date : ${dateLabel}`,
-    `Heure : ${eventTime}`,
-    `Couverts : ${guestsLabel}`,
-    ...(specialRequests ? [`Notes : ${specialRequests}`] : []),
+    et.recap,
+    `${et.name} : ${fullName}`,
+    `${et.email} : ${email}`,
+    `${et.phone} : ${phone ?? "—"}`,
+    `${et.date} : ${clientDateLabel}`,
+    `${et.time} : ${eventTime}`,
+    `${et.covers} : ${clientGuestsLabel}`,
+    ...(specialRequests ? [`${et.notes} : ${specialRequests}`] : []),
     "",
     "Restaurant CARBO",
     "11 rue Trivalle, Carcassonne",
@@ -258,7 +327,7 @@ export async function POST(req: NextRequest) {
         from: FROM_EMAIL,
         to: email,
         replyTo: REPLY_TO_EMAIL,
-        subject: "Confirmation de votre demande de réservation — CARBO",
+        subject: et.subject,
         html: clientHtml,
         text: clientText,
       }),

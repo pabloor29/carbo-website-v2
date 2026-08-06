@@ -1,0 +1,89 @@
+{
+  "week": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "menu": "Menu",
+    "contact": "Contact",
+    "reservation": "Reservation",
+    "reserve": "Book",
+    "language": "Language"
+  },
+  "hero": {
+    "subtitle": "Italian restaurant · Carcassonne",
+    "contact": "Contact",
+    "menu": "Menu",
+    "about": "About us",
+    "reservation": "Reservation"
+  },
+  "intro": {
+    "title": "Pasta & tradition",
+    "body": "At CARBO, discover authentic Italian cuisine in the heart of Carcassonne. Fresh homemade pasta, traditional recipes and seasonal produce — a generous and warm experience in our Italian restaurant at 11 rue Trivalle.",
+    "cta": "Our menu"
+  },
+  "reviews": {
+    "title": "Google Reviews",
+    "previous": "Previous review",
+    "next": "Next review",
+    "goToReview": "Go to review {number}"
+  },
+  "contact": {
+    "hoursTitle": "Opening hours",
+    "closed": "Closed",
+    "unavailable": "Hours unavailable",
+    "paymentTitle": "Payment methods",
+    "creditCard": "Credit card",
+    "cash": "Cash",
+    "petsAllowed": "Pets allowed",
+    "wifi": "Wi-Fi access",
+    "langEnglish": "English",
+    "langSpanish": "Spanish",
+    "langItalian": "Italian",
+    "phonePrefix": "Phone"
+  },
+  "about": {
+    "loulousTitle": "The lovebirds",
+    "loulousBody": "We are Louis and Louisa, a young couple passionate about food and hospitality. Our adventure begins with a simple idea: to create a warm place to share authentic Italian dishes, refined cocktails and, above all, convivial moments.",
+    "chefTitle": "The chef",
+    "chefBody": "Behind the stove, Louisa, a lover of Italian cuisine, prepares homemade dishes inspired by traditional recipes and seasonal produce.",
+    "barmanTitle": "The barman",
+    "barmanBody": "In the dining room, Louis welcomes you with a smile, advises you on the wines and crafts carefully designed cocktails to accompany your meals.",
+    "carboTitle": "Carbo",
+    "carboBody": "And of course, there is Carbo, our little dachshund and the restaurant's mascot, who joins us on this wonderful adventure."
+  },
+  "footer": {
+    "hoursTitle": "Opening hours",
+    "addressTitle": "Address",
+    "contactTitle": "Contact",
+    "closed": "Closed",
+    "unavailable": "Hours unavailable",
+    "legal": "Legal notice",
+    "privacy": "Privacy policy",
+    "cgu": "Terms of use"
+  },
+  "cookie": {
+    "text": "This site uses anonymous, cookie-free analytics (Vercel Analytics). No advertising tracking cookie is set.",
+    "learnMore": "Learn more",
+    "gotIt": "Got it",
+    "close": "Close"
+  },
+  "formula": {
+    "title": "Lunch set menu",
+    "button": "Lunch set menu"
+  },
+  "meta": {
+    "defaultTitle": "CARBO - Italian Restaurant in Carcassonne",
+    "titleTemplate": "%s | CARBO - Italian Restaurant Carcassonne",
+    "description": "Discover CARBO, an Italian restaurant in Carcassonne. Fresh homemade pasta, authentic Italian cuisine, cocktails and wines. 11 rue Trivalle, Carcassonne. Book online!",
+    "homeTitle": "CARBO - Italian Restaurant in Carcassonne | Fresh Homemade Pasta",
+    "homeDescription": "CARBO — Italian restaurant in Carcassonne, 11 rue Trivalle. Fresh homemade pasta, authentic Italian cuisine, cocktails and wine list. Open Tue-Sat. Book online!",
+    "contactTitle": "Contact & Opening hours",
+    "contactDescription": "Contact the CARBO restaurant in Carcassonne. 11 rue Trivalle, 11000 Carcassonne. Tel: +33 4 34 42 27 49. Open Tuesday to Saturday 12pm-2pm and 6pm-10pm.",
+    "menuTitle": "Menu",
+    "menuDescription": "Discover the CARBO menu: fresh homemade pasta, authentic Italian dishes, wine list and cocktails. Italian restaurant in Carcassonne, 11 rue Trivalle.",
+    "aboutTitle": "About us",
+    "aboutDescription": "Meet the CARBO team, an Italian restaurant in Carcassonne: Louis, Louisa the chef, and Carbo the mascot. Authentic Italian cuisine, fresh homemade pasta.",
+    "reservationTitle": "Reservation",
+    "reservationDescription": "Book your table at the CARBO restaurant in Carcassonne. Fast and simple online booking. Italian restaurant, 11 rue Trivalle, Carcassonne."
+  }
+}

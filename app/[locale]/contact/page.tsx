@@ -1,7 +1,6 @@
 export const dynamic = 'force-dynamic';
 
 import type { Metadata } from "next";
-import CustomHeroBannerImage from "@/components/CustomHeroBannerImage";
 import CustomHeroBannerVideo from "@/components/CustomHeroBannerVideo";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
@@ -11,25 +10,36 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Banknote, CreditCard, Coins, Ticket } from "lucide-react";
+import { CreditCard, Coins } from "lucide-react";
 import React from "react";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getOpeningHours, DAYS_FR } from "@/lib/opening-hours";
+import { alternatesFor } from "@/lib/i18n-meta";
 
-export const metadata: Metadata = {
-  title: "Contact & Horaires",
-  description: "Contactez le restaurant CARBO à Carcassonne. 11 rue Trivalle, 11000 Carcassonne. Tél : +33 4 34 42 27 49. Ouvert mardi au samedi 12h-14h et 18h-22h.",
-  alternates: {
-    canonical: "https://www.restaurant-carbo.fr/contact",
-  },
-};
+export async function generateMetadata({
+  params: { locale },
+}: {
+  params: { locale: string };
+}): Promise<Metadata> {
+  const t = await getTranslations({ locale, namespace: "meta" });
+  return {
+    title: t("contactTitle"),
+    description: t("contactDescription"),
+    alternates: alternatesFor(locale, "/contact"),
+  };
+}
 
-async function ContactPage() {
+async function ContactPage({ params: { locale } }: { params: { locale: string } }) {
+  setRequestLocale(locale);
   const hours = await getOpeningHours();
+  const t = await getTranslations("contact");
+  const week = (await getTranslations()).raw("week") as string[];
+  const heroTitle = (await getTranslations("hero"))("contact");
 
   return (
     <>
       <Navbar />
-      <CustomHeroBannerVideo title="Contact" video="/img/deco/bg_video.mp4" />
+      <CustomHeroBannerVideo title={heroTitle} video="/img/deco/bg_video.mp4" />
 
       <div className="w-full flex flex-col lg:flex-row justify-between lg:space-x-8 space-y-8 lg:space-y-0 bg-whiteSmokedBG">
         <div className="lg:h-[750px] h-[1100px] lg:w-1/2 lg:pl-16 space-y-8 flex flex-col items-center justify-center lg:py-12">
@@ -43,11 +53,11 @@ async function ContactPage() {
                 >
                   11 rue Trivalle, 11000 Carcassonne
                 </a>
-                <a href="tel:+33434422749">Fixe : +33 4 34 42 27 49</a>
+                <a href="tel:+33434422749">{t("phonePrefix")} : +33 4 34 42 27 49</a>
               </div>
 
               <div className="text-greenBottle w-full flex flex-col space-y-3 items-center lg:items-start justify-center">
-                <p>Modes de paiment</p>
+                <p>{t("paymentTitle")}</p>
                 <div className="flex items-center space-x-10">
                   <TooltipProvider>
                     <Tooltip>
@@ -57,7 +67,7 @@ async function ContactPage() {
                         </div>
                       </TooltipTrigger>
                       <TooltipContent className="w-full bg-greenBottle rounded-xl text-white">
-                        <p>Carte de crédit</p>
+                        <p>{t("creditCard")}</p>
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
@@ -70,7 +80,7 @@ async function ContactPage() {
                         </div>
                       </TooltipTrigger>
                       <TooltipContent className="w-full bg-greenBottle rounded-xl text-white">
-                        <p>Espèces</p>
+                        <p>{t("cash")}</p>
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
@@ -79,17 +89,17 @@ async function ContactPage() {
               </div>
 
               <div className="text-greenBottle flex w-full flex-col justify-center items-center lg:items-start space-y-3">
-                <p>Animaux acceptés</p>
-                <p>Accès Internet Wifi</p>
-                <p>🇬🇧 Anglais</p>
-                <p>🇪🇸 Espagnol</p>
-                <p>🇮🇹 Italien</p>
+                <p>{t("petsAllowed")}</p>
+                <p>{t("wifi")}</p>
+                <p>🇬🇧 {t("langEnglish")}</p>
+                <p>🇪🇸 {t("langSpanish")}</p>
+                <p>🇮🇹 {t("langItalian")}</p>
               </div>
             </div>
 
             <div className="text-greenBottle border-4 md:w-fit mt-12 lg:mt-0 px-8 py-4 border-greenBottle flex flex-col items-center justify-center space-y-6 shadow-[-15px_15px_0_0_#192C1D]">
               <h3 className="w-full text-center z-10 text-greenBottle border-b-4 border-greenBottle font-schoolbell md:text-7xl text-5xl tracking-wide">
-                Horaires
+                {t("hoursTitle")}
               </h3>
 
               {hours ? (
@@ -98,9 +108,9 @@ async function ContactPage() {
                     const d = hours[i];
                     return (
                       <li key={day} className="flex justify-between gap-8 text-base">
-                        <span className="font-bold">{day}</span>
+                        <span className="font-bold">{week[i] ?? day}</span>
                         {d.closedDay ? (
-                          <span className="italic md:text-base text-sm">Fermé</span>
+                          <span className="italic md:text-base text-sm">{t("closed")}</span>
                         ) : (
                           <div className="flex flex-col items-end">
                             {!d.closedLunch && d.midi.debut && (
@@ -116,7 +126,7 @@ async function ContactPage() {
                   })}
                 </ul>
               ) : (
-                <p className="font-cormorantGaramond text-xl">Horaires non disponibles</p>
+                <p className="font-cormorantGaramond text-xl">{t("unavailable")}</p>
               )}
             </div>
           </div>
@@ -127,7 +137,7 @@ async function ContactPage() {
               title="Google Map"
               width="100%"
               height="100%"
-              style={{ 
+              style={{
                 border: 10,
                 padding: 40,
                 borderRadius: 50

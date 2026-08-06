@@ -1,6 +1,7 @@
 "use client";
 
 import { Variants, motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import React from "react";
 
 const textVariants: Variants = {
@@ -19,6 +20,7 @@ const textVariants: Variants = {
 };
 
 function HeroBanner() {
+  const t = useTranslations("hero");
   return (
     <div className="h-screen w-full flex justify-center items-center bg-gradient-to-b from-[#001F50] to-[#002E6D]">
       <div className="h-screen w-full flex justify-center items-center bg-black/60 absolute z-10"></div>
@@ -44,7 +46,7 @@ function HeroBanner() {
           variants={textVariants}
           className="z-10 text-white/90 font-schoolbell lg:text-5xl text-2xl pt-10"
         >
-          Restaurant italien · Carcassonne
+          {t("subtitle")}
         </motion.h2>
       </div>
     </div>

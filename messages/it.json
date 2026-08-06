@@ -1,0 +1,89 @@
+{
+  "week": ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato", "Domenica"],
+  "nav": {
+    "home": "Home",
+    "about": "Chi siamo",
+    "menu": "Menù",
+    "contact": "Contatti",
+    "reservation": "Prenotazione",
+    "reserve": "Prenota",
+    "language": "Lingua"
+  },
+  "hero": {
+    "subtitle": "Ristorante italiano · Carcassonne",
+    "contact": "Contatti",
+    "menu": "Menù",
+    "about": "Presentazione",
+    "reservation": "Prenotazione"
+  },
+  "intro": {
+    "title": "Pasta & tradizione",
+    "body": "Da CARBO, scopri un'autentica cucina italiana nel cuore di Carcassonne. Pasta fresca fatta in casa, ricette tradizionali e prodotti di stagione — un'esperienza generosa e conviviale nel nostro ristorante italiano in 11 rue Trivalle.",
+    "cta": "Il nostro menù"
+  },
+  "reviews": {
+    "title": "Recensioni Google",
+    "previous": "Recensione precedente",
+    "next": "Recensione successiva",
+    "goToReview": "Vai alla recensione {number}"
+  },
+  "contact": {
+    "hoursTitle": "Orari",
+    "closed": "Chiuso",
+    "unavailable": "Orari non disponibili",
+    "paymentTitle": "Metodi di pagamento",
+    "creditCard": "Carta di credito",
+    "cash": "Contanti",
+    "petsAllowed": "Animali ammessi",
+    "wifi": "Accesso Internet Wi-Fi",
+    "langEnglish": "Inglese",
+    "langSpanish": "Spagnolo",
+    "langItalian": "Italiano",
+    "phonePrefix": "Telefono"
+  },
+  "about": {
+    "loulousTitle": "I piccioncini",
+    "loulousBody": "Siamo Louis e Louisa, una giovane coppia appassionata di gastronomia e ospitalità. La nostra avventura inizia con un'idea semplice: creare un luogo accogliente dove condividere piatti italiani autentici, cocktail raffinati e, soprattutto, momenti conviviali.",
+    "chefTitle": "La chef",
+    "chefBody": "Dietro ai fornelli, Louisa, innamorata della cucina italiana, prepara piatti fatti in casa ispirati alle ricette tradizionali e ai prodotti di stagione.",
+    "barmanTitle": "Il barman",
+    "barmanBody": "In sala, Louis vi accoglie con il sorriso, vi consiglia sui vini ed elabora cocktail studiati con cura per accompagnare i vostri pasti.",
+    "carboTitle": "Carbo",
+    "carboBody": "E naturalmente c'è Carbo, il nostro piccolo bassotto e mascotte del ristorante, che ci accompagna in questa bella avventura."
+  },
+  "footer": {
+    "hoursTitle": "Orari",
+    "addressTitle": "Indirizzo",
+    "contactTitle": "Contatti",
+    "closed": "Chiuso",
+    "unavailable": "Orari non disponibili",
+    "legal": "Note legali",
+    "privacy": "Informativa sulla privacy",
+    "cgu": "Condizioni d'uso"
+  },
+  "cookie": {
+    "text": "Questo sito utilizza una misurazione del pubblico anonima e senza cookie (Vercel Analytics). Non viene installato alcun cookie di tracciamento pubblicitario.",
+    "learnMore": "Scopri di più",
+    "gotIt": "Ho capito",
+    "close": "Chiudi"
+  },
+  "formula": {
+    "title": "Menù pranzo",
+    "button": "Menù pranzo"
+  },
+  "meta": {
+    "defaultTitle": "CARBO - Ristorante Italiano a Carcassonne",
+    "titleTemplate": "%s | CARBO - Ristorante Italiano Carcassonne",
+    "description": "Scopri CARBO, ristorante italiano a Carcassonne. Pasta fresca fatta in casa, autentica cucina italiana, cocktail e vini. 11 rue Trivalle, Carcassonne. Prenota online!",
+    "homeTitle": "CARBO - Ristorante Italiano a Carcassonne | Pasta Fresca Fatta in Casa",
+    "homeDescription": "CARBO — ristorante italiano a Carcassonne, 11 rue Trivalle. Pasta fresca fatta in casa, autentica cucina italiana, cocktail e carta dei vini. Aperto mar-sab. Prenota online!",
+    "contactTitle": "Contatti e Orari",
+    "contactDescription": "Contatta il ristorante CARBO a Carcassonne. 11 rue Trivalle, 11000 Carcassonne. Tel: +33 4 34 42 27 49. Aperto da martedì a sabato 12-14 e 18-22.",
+    "menuTitle": "Menù",
+    "menuDescription": "Scopri il menù di CARBO: pasta fresca fatta in casa, autentici piatti italiani, carta dei vini e cocktail. Ristorante italiano a Carcassonne, 11 rue Trivalle.",
+    "aboutTitle": "Presentazione",
+    "aboutDescription": "Incontra il team di CARBO, ristorante italiano a Carcassonne: Louis, Louisa la chef e Carbo la mascotte. Autentica cucina italiana, pasta fresca fatta in casa.",
+    "reservationTitle": "Prenotazione",
+    "reservationDescription": "Prenota il tuo tavolo al ristorante CARBO di Carcassonne. Prenotazione online rapida e semplice. Ristorante italiano, 11 rue Trivalle, Carcassonne."
+  }
+}
