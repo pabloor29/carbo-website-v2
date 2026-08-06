@@ -1,5 +1,5 @@
 "use client";
-import { BadgeCheck } from "lucide-react";
+import { BadgeCheck, AlertTriangle } from "lucide-react";
 import React, { useState, useRef, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -42,6 +42,7 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlo
       specialRequestsLabel: "Demandes spéciales",
       submitButton: "ENVOYER LA DEMANDE",
       afterSentMessage: `Merci pour votre demande de réservation ! Un email de confirmation vous sera envoyé sous peu. Veuillez vérifier votre boîte mail.`,
+      spamWarning: `Pensez à vérifier votre dossier courrier indésirable (spam) : notre email de confirmation peut parfois s'y glisser.`,
       alertMaxNbGuests: "Pour toute réservation supérieure à 10 couverts, veuillez nous contacter à cette adresse mail : ",
       fillRequiredFields: "Veuillez remplir les champs obligatoires : nom, email, nombre de personnes, date et heure.",
       serviceLabel: "Service",
@@ -72,6 +73,7 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlo
       specialRequestsLabel: "Special requests",
       submitButton: "SEND REQUEST",
       afterSentMessage: `Thank you for your reservation request! A confirmation email will be sent to you shortly. Please check your inbox.`,
+      spamWarning: `Be sure to check your spam / junk folder — our confirmation email sometimes ends up there.`,
       alertMaxNbGuests: "For reservations of more than 10 covers, please contact us at this email address: ",
       fillRequiredFields: "Please fill in the required fields: name, email, number of people, date and time.",
       serviceLabel: "Service",
@@ -102,6 +104,7 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlo
       specialRequestsLabel: "Solicitudes especiales",
       submitButton: "ENVIAR SOLICITUD",
       afterSentMessage: `¡Gracias por su solicitud de reserva! Un correo electrónico de confirmación le será enviado en breve. Por favor, verifique su bandeja de entrada.`,
+      spamWarning: `No olvide revisar su carpeta de correo no deseado (spam): nuestro correo de confirmación puede acabar allí.`,
       alertMaxNbGuests: "Para reservas de más de 10 comensales, póngase en contacto con nosotros en esta dirección de correo electrónico: ",
       fillRequiredFields: "Por favor complete los campos obligatorios: nombre, correo electrónico, número de personas, fecha y hora.",
       serviceLabel: "Servicio",
@@ -132,6 +135,7 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlo
       specialRequestsLabel: "Richieste speciali",
       submitButton: "INVIA LA RICHIESTA",
       afterSentMessage: `Grazie per la tua richiesta di prenotazione! Una email di conferma ti sarà inviata a breve. Controlla la tua casella di posta.`,
+      spamWarning: `Ricordati di controllare la cartella spam / posta indesiderata: la nostra email di conferma potrebbe finire lì.`,
       alertMaxNbGuests: "Per prenotazioni superiori a 10 coperti, vi preghiamo di contattarci all'indirizzo e-mail: ",
       fillRequiredFields: "Compila i campi obbligatori: nome, email, numero di persone, data e ora.",
       serviceLabel: "Servizio",
@@ -221,6 +225,14 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlo
   };
 
   const formRef = useRef<HTMLFormElement>(null);
+  const successRef = useRef<HTMLDivElement>(null);
+
+  // Bring the confirmation message into view so the user sees it without scrolling.
+  useEffect(() => {
+    if (succeeded) {
+      successRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [succeeded]);
 
   const handleSelect = (value: string) => {
     setSelectedValue(value);
@@ -389,11 +401,25 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlo
         `}
       </style>
       {succeeded ? (
-        <div className="flex flex-col lg:flex-row w-full h-96 justify-center px-4 items-center lg:space-x-3 text-greenBottle bg-whiteSmokedBG">
-          <BadgeCheck />
-          <p className="text-xl italic text-center">
-            {translation.afterSentMessage}
-          </p>
+        <div
+          ref={successRef}
+          className="flex flex-col w-full min-h-[24rem] justify-center items-center gap-6 px-4 py-16 scroll-mt-28 text-greenBottle bg-whiteSmokedBG"
+        >
+          <div className="flex flex-col lg:flex-row items-center gap-3 lg:space-x-3 max-w-2xl">
+            <BadgeCheck className="flex-shrink-0" />
+            <p className="text-xl italic text-center">
+              {translation.afterSentMessage}
+            </p>
+          </div>
+          <div
+            role="alert"
+            className="flex items-start gap-3 w-full max-w-2xl bg-amber-50 border-2 border-amber-300 rounded-lg px-5 py-4 shadow-sm"
+          >
+            <AlertTriangle className="flex-shrink-0 mt-0.5 text-amber-600" size={22} strokeWidth={2} />
+            <p className="text-sm sm:text-base font-semibold not-italic text-left text-amber-900">
+              {translation.spamWarning}
+            </p>
+          </div>
         </div>
       ) : (
         <div className="relative flex flex-col lg:flex-row justify-center items-center lg:space-x-32 space-y-20 py-16 bg-whiteSmokedBG">
