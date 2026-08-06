@@ -19,6 +19,7 @@ type Props = {
   lunchSlots: string[];
   dinnerSlots: string[];
   dayServices: DayServices[];
+  disabledSlotsByDate: Record<string, string[]>;
 };
 
 function toLocalDateStr(date: Date): string {
@@ -28,7 +29,7 @@ function toLocalDateStr(date: Date): string {
   return `${y}-${m}-${d}`;
 }
 
-const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlots, dinnerSlots, dayServices }: Props) => {
+const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlots, dinnerSlots, dayServices, disabledSlotsByDate }: Props) => {
   const translations = {
     fr: {
       title: "Demande de réservation",
@@ -50,6 +51,7 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlo
       todaySameDayMessage: "Pour toute réservation le jour même, merci d'appeler le restaurant directement.",
       pickDateFirst: "Sélectionnez d'abord une date pour voir les créneaux disponibles.",
       noSlots: "Aucun créneau disponible",
+      slotUnavailable: "Ce créneau vient d'être complet. Merci de choisir un autre horaire.",
       selectedLabel: "Sélectionné",
       closedLabel: "Fermé",
       duplicateTitle: "Réservation déjà existante",
@@ -79,6 +81,7 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlo
       todaySameDayMessage: "For same-day reservations, please call the restaurant directly.",
       pickDateFirst: "Select a date first to see available time slots.",
       noSlots: "No slots available",
+      slotUnavailable: "This slot has just filled up. Please choose another time.",
       selectedLabel: "Selected",
       closedLabel: "Closed",
       duplicateTitle: "Reservation already exists",
@@ -108,6 +111,7 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlo
       todaySameDayMessage: "Para reservas en el mismo día, llame directamente al restaurante.",
       pickDateFirst: "Seleccione primero una fecha para ver los horarios disponibles.",
       noSlots: "No hay horarios disponibles",
+      slotUnavailable: "Este horario acaba de completarse. Por favor elija otra hora.",
       selectedLabel: "Seleccionado",
       closedLabel: "Cerrado",
       duplicateTitle: "Ya existe una reserva",
@@ -137,6 +141,7 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlo
       todaySameDayMessage: "Per prenotazioni in giornata, chiama direttamente il ristorante.",
       pickDateFirst: "Seleziona prima una data per vedere gli orari disponibili.",
       noSlots: "Nessun orario disponibile",
+      slotUnavailable: "Questo orario è appena stato completato. Scegli un altro orario.",
       selectedLabel: "Selezionato",
       closedLabel: "Chiuso",
       duplicateTitle: "Prenotazione già esistente",
@@ -209,6 +214,12 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlo
     return h * 60 + (m || 0) <= now.getHours() * 60 + now.getMinutes();
   };
 
+  // A slot the restaurant punctually disabled for the selected date.
+  const isOverriddenSlot = (slot: string): boolean => {
+    if (!selectedDate) return false;
+    return disabledSlotsByDate[toLocalDateStr(selectedDate)]?.includes(slot) ?? false;
+  };
+
   const formRef = useRef<HTMLFormElement>(null);
 
   const handleSelect = (value: string) => {
@@ -229,10 +240,10 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlo
     if (!selectedValue) return;
     const inLunch = lunchSlots.includes(selectedValue);
     const inDinner = dinnerSlots.includes(selectedValue);
-    if ((inLunch && !lunchEnabled) || (inDinner && !dinnerEnabled) || isPastSlot(selectedValue)) {
+    if ((inLunch && !lunchEnabled) || (inDinner && !dinnerEnabled) || isPastSlot(selectedValue) || isOverriddenSlot(selectedValue)) {
       setSelectedValue("");
     }
-  }, [selectedDate, lunchEnabled, dinnerEnabled, selectedValue, lunchSlots, dinnerSlots]);
+  }, [selectedDate, lunchEnabled, dinnerEnabled, selectedValue, lunchSlots, dinnerSlots, disabledSlotsByDate]);
 
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -279,6 +290,11 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlo
           setDuplicateInfo(data.existing);
           return;
         }
+        if (data?.slotUnavailable) {
+          setSelectedValue("");
+          setErrorMessage(translation.slotUnavailable);
+          return;
+        }
       }
 
       if (!res.ok) throw new Error("Erreur serveur");
@@ -314,7 +330,7 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlo
         </div>
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 gap-2">
           {slots.map((option) => {
-            const disabled = !enabled || isPastSlot(option);
+            const disabled = !enabled || isPastSlot(option) || isOverriddenSlot(option);
             const isSelected = selectedValue === option;
             return (
               <button

@@ -88,6 +88,22 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  // Reject slots the restaurant punctually disabled for this date (closes the
+  // race between the page loading the slots and the form being submitted).
+  const { data: override, error: overrideError } = await supabase
+    .from("reservation_slot_overrides")
+    .select("disabled_slots")
+    .eq("restaurant_id", process.env.RESTAURANT_ID!)
+    .eq("date", eventDateISO)
+    .maybeSingle();
+
+  if (overrideError) {
+    console.error("Supabase slot override check error:", JSON.stringify(overrideError));
+    // Non-blocking: fall through to normal insert if the check itself fails.
+  } else if (Array.isArray(override?.disabled_slots) && override?.disabled_slots.includes(eventTime)) {
+    return NextResponse.json({ slotUnavailable: true }, { status: 409 });
+  }
+
   const { error: dbError } = await supabase.from("reservations").insert({
     restaurant_id: process.env.RESTAURANT_ID!,
     date: eventDateISO,

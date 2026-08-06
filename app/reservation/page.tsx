@@ -29,6 +29,7 @@ async function ReservationPage() {
         lunchSlots={config.lunchSlots}
         dinnerSlots={config.dinnerSlots}
         dayServices={config.dayServices}
+        disabledSlotsByDate={config.disabledSlotsByDate}
       />
       <Footer />
     </>
