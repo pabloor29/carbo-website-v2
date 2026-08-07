@@ -183,6 +183,8 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlo
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedValue, setSelectedValue] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  // Times still bookable for the chosen date + party size (null = not yet fetched → show all).
+  const [availSet, setAvailSet] = useState<Set<string> | null>(null);
   const [duplicateInfo, setDuplicateInfo] = useState<{
     name: string;
     email: string;
@@ -230,6 +232,22 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlo
     return disabledSlotsByDate[toLocalDateStr(selectedDate)]?.includes(slot) ?? false;
   };
 
+  // A slot where the restaurant is full for this party size (capacity + meal duration).
+  const isFull = (slot: string): boolean => availSet !== null && !availSet.has(slot);
+
+  // Ask the admin which times are still free for this date + party size.
+  useEffect(() => {
+    if (!selectedDate || isDateClosed(selectedDate)) { setAvailSet(null); return; }
+    const covers = Math.max(1, Number(formData.numberOfGuests) || 2);
+    const ac = new AbortController();
+    fetch(`/api/availability?date=${toLocalDateStr(selectedDate)}&covers=${covers}`, { signal: ac.signal })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => setAvailSet(d ? new Set<string>(d.slots) : null))
+      .catch(() => { /* network/abort → fall back to schedule-only slots */ });
+    return () => ac.abort();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedDate, formData.numberOfGuests]);
+
   const formRef = useRef<HTMLFormElement>(null);
   const successRef = useRef<HTMLDivElement>(null);
 
@@ -258,10 +276,11 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlo
     if (!selectedValue) return;
     const inLunch = lunchSlots.includes(selectedValue);
     const inDinner = dinnerSlots.includes(selectedValue);
-    if ((inLunch && !lunchEnabled) || (inDinner && !dinnerEnabled) || isPastSlot(selectedValue) || isOverriddenSlot(selectedValue)) {
+    if ((inLunch && !lunchEnabled) || (inDinner && !dinnerEnabled) || isPastSlot(selectedValue) || isOverriddenSlot(selectedValue) || isFull(selectedValue)) {
       setSelectedValue("");
     }
-  }, [selectedDate, lunchEnabled, dinnerEnabled, selectedValue, lunchSlots, dinnerSlots, disabledSlotsByDate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedDate, lunchEnabled, dinnerEnabled, selectedValue, lunchSlots, dinnerSlots, disabledSlotsByDate, availSet]);
 
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -349,7 +368,7 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlo
         </div>
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 gap-2">
           {slots.map((option) => {
-            const disabled = !enabled || isPastSlot(option) || isOverriddenSlot(option);
+            const disabled = !enabled || isPastSlot(option) || isOverriddenSlot(option) || isFull(option);
             const isSelected = selectedValue === option;
             return (
               <button
