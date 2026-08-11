@@ -14,6 +14,8 @@ import { CreditCard, Coins } from "lucide-react";
 import React from "react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getOpeningHours, DAYS_FR } from "@/lib/opening-hours";
+import { getRestaurantContact } from "@/lib/restaurant-contact";
+import { telHref, SHOW_PHONE } from "@/lib/phone";
 import { alternatesFor } from "@/lib/i18n-meta";
 
 export async function generateMetadata({
@@ -32,6 +34,7 @@ export async function generateMetadata({
 async function ContactPage({ params: { locale } }: { params: { locale: string } }) {
   setRequestLocale(locale);
   const hours = await getOpeningHours();
+  const contact = await getRestaurantContact();
   const t = await getTranslations("contact");
   const week = (await getTranslations()).raw("week") as string[];
   const heroTitle = (await getTranslations("hero"))("contact");
@@ -53,7 +56,9 @@ async function ContactPage({ params: { locale } }: { params: { locale: string } 
                 >
                   11 rue Trivalle, 11000 Carcassonne
                 </a>
-                <a href="tel:+33434422749">{t("phonePrefix")} : +33 4 34 42 27 49</a>
+                {SHOW_PHONE && (
+                  <a href={telHref(contact.phone)}>{t("phonePrefix")} : {contact.phone}</a>
+                )}
               </div>
 
               <div className="text-greenBottle w-full flex flex-col space-y-3 items-center lg:items-start justify-center">

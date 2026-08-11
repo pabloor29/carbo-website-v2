@@ -1,4 +1,6 @@
 import { Instagram, Phone, Wrench } from "lucide-react";
+import { getRestaurantContact } from "@/lib/restaurant-contact";
+import { telHref, SHOW_PHONE } from "@/lib/phone";
 
 const messages = {
   fr: {
@@ -35,7 +37,8 @@ const messages = {
   },
 };
 
-export default function ReservationMaintenance() {
+export default async function ReservationMaintenance() {
+  const contact = await getRestaurantContact();
   return (
     <section className="min-h-[60vh] flex flex-col items-center justify-center bg-whiteSmokedBG px-6 py-20 text-greenBottle">
       <div className="flex flex-col items-center gap-6 max-w-xl text-center">
@@ -55,13 +58,15 @@ export default function ReservationMaintenance() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 mt-4 w-full justify-center">
-          <a
-            href="tel:+33434422749"
-            className="flex items-center gap-3 justify-center border border-greenBottle px-6 py-4 font-cormorantGaramond text-xl hover:bg-greenBottle hover:text-whiteSmokedBG transition-colors duration-200"
-          >
-            <Phone size={20} />
-            <span>+33 4 34 42 27 49</span>
-          </a>
+          {SHOW_PHONE && (
+            <a
+              href={telHref(contact.phone)}
+              className="flex items-center gap-3 justify-center border border-greenBottle px-6 py-4 font-cormorantGaramond text-xl hover:bg-greenBottle hover:text-whiteSmokedBG transition-colors duration-200"
+            >
+              <Phone size={20} />
+              <span>{contact.phone}</span>
+            </a>
+          )}
 
           <a
             href="https://www.instagram.com/carbo_restaurant/?hl=fr"

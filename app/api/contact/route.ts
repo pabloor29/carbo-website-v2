@@ -2,6 +2,7 @@ import { Resend } from "resend";
 import { createClient } from "@supabase/supabase-js";
 import { NextRequest, NextResponse } from "next/server";
 import { waitUntil } from "@vercel/functions";
+import { getRestaurantContact } from "@/lib/restaurant-contact";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -79,6 +80,8 @@ export async function POST(req: NextRequest) {
   // Client language (from the site-wide selector). Persisted on the reservation
   // so RESA can later answer confirm/refuse in the guest's language.
   const lang: "fr" | "en" | "es" | "it" = ["fr", "en", "es", "it"].includes(locale) ? locale : "fr";
+
+  const contact = await getRestaurantContact();
 
   const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -259,7 +262,7 @@ export async function POST(req: NextRequest) {
         <div style="background:#FFFFFF;border:1px solid #E5DED0;border-radius:12px;padding:20px 24px;margin-bottom:24px;">
           <p style="margin:0 0 6px;font-size:14px;font-weight:600;color:#16201B;">Restaurant CARBO</p>
           <p style="margin:0 0 3px;font-size:13px;color:#5E665E;">11 rue Trivalle, Carcassonne</p>
-          <p style="margin:0;font-size:13px;color:#5E665E;">+33 4 34 42 27 49</p>
+          <p style="margin:0;font-size:13px;color:#5E665E;">${contact.phone}</p>
         </div>
 
         <p style="margin:0;text-align:center;font-size:12px;color:#9A9587;">
@@ -305,7 +308,7 @@ export async function POST(req: NextRequest) {
     "",
     "Restaurant CARBO",
     "11 rue Trivalle, Carcassonne",
-    "+33 4 34 42 27 49",
+    contact.phone,
     "",
     "Propulsé par RESA · resa-service.com",
   ].join("\n");

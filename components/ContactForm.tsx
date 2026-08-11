@@ -6,6 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
 import { fr, enGB, es, it } from "date-fns/locale";
 import { useLocale } from "next-intl";
+import { telHref, SHOW_PHONE } from "@/lib/phone";
 
 registerLocale("fr", fr);
 registerLocale("en", enGB);
@@ -24,6 +25,8 @@ type Props = {
   dinnerSlots: string[];
   dayServices: DayServices[];
   disabledSlotsByDate: Record<string, string[]>;
+  phone: string;
+  email: string;
 };
 
 function toLocalDateStr(date: Date): string {
@@ -33,7 +36,7 @@ function toLocalDateStr(date: Date): string {
   return `${y}-${m}-${d}`;
 }
 
-const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlots, dinnerSlots, dayServices, disabledSlotsByDate }: Props) => {
+const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlots, dinnerSlots, dayServices, disabledSlotsByDate, phone, email }: Props) => {
   const translations = {
     fr: {
       title: "Demande de réservation",
@@ -516,10 +519,10 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlo
             <div className="bg-greenBottle/80 p-2 text-whiteSmokedBG">
               {translation.alertMaxNbGuests}
               <a
-                href="mailto:carbo11@icloud.com"
+                href={`mailto:${email}`}
                 className="text-blue-300"
               >
-                carbo11@icloud.com
+                {email}
               </a>
             </div>
 
@@ -576,12 +579,14 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlo
                 <p className="text-sm text-amber-800 font-medium">
                   {translation.todaySameDayMessage}
                 </p>
-                <a
-                  href="tel:+33434422749"
-                  className="inline-flex items-center justify-center gap-2 bg-greenBottle text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-greenBottle/80 transition-colors duration-200 self-start"
-                >
-                  📞 {translation.callButton}
-                </a>
+                {SHOW_PHONE && (
+                  <a
+                    href={telHref(phone)}
+                    className="inline-flex items-center justify-center gap-2 bg-greenBottle text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-greenBottle/80 transition-colors duration-200 self-start"
+                  >
+                    📞 {translation.callButton}
+                  </a>
+                )}
               </div>
             )}
 
@@ -704,12 +709,14 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, lunchSlo
             <p className="mt-4 text-gray-700">{translation.duplicateCheckMail}</p>
             <p className="mt-3 text-gray-700">{translation.duplicateNoMail}</p>
 
-            <a
-              href="tel:+33434422749"
-              className="mt-3 inline-flex items-center gap-2 rounded-md bg-greenBottle px-4 py-2 font-medium text-white transition-colors duration-200 hover:bg-greenBottle/80"
-            >
-              📞 {translation.duplicateCall} — +33 4 34 42 27 49
-            </a>
+            {SHOW_PHONE && (
+              <a
+                href={telHref(phone)}
+                className="mt-3 inline-flex items-center gap-2 rounded-md bg-greenBottle px-4 py-2 font-medium text-white transition-colors duration-200 hover:bg-greenBottle/80"
+              >
+                📞 {translation.duplicateCall} — {phone}
+              </a>
+            )}
 
             <div className="mt-5 flex justify-end">
               <button

@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 import { NextRequest, NextResponse } from "next/server";
+import { getRestaurantContact } from "@/lib/restaurant-contact";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const FROM_EMAIL = process.env.RESEND_FROM_EMAIL ?? "onboarding@resend.dev";
@@ -12,6 +13,8 @@ const WORDMARK = `<span style="font-family:'Schibsted Grotesk',Arial,sans-serif;
 export async function POST(req: NextRequest) {
   const { email, fullName, eventDate, eventTime, numberOfGuests, reservationType, reservationComment, reservationComment2 } =
     await req.json();
+
+  const contact = await getRestaurantContact();
 
   const isConfirmed = reservationType === "CONFIRMÉE";
 
@@ -65,7 +68,7 @@ export async function POST(req: NextRequest) {
         <div style="background:#FFFFFF;border:1px solid #E5DED0;border-radius:12px;padding:20px 24px;margin-bottom:24px;">
           <p style="margin:0 0 5px;font-size:14px;font-weight:600;color:#16201B;">Restaurant CARBO</p>
           <p style="margin:0 0 3px;font-size:13px;color:#5E665E;">11 rue Trivalle, Carcassonne</p>
-          <p style="margin:0;font-size:13px;color:#5E665E;">+33 4 34 42 27 49 · +33 6 29 10 42 17</p>
+          <p style="margin:0;font-size:13px;color:#5E665E;">${contact.phone}</p>
         </div>
 
         <p style="margin:0;text-align:center;font-size:12px;color:#9A9587;">
@@ -91,7 +94,7 @@ export async function POST(req: NextRequest) {
     "",
     "Restaurant CARBO",
     "11 rue Trivalle, Carcassonne",
-    "+33 4 34 42 27 49 · +33 6 29 10 42 17",
+    contact.phone,
     "",
     "Propulsé par RESA · resa-service.com",
   ].join("\n");

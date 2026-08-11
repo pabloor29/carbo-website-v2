@@ -1,7 +1,10 @@
 import Navbar from "@/components/Navbar";
 import React from "react";
+import { getRestaurantContact } from "@/lib/restaurant-contact";
+import { SHOW_PHONE } from "@/lib/phone";
 
-export default function MentionsLegalesPage() {
+export default async function MentionsLegalesPage() {
+  const contact = await getRestaurantContact();
   return (
     <>
       <Navbar />
@@ -18,9 +21,13 @@ export default function MentionsLegalesPage() {
               <br />
               11 rue Trivalle, 11000 Carcassonne, France
               <br />
-              Téléphone&nbsp;: +33 4 34 42 27 49
-              <br />
-              Email&nbsp;: carbo11@icloud.com
+              {SHOW_PHONE && (
+                <>
+                  Téléphone&nbsp;: {contact.phone}
+                  <br />
+                </>
+              )}
+              Email&nbsp;: {contact.email}
               <br />
               {/* TODO: compléter avec la forme juridique, le SIRET, le RCS, le N° TVA, le capital social, et le nom du directeur de la publication */}
               Forme juridique&nbsp;: [à compléter]
@@ -78,7 +85,7 @@ export default function MentionsLegalesPage() {
             <h2 className="font-schoolbell text-3xl mb-3">Contact</h2>
             <p className="text-xl leading-relaxed">
               Pour toute question relative aux présentes mentions légales, vous pouvez nous contacter à l&apos;adresse&nbsp;
-              <a href="mailto:carbo11@icloud.com" className="underline">carbo11@icloud.com</a>.
+              <a href={`mailto:${contact.email}`} className="underline">{contact.email}</a>.
             </p>
           </section>
         </div>

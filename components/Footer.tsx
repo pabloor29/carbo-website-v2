@@ -3,10 +3,13 @@ import React from "react";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
 import { getOpeningHours, DAYS_FR } from "@/lib/opening-hours";
+import { getRestaurantContact } from "@/lib/restaurant-contact";
+import { telHref, SHOW_PHONE } from "@/lib/phone";
 import CookieBanner from "./CookieBanner";
 
 async function Footer() {
   const hours = await getOpeningHours();
+  const contact = await getRestaurantContact();
   const t = await getTranslations("footer");
   const week = (await getTranslations()).raw("week") as string[];
 
@@ -61,14 +64,16 @@ async function Footer() {
             <ul className="flex flex-col gap-3 items-center justify-center text-xl font-cormorantGaramond">
               <li className="flex gap-2 hover:underline">
                 <Mail />
-                <a href="mailto:carbo11@icloud.com">
-                  carbo11@icloud.com
+                <a href={`mailto:${contact.email}`}>
+                  {contact.email}
                 </a>
               </li>
-              <li className="flex gap-2 hover:underline">
-                <Phone />
-                <a href="tel:+33434422749">TEL +33 4 34 42 27 49</a>
-              </li>
+              {SHOW_PHONE && (
+                <li className="flex gap-2 hover:underline">
+                  <Phone />
+                  <a href={telHref(contact.phone)}>TEL {contact.phone}</a>
+                </li>
+              )}
               <li className="flex gap-2 hover:underline">
                 <Instagram />
                 <a href="https://www.instagram.com/carbo_restaurant/?hl=fr">@carbo_restaurant</a>

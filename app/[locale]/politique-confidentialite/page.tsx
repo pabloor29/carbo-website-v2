@@ -1,7 +1,9 @@
 import Navbar from "@/components/Navbar";
 import React from "react";
+import { getRestaurantContact } from "@/lib/restaurant-contact";
 
-export default function PolitiqueConfidentialitePage() {
+export default async function PolitiqueConfidentialitePage() {
+  const contact = await getRestaurantContact();
   return (
     <>
       <Navbar />
@@ -18,7 +20,7 @@ export default function PolitiqueConfidentialitePage() {
           <section className="mb-10">
             <h2 className="font-schoolbell text-3xl mb-3">Responsable du traitement</h2>
             <p className="text-xl leading-relaxed">
-              Restaurant CARBO — 11 rue Trivalle, 11000 Carcassonne — <a href="mailto:carbo11@icloud.com" className="underline">carbo11@icloud.com</a>.
+              Restaurant CARBO — 11 rue Trivalle, 11000 Carcassonne — <a href={`mailto:${contact.email}`} className="underline">{contact.email}</a>.
             </p>
           </section>
 
@@ -87,7 +89,7 @@ export default function PolitiqueConfidentialitePage() {
             <p className="text-xl leading-relaxed">
               Conformément au RGPD, vous disposez d&apos;un droit d&apos;accès, de rectification, d&apos;effacement,
               de limitation, d&apos;opposition et de portabilité concernant vos données. Pour exercer ces droits,
-              contactez-nous à <a href="mailto:carbo11@icloud.com" className="underline">carbo11@icloud.com</a>.
+              contactez-nous à <a href={`mailto:${contact.email}`} className="underline">{contact.email}</a>.
               Vous pouvez également introduire une réclamation auprès de la CNIL (<a href="https://www.cnil.fr" className="underline">www.cnil.fr</a>).
             </p>
           </section>

@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import React from "react";
 import ContactForm from "@/components/ContactForm";
 import { getReservationConfig } from "@/lib/reservation";
+import { getRestaurantContact } from "@/lib/restaurant-contact";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { alternatesFor } from "@/lib/i18n-meta";
 
@@ -24,6 +25,7 @@ export async function generateMetadata({
 async function ReservationPage({ params: { locale } }: { params: { locale: string } }) {
   setRequestLocale(locale);
   const config = await getReservationConfig();
+  const contact = await getRestaurantContact();
   const heroTitle = (await getTranslations("hero"))("reservation");
 
   return (
@@ -39,6 +41,8 @@ async function ReservationPage({ params: { locale } }: { params: { locale: strin
         dinnerSlots={config.dinnerSlots}
         dayServices={config.dayServices}
         disabledSlotsByDate={config.disabledSlotsByDate}
+        phone={contact.phone}
+        email={contact.email}
       />
       <Footer />
     </>

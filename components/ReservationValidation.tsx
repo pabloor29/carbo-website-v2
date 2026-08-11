@@ -13,10 +13,10 @@ interface ReservationInfo {
 }
 
 const CONFIRM_COMMENT = "Merci beaucoup pour votre réservation ! Nous sommes heureux de vous informer que votre demande a été confirmée. Nous avons hâte de vous accueillir au restaurant pour passer un agréable moment ensemble. À très bientôt !";
-const CONFIRM_COMMENT2 = "Nous vous attendons au 11 rue Trivalle CARCASSONNE. Pour toutes demandes supplémentaires, veuillez nous contacter au +33 4 34 42 27 49 ou +33 6 29 10 42 17.";
 const REFUSE_COMMENT = "Nous vous remercions pour votre réservation. Malheureusement, nous ne pouvons pas l'accepter pour le moment. Nous sommes désolés pour ce contretemps et espérons avoir l'occasion de vous accueillir une prochaine fois. N'hésitez pas à reprogrammer votre réservation à une autre date. À bientôt !";
 
-const ReservationDetails = () => {
+const ReservationDetails = ({ phone }: { phone: string }) => {
+  const confirmComment2 = `Nous vous attendons au 11 rue Trivalle CARCASSONNE. Pour toutes demandes supplémentaires, veuillez nous contacter au ${phone}.`;
   const [reservationInfo, setReservationInfo] = useState<ReservationInfo | null>(null);
   const [isSending, setIsSending] = useState(false);
   const [sent, setSent] = useState<"confirmed" | "refused" | null>(null);
@@ -52,7 +52,7 @@ const ReservationDetails = () => {
           numberOfGuests: reservationInfo.invites,
           reservationType: type,
           reservationComment: isConfirmed ? CONFIRM_COMMENT : REFUSE_COMMENT,
-          reservationComment2: isConfirmed ? CONFIRM_COMMENT2 : "",
+          reservationComment2: isConfirmed ? confirmComment2 : "",
         }),
       });
 

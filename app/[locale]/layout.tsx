@@ -6,6 +6,8 @@ import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { getOpeningHours, toSchemaOpeningHours } from "@/lib/opening-hours";
+import { getRestaurantContact } from "@/lib/restaurant-contact";
+import { normalizePhone, SHOW_PHONE } from "@/lib/phone";
 import { routing, type Locale } from "@/i18n/routing";
 import { SITE_URL, alternatesFor, ogLocale } from "@/lib/i18n-meta";
 
@@ -87,7 +89,7 @@ const jsonLd = {
   name: "CARBO",
   url: SITE_URL,
   image: `${SITE_URL}/img/deco/carbo.webp`,
-  telephone: "+33434422749",
+  // telephone is injected per-request from the restaurants row (see LocaleLayout).
   address: {
     "@type": "PostalAddress",
     streetAddress: "11 rue Trivalle",
@@ -141,8 +143,10 @@ export default async function LocaleLayout({
 
   const hours = await getOpeningHours();
   const schemaHours = hours ? toSchemaOpeningHours(hours) : [];
+  const contact = await getRestaurantContact();
   const restaurantJsonLd = {
     ...jsonLd,
+    ...(SHOW_PHONE ? { telephone: normalizePhone(contact.phone) } : {}),
     openingHours: schemaHours.length > 0 ? schemaHours : FALLBACK_OPENING_HOURS,
   };
 
